@@ -9,8 +9,9 @@ import {
   ChevronRight, 
   Zap, 
   Droplets,
-  AlertCircle,
-  BarChart3
+  Search,
+  X,
+  Check
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -24,13 +25,15 @@ import {
 import { calculateCaffeine, COMMON_VOLUMES } from '../utils/caffeine';
 
 export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
-  // Current date tracking
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [isAddDrinkModalOpen, setIsAddDrinkModalOpen] = useState(false);
   const [activeViewTab, setActiveViewTab] = useState('daily'); // 'daily' | 'weekly'
 
-  // Modal form state
-  const [selectedProductId, setSelectedProductId] = useState(products[0]?.id || '');
+  // Modal Step State: step 1 = Select Drink, step 2 = Select Volume & Confirm
+  const [modalStep, setModalStep] = useState(1);
+  const [drinkSearch, setDrinkSearch] = useState('');
+  const [selectedBrandFilter, setSelectedBrandFilter] = useState('all');
+  const [chosenProduct, setChosenProduct] = useState(null);
   const [consumedVolume, setConsumedVolume] = useState(250);
   const [customVolume, setCustomVolume] = useState('');
   const [isCustom, setIsCustom] = useState(false);
@@ -39,54 +42,73 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
   const productsMap = {};
   products.forEach((p) => { productsMap[p.id] = p; });
 
-  const currentProduct = productsMap[selectedProductId];
+  // Get unique brands list for filtering modal
+  const uniqueBrands = Array.from(new Set(products.map((p) => p.brand))).sort();
+
+  // Filtered drinks in modal search
+  const filteredModalProducts = products.filter((p) => {
+    const matchesSearch = 
+      p.name.toLowerCase().includes(drinkSearch.toLowerCase()) ||
+      (p.flavor && p.flavor.toLowerCase().includes(drinkSearch.toLowerCase())) ||
+      p.brand.toLowerCase().includes(drinkSearch.toLowerCase());
+    const matchesBrand = selectedBrandFilter === 'all' || p.brand === selectedBrandFilter;
+    return matchesSearch && matchesBrand;
+  });
 
   // Daily logs for selected date
   const todayLogs = drinkLogs[selectedDate] || [];
 
-  // Calculations for current date
   const totalDrinksToday = todayLogs.length;
   const totalCaffeineToday = todayLogs.reduce((acc, curr) => acc + (curr.caffeineMg || 0), 0);
   const totalVolumeToday = todayLogs.reduce((acc, curr) => acc + (curr.volumeMl || 0), 0);
 
-  // Date shifting
   const shiftDate = (days) => {
     const d = new Date(selectedDate);
     d.setDate(d.getDate() + days);
     setSelectedDate(d.toISOString().split('T')[0]);
   };
 
-  // Add Drink Submission
-  const handleAddDrinkSubmit = (e) => {
-    e.preventDefault();
-    if (!currentProduct) return;
+  const openLogModal = () => {
+    setModalStep(1);
+    setDrinkSearch('');
+    setSelectedBrandFilter('all');
+    setChosenProduct(null);
+    setIsCustom(false);
+    setCustomVolume('');
+    setIsAddDrinkModalOpen(true);
+  };
 
-    const volume = isCustom ? Number(customVolume) || currentProduct.servingSize : Number(consumedVolume);
-    const caffeineCalculated = calculateCaffeine(currentProduct, volume);
+  const handleSelectProduct = (prod) => {
+    setChosenProduct(prod);
+    setConsumedVolume(prod.servingSize || 250);
+    setModalStep(2);
+  };
+
+  const handleConfirmDrink = () => {
+    if (!chosenProduct) return;
+    const volume = isCustom ? Number(customVolume) || chosenProduct.servingSize : Number(consumedVolume);
+    const caffeineCalculated = calculateCaffeine(chosenProduct, volume);
 
     const now = new Date();
     const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
     const newEntry = {
       id: `log-${Date.now()}`,
-      productId: currentProduct.id,
+      productId: chosenProduct.id,
       volumeMl: volume,
       caffeineMg: caffeineCalculated,
       time: timeStr
     };
 
     const updatedDateLogs = [...todayLogs, newEntry];
-    const newDrinkLogs = {
+    onSaveLogs({
       ...drinkLogs,
       [selectedDate]: updatedDateLogs
-    };
+    });
 
-    onSaveLogs(newDrinkLogs);
     setIsAddDrinkModalOpen(false);
-    setIsCustom(false);
   };
 
-  // 5.3 Plus / Minus Controls
   const handleModifyServing = (index, delta) => {
     const item = todayLogs[index];
     if (!item) return;
@@ -94,7 +116,6 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
     const prod = productsMap[item.productId];
     if (!prod) return;
 
-    // A serving step equals standard serving size
     const stepVolume = prod.servingSize || 250;
     const newVolume = item.volumeMl + delta * stepVolume;
 
@@ -124,16 +145,11 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
     });
   };
 
-  // ==========================================
-  // 5.4 Weekly Statistics Calculation
-  // ==========================================
-  // Generate 7 days ending at selectedDate
+  // Weekly calculations
   const getWeeklyData = () => {
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const result = [];
     const base = new Date(selectedDate);
-
-    // Show current week Mon - Sun
     const dayIndex = base.getDay();
     const mondayOffset = (dayIndex === 0 ? -6 : 1) - dayIndex;
     const monday = new Date(base);
@@ -185,7 +201,6 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
         gap: '16px',
         marginBottom: '24px'
       }}>
-        {/* Daily vs Weekly View */}
         <div style={{ display: 'flex', gap: '8px', backgroundColor: '#E2E8F0', padding: '4px', borderRadius: '10px' }}>
           <button
             onClick={() => setActiveViewTab('daily')}
@@ -217,7 +232,7 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
           </button>
         </div>
 
-        {/* Date Selector with Next / Prev controls */}
+        {/* Date Selector */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#FFFFFF', padding: '6px 12px', borderRadius: '10px', border: '1px solid #CBD5E1' }}>
           <button onClick={() => shiftDate(-1)} style={{ padding: '4px', color: '#64748B' }} title="Previous Day">
             <ChevronLeft size={18} />
@@ -241,9 +256,6 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
         </div>
       </div>
 
-      {/* =========================================================
-          SECTION 5.1 — DAILY TRACKER VIEW
-         ========================================================= */}
       {activeViewTab === 'daily' ? (
         <div>
           {/* Daily Summary Cards */}
@@ -262,13 +274,13 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
             <div className="rankit-card" style={{ padding: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748B', fontSize: '0.82rem', fontWeight: 700 }}>
                 <Zap size={16} color="#F59E0B" />
-                <span>Total Estimated Caffeine</span>
+                <span>Estimated Caffeine</span>
               </div>
               <div style={{ fontSize: '2rem', fontWeight: 800, color: totalCaffeineToday > 400 ? '#EF4444' : '#F59E0B', marginTop: '6px' }}>
                 {totalCaffeineToday} <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>mg</span>
               </div>
               <span style={{ fontSize: '0.75rem', color: totalCaffeineToday > 400 ? '#EF4444' : '#10B981', fontWeight: 600 }}>
-                {totalCaffeineToday > 400 ? '⚠️ Exceeds 400mg FDA daily guidance' : '✓ Within typical 400mg daily guidance'}
+                {totalCaffeineToday > 400 ? '⚠️ Exceeds 400mg FDA guidance' : '✓ Safe daily intake'}
               </span>
             </div>
 
@@ -289,21 +301,18 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A' }}>
               Logged Drinks for {selectedDate}
             </h3>
-            <button
-              onClick={() => setIsAddDrinkModalOpen(true)}
-              className="btn-primary"
-            >
+            <button onClick={openLogModal} className="btn-primary">
               <Plus size={18} />
-              <span>Add Drink</span>
+              <span>Log Drink</span>
             </button>
           </div>
 
-          {/* Drink List Table */}
+          {/* Drink List */}
           {todayLogs.length === 0 ? (
             <div className="rankit-card" style={{ padding: '48px', textAlign: 'center', color: '#64748B' }}>
               <Coffee size={36} color="#CBD5E1" style={{ margin: '0 auto 12px auto' }} />
               <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>No drinks logged for this date</h4>
-              <p style={{ fontSize: '0.85rem', marginTop: '4px' }}>Click "Add Drink" to log an energy drink and calculate your caffeine.</p>
+              <p style={{ fontSize: '0.85rem', marginTop: '4px' }}>Click "Log Drink" above to record what you drank and calculate your caffeine.</p>
             </div>
           ) : (
             <div className="rankit-card" style={{ overflow: 'hidden' }}>
@@ -313,8 +322,8 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
                     <th style={{ padding: '14px 20px' }}>Time</th>
                     <th style={{ padding: '14px 20px' }}>Drink</th>
                     <th style={{ padding: '14px 20px' }}>Volume</th>
-                    <th style={{ padding: '14px 20px' }}>Caffeine Contribution</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center' }}>Serving Controls</th>
+                    <th style={{ padding: '14px 20px' }}>Caffeine</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center' }}>Servings</th>
                     <th style={{ padding: '14px 20px', textAlign: 'right' }}>Action</th>
                   </tr>
                 </thead>
@@ -342,31 +351,19 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
                         </td>
                         <td style={{ padding: '14px 20px', textAlign: 'center' }}>
                           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid #CBD5E1', borderRadius: '6px', padding: '2px 6px', backgroundColor: '#FFFFFF' }}>
-                            <button
-                              onClick={() => handleModifyServing(idx, -1)}
-                              style={{ padding: '2px 6px', color: '#64748B' }}
-                              title="Minus one serving"
-                            >
+                            <button onClick={() => handleModifyServing(idx, -1)} style={{ padding: '2px 6px', color: '#64748B' }} title="Minus one serving">
                               <Minus size={14} />
                             </button>
                             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#0F172A' }}>
                               {(log.volumeMl / (prod?.servingSize || 250)).toFixed(1)} can
                             </span>
-                            <button
-                              onClick={() => handleModifyServing(idx, 1)}
-                              style={{ padding: '2px 6px', color: '#4F46E5' }}
-                              title="Plus one serving"
-                            >
+                            <button onClick={() => handleModifyServing(idx, 1)} style={{ padding: '2px 6px', color: '#4F46E5' }} title="Plus one serving">
                               <Plus size={14} />
                             </button>
                           </div>
                         </td>
                         <td style={{ padding: '14px 20px', textAlign: 'right' }}>
-                          <button
-                            onClick={() => handleRemoveLog(idx)}
-                            style={{ color: '#EF4444', padding: '4px' }}
-                            title="Remove entire entry"
-                          >
+                          <button onClick={() => handleRemoveLog(idx)} style={{ color: '#EF4444', padding: '4px' }} title="Remove entry">
                             <Trash2 size={16} />
                           </button>
                         </td>
@@ -386,45 +383,36 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
           )}
         </div>
       ) : (
-        /* =========================================================
-           SECTION 5.4 — WEEKLY STATISTICS & 7-DAY BAR CHART
-           ========================================================= */
+        /* Weekly statistics */
         <div>
-          {/* Weekly Summary Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '24px' }}>
             <div className="rankit-card" style={{ padding: '20px' }}>
               <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 700 }}>Total Drinks (Week)</span>
               <div style={{ fontSize: '2rem', fontWeight: 800, color: '#0F172A', marginTop: '6px' }}>
                 {weeklyStats.totalWeeklyDrinks}
               </div>
-              <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Across 7 days</span>
             </div>
 
             <div className="rankit-card" style={{ padding: '20px' }}>
-              <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 700 }}>Total Weekly Caffeine</span>
+              <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 700 }}>Weekly Caffeine</span>
               <div style={{ fontSize: '2rem', fontWeight: 800, color: '#F59E0B', marginTop: '6px' }}>
                 {weeklyStats.totalWeeklyCaffeine} <span style={{ fontSize: '1rem' }}>mg</span>
               </div>
-              <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Historical consumption</span>
             </div>
 
             <div className="rankit-card" style={{ padding: '20px' }}>
-              <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 700 }}>Daily Caffeine Average</span>
+              <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 700 }}>Daily Average</span>
               <div style={{ fontSize: '2rem', fontWeight: 800, color: '#4F46E5', marginTop: '6px' }}>
                 {weeklyStats.avgDailyCaffeine} <span style={{ fontSize: '1rem' }}>mg / day</span>
               </div>
-              <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Avg {weeklyStats.avgDailyDrinks} drinks / day</span>
             </div>
           </div>
 
-          {/* 7-Day Bar Chart */}
           <div className="rankit-card" style={{ padding: '24px', marginBottom: '24px' }}>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <BarChart3 size={18} color="#4F46E5" />
-              <span>7-Day Caffeine Consumption (mg)</span>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', marginBottom: '16px' }}>
+              7-Day Caffeine Consumption (mg)
             </h3>
-
-            <div style={{ width: '100%', height: '300px' }}>
+            <div style={{ width: '100%', height: '280px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={weeklyStats.days} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <XAxis dataKey="dayName" stroke="#64748B" fontSize={12} />
@@ -432,70 +420,21 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#0F172A', borderRadius: '8px', color: '#FFFFFF', border: 'none' }} 
                     formatter={(val) => [`${val} mg`, 'Caffeine']}
-                    labelFormatter={(label, payload) => payload?.[0]?.payload?.dateStr || label}
                   />
-                  <ReferenceLine y={400} stroke="#EF4444" strokeDasharray="3 3" label={{ value: '400mg Guidance', fill: '#EF4444', fontSize: 11 }} />
+                  <ReferenceLine y={400} stroke="#EF4444" strokeDasharray="3 3" label={{ value: '400mg Limit', fill: '#EF4444', fontSize: 11 }} />
                   <Bar dataKey="caffeine" fill="#4F46E5" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
-
-          {/* 7-Day Breakdown Table as Specified */}
-          <div className="rankit-card" style={{ overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
-              <thead>
-                <tr style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontWeight: 700 }}>
-                  <th style={{ padding: '14px 20px' }}>Day</th>
-                  <th style={{ padding: '14px 20px' }}>Date</th>
-                  <th style={{ padding: '14px 20px' }}>Drinks</th>
-                  <th style={{ padding: '14px 20px' }}>Caffeine (mg)</th>
-                  <th style={{ padding: '14px 20px', textAlign: 'right' }}>Jump to Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {weeklyStats.days.map((d) => (
-                  <tr key={d.dateStr} style={{ borderBottom: '1px solid #F1F5F9', backgroundColor: d.isSelected ? '#EEF2FF' : 'transparent' }}>
-                    <td style={{ padding: '14px 20px', fontWeight: 700, color: d.isSelected ? '#4F46E5' : '#0F172A' }}>
-                      {d.dayName} {d.isToday && '(Today)'}
-                    </td>
-                    <td style={{ padding: '14px 20px', color: '#64748B' }}>
-                      {d.dateStr}
-                    </td>
-                    <td style={{ padding: '14px 20px', fontWeight: 600 }}>
-                      {d.drinks}
-                    </td>
-                    <td style={{ padding: '14px 20px', fontWeight: 800, color: d.caffeine > 0 ? '#F59E0B' : '#94A3B8' }}>
-                      {d.caffeine} mg
-                    </td>
-                    <td style={{ padding: '14px 20px', textAlign: 'right' }}>
-                      <button
-                        onClick={() => {
-                          setSelectedDate(d.dateStr);
-                          setActiveViewTab('daily');
-                        }}
-                        className="btn-secondary"
-                        style={{ padding: '4px 10px', fontSize: '0.75rem' }}
-                      >
-                        Inspect Log
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-                <tr style={{ backgroundColor: '#F8FAFC', fontWeight: 800, color: '#0F172A' }}>
-                  <td style={{ padding: '14px 20px' }}>Total Weekly</td>
-                  <td>—</td>
-                  <td style={{ padding: '14px 20px' }}>{weeklyStats.totalWeeklyDrinks} drinks</td>
-                  <td style={{ padding: '14px 20px', color: '#F59E0B' }}>{weeklyStats.totalWeeklyCaffeine} mg</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       )}
 
-      {/* 5.2 Add Drink Modal with Volume & Formula Selection */}
+      {/* =========================================================
+          SIMPLIFIED 2-STEP LOG DRINK MODAL
+          Step 1: Clean search & click to choose drink
+          Step 2: Simple volume selector & confirm
+         ========================================================= */}
       {isAddDrinkModalOpen && (
         <div style={{
           position: 'fixed',
@@ -511,105 +450,231 @@ export default function DrinkTracker({ products, drinkLogs, onSaveLogs }) {
           zIndex: 50,
           padding: '20px'
         }}>
-          <form onSubmit={handleAddDrinkSubmit} className="rankit-card" style={{ width: '100%', maxWidth: '480px', padding: '28px' }}>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0F172A', marginBottom: '16px' }}>
-              Log Drink Intake
-            </h2>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="rankit-card" style={{ width: '100%', maxWidth: '520px', padding: '24px', maxHeight: '90vh', overflowY: 'auto' }}>
+            {/* Modal Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
-                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
-                  Select Drink from Catalog *
-                </label>
-                <select
-                  value={selectedProductId}
-                  onChange={(e) => {
-                    setSelectedProductId(e.target.value);
-                    const p = productsMap[e.target.value];
-                    if (p) setConsumedVolume(p.servingSize);
-                  }}
-                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem', backgroundColor: '#FFFFFF' }}
-                >
-                  {products.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.brand} — {p.name} ({p.caffeine}mg / {p.servingSize}ml)
-                    </option>
-                  ))}
-                </select>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>
+                  {modalStep === 1 ? 'Step 1: Choose What You Drank' : 'Step 2: Confirm Amount'}
+                </h2>
+                <p style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                  {modalStep === 1 ? 'Search or pick an energy drink from the catalog' : 'Adjust the volume consumed to calculate exact caffeine'}
+                </p>
               </div>
+              <button onClick={() => setIsAddDrinkModalOpen(false)} style={{ color: '#64748B' }}>
+                <X size={20} />
+              </button>
+            </div>
 
-              {/* Volume Selection Options */}
+            {/* STEP 1: PICK DRINK */}
+            {modalStep === 1 ? (
               <div>
-                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
-                  Consumed Volume Selection
-                </label>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {/* Search & Brand Filter */}
+                <div style={{ display: 'flex', gap: '8px', marginBottom: '14px' }}>
+                  <div style={{ position: 'relative', flex: 1 }}>
+                    <Search size={16} color="#94A3B8" style={{ position: 'absolute', left: '10px', top: '11px' }} />
+                    <input
+                      type="text"
+                      autoFocus
+                      placeholder="Type drink or flavour name..."
+                      value={drinkSearch}
+                      onChange={(e) => setDrinkSearch(e.target.value)}
+                      style={{ width: '100%', padding: '8px 12px 8px 32px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.85rem' }}
+                    />
+                  </div>
                   <select
-                    disabled={isCustom}
-                    value={consumedVolume}
-                    onChange={(e) => setConsumedVolume(Number(e.target.value))}
-                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem', backgroundColor: isCustom ? '#F1F5F9' : '#FFFFFF' }}
+                    value={selectedBrandFilter}
+                    onChange={(e) => setSelectedBrandFilter(e.target.value)}
+                    style={{ padding: '8px 10px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.8rem', backgroundColor: '#FFFFFF' }}
                   >
-                    {COMMON_VOLUMES.map((v) => (
-                      <option key={v.value} value={v.value}>{v.label}</option>
+                    <option value="all">All Brands</option>
+                    {uniqueBrands.map((b) => (
+                      <option key={b} value={b}>{b}</option>
                     ))}
-                    {currentProduct && !COMMON_VOLUMES.some((x) => x.value === currentProduct.servingSize) && (
-                      <option value={currentProduct.servingSize}>
-                        Standard Can Size ({currentProduct.servingSize} ml)
-                      </option>
-                    )}
                   </select>
+                </div>
 
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', fontWeight: 600, color: '#475569' }}>
-                    <input
-                      type="checkbox"
-                      checked={isCustom}
-                      onChange={(e) => setIsCustom(e.target.checked)}
-                    />
-                    <span>Enter custom volume in millilitres</span>
-                  </label>
-
-                  {isCustom && (
-                    <input
-                      type="number"
-                      placeholder="e.g. 180"
-                      min="1"
-                      max="2000"
-                      value={customVolume}
-                      onChange={(e) => setCustomVolume(e.target.value)}
-                      style={{ width: '100%', padding: '8px 12px', border: '1px solid #4F46E5', borderRadius: '8px', fontSize: '0.875rem' }}
-                    />
+                {/* Clean Scrollable List of Drinks */}
+                <div style={{ maxHeight: '340px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {filteredModalProducts.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '30px', color: '#94A3B8', fontSize: '0.85rem' }}>
+                      No matching drinks found. Try a different search term.
+                    </div>
+                  ) : (
+                    filteredModalProducts.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() => handleSelectProduct(p)}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '10px 14px',
+                          borderRadius: '8px',
+                          border: '1px solid #E2E8F0',
+                          backgroundColor: '#FFFFFF',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#EEF2FF';
+                          e.currentTarget.style.borderColor = '#4F46E5';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#FFFFFF';
+                          e.currentTarget.style.borderColor = '#E2E8F0';
+                        }}
+                      >
+                        <div>
+                          <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#0F172A' }}>{p.name}</div>
+                          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                            {p.brand} • {p.flavor}
+                          </div>
+                        </div>
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#F59E0B' }}>{p.caffeine} mg</span>
+                          <div style={{ fontSize: '0.72rem', color: '#94A3B8' }}>{p.servingSize} ml</div>
+                        </div>
+                      </button>
+                    ))
                   )}
                 </div>
               </div>
-
-              {/* Dynamic Formula Calculation Preview */}
-              {currentProduct && (
-                <div style={{ padding: '14px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                  <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600, marginBottom: '4px' }}>
-                    Calculated Intake Preview:
+            ) : (
+              /* STEP 2: CONFIRM VOLUME & LOG */
+              <div>
+                {/* Selected Product Summary Card */}
+                <div style={{
+                  padding: '14px',
+                  backgroundColor: '#F8FAFC',
+                  borderRadius: '10px',
+                  border: '1px solid #E2E8F0',
+                  marginBottom: '18px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#4F46E5', textTransform: 'uppercase' }}>
+                      {chosenProduct.brand}
+                    </span>
+                    <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0F172A' }}>
+                      {chosenProduct.name}
+                    </h4>
+                    <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                      Standard: {chosenProduct.caffeine}mg per {chosenProduct.servingSize}ml
+                    </span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.85rem', color: '#0F172A' }}>
-                      Volume: <strong>{isCustom ? customVolume || 0 : consumedVolume} ml</strong>
-                    </span>
-                    <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#F59E0B' }}>
-                      ≈ {calculateCaffeine(currentProduct, isCustom ? Number(customVolume) || 0 : consumedVolume)} mg caffeine
-                    </span>
+                  <button
+                    onClick={() => setModalStep(1)}
+                    style={{ fontSize: '0.75rem', color: '#4F46E5', fontWeight: 700 }}
+                  >
+                    Change Drink
+                  </button>
+                </div>
+
+                {/* Amount selector */}
+                <div style={{ marginBottom: '16px' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '8px' }}>
+                    Select Serving Size
+                  </label>
+                  
+                  {/* Preset Buttons */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '10px' }}>
+                    {[
+                      { label: 'Full Can', ml: chosenProduct.servingSize },
+                      { label: 'Half Can', ml: Math.round(chosenProduct.servingSize / 2) },
+                      { label: '250 ml Slim', ml: 250 },
+                      { label: '355 ml 12oz', ml: 355 },
+                      { label: '473 ml 16oz', ml: 473 },
+                      { label: '500 ml Tall', ml: 500 }
+                    ].map((btn, i) => {
+                      const isSelected = !isCustom && consumedVolume === btn.ml;
+                      return (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => {
+                            setIsCustom(false);
+                            setConsumedVolume(btn.ml);
+                          }}
+                          style={{
+                            padding: '8px',
+                            borderRadius: '6px',
+                            border: isSelected ? '2px solid #4F46E5' : '1px solid #CBD5E1',
+                            backgroundColor: isSelected ? '#EEF2FF' : '#FFFFFF',
+                            color: isSelected ? '#4F46E5' : '#0F172A',
+                            fontWeight: isSelected ? 800 : 600,
+                            fontSize: '0.78rem'
+                          }}
+                        >
+                          <div>{btn.label}</div>
+                          <div style={{ fontSize: '0.7rem', color: '#64748B' }}>{btn.ml} ml</div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Custom ml toggle */}
+                  <div style={{ marginTop: '10px' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', fontWeight: 600, color: '#475569', cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={isCustom}
+                        onChange={(e) => setIsCustom(e.target.checked)}
+                      />
+                      <span>Or enter custom millilitres</span>
+                    </label>
+
+                    {isCustom && (
+                      <input
+                        type="number"
+                        placeholder="e.g. 150 ml"
+                        min="1"
+                        max="2000"
+                        autoFocus
+                        value={customVolume}
+                        onChange={(e) => setCustomVolume(e.target.value)}
+                        style={{ width: '100%', marginTop: '8px', padding: '8px 12px', border: '2px solid #4F46E5', borderRadius: '6px', fontSize: '0.85rem' }}
+                      />
+                    )}
                   </div>
                 </div>
-              )}
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '10px' }}>
-                <button type="button" onClick={() => setIsAddDrinkModalOpen(false)} className="btn-secondary">
-                  Cancel
-                </button>
-                <button type="submit" className="btn-primary">
-                  Log Consumption
-                </button>
+                {/* Calculation Preview */}
+                <div style={{
+                  padding: '12px 16px',
+                  backgroundColor: '#FEF3C7',
+                  borderRadius: '8px',
+                  border: '1px solid #FDE68A',
+                  marginBottom: '20px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  <span style={{ fontSize: '0.85rem', color: '#92400E', fontWeight: 600 }}>
+                    Caffeine Logged:
+                  </span>
+                  <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#B45309' }}>
+                    {calculateCaffeine(chosenProduct, isCustom ? Number(customVolume) || 0 : consumedVolume)} mg
+                  </span>
+                </div>
+
+                {/* Modal Buttons */}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                  <button type="button" onClick={() => setModalStep(1)} className="btn-secondary">
+                    Back
+                  </button>
+                  <button type="button" onClick={handleConfirmDrink} className="btn-primary">
+                    <Check size={16} />
+                    <span>Log to Today</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            )}
+          </div>
         </div>
       )}
     </div>

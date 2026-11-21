@@ -1,36 +1,39 @@
 import React, { useState } from 'react';
 import { 
   Layers, 
-  Filter, 
   Plus, 
   Grid, 
   List, 
   X, 
   AlertCircle, 
-  Check, 
-  Droplets, 
-  Zap, 
-  Building2, 
+  ChevronRight,
+  ArrowLeft,
   Sparkles,
-  ArrowRight
+  Zap,
+  Droplets,
+  Search
 } from 'lucide-react';
 import SearchBar from '../components/SearchBar';
 import ProductCard from '../components/ProductCard';
 
-export default function Catalog({ products, brands, onAddProduct, onSelectProductForDetail }) {
+export default function Catalog({ products, brands, onAddProduct }) {
   const [activeCatalogCategory, setActiveCatalogCategory] = useState('energy-drinks'); // 'energy-drinks' | 'coffee'
+  
+  // Selected Brand View: null = show all Brand Buttons; brand object = drill down into specific brand
+  const [selectedBrand, setSelectedBrand] = useState(null);
+
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedBrandFilter, setSelectedBrandFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'active' | 'discontinued'
   const [sortOrder, setSortOrder] = useState('az'); // 'az' | 'za' | 'caffeine-desc' | 'caffeine-asc'
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
+  
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedProductDetail, setSelectedProductDetail] = useState(null);
 
   // New product form state
   const [newProduct, setNewProduct] = useState({
     name: '',
-    brand: brands[0]?.name || 'Red Bull',
+    brand: selectedBrand?.name || brands[0]?.name || 'Red Bull',
     flavor: '',
     caffeine: 160,
     servingSize: 500,
@@ -40,24 +43,31 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
     image: ''
   });
 
-  // Filter & Sort Logic
-  const filteredProducts = products.filter((p) => {
-    // Search query matches name, brand, flavor, or description
+  // Calculate product counts per brand
+  const brandProductCounts = {};
+  products.forEach((p) => {
+    const bName = p.brand;
+    brandProductCounts[bName] = (brandProductCounts[bName] || 0) + 1;
+  });
+
+  // Products belonging to the selected brand (or all if filtered)
+  const currentBrandProducts = selectedBrand 
+    ? products.filter((p) => p.brand.toLowerCase() === selectedBrand.name.toLowerCase() || p.brandId === selectedBrand.id)
+    : products;
+
+  // Filtered & Sorted products within active view
+  const displayProducts = currentBrandProducts.filter((p) => {
     const matchesSearch = 
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (p.flavor && p.flavor.toLowerCase().includes(searchQuery.toLowerCase()));
+      (p.flavor && p.flavor.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      p.brand.toLowerCase().includes(searchQuery.toLowerCase());
 
-    // Brand filter
-    const matchesBrand = selectedBrandFilter === 'all' || p.brand.toLowerCase() === selectedBrandFilter.toLowerCase() || p.brandId === selectedBrandFilter;
-
-    // Status filter
     const matchesStatus = 
       statusFilter === 'all' ? true :
       statusFilter === 'active' ? !p.isDiscontinued :
       p.isDiscontinued;
 
-    return matchesSearch && matchesBrand && matchesStatus;
+    return matchesSearch && matchesStatus;
   }).sort((a, b) => {
     if (sortOrder === 'az') return a.name.localeCompare(b.name);
     if (sortOrder === 'za') return b.name.localeCompare(a.name);
@@ -90,7 +100,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
     setIsAddModalOpen(false);
     setNewProduct({
       name: '',
-      brand: brands[0]?.name || 'Red Bull',
+      brand: selectedBrand?.name || brands[0]?.name || 'Red Bull',
       flavor: '',
       caffeine: 160,
       servingSize: 500,
@@ -103,7 +113,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
 
   return (
     <div style={{ padding: '28px', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
-      {/* 4.1 Catalog Category Selector */}
+      {/* 4.1 Top Level Category Switcher */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -114,7 +124,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
       }}>
         <div style={{ display: 'flex', gap: '8px', background: '#E2E8F0', padding: '4px', borderRadius: '10px' }}>
           <button
-            onClick={() => setActiveCatalogCategory('energy-drinks')}
+            onClick={() => { setActiveCatalogCategory('energy-drinks'); }}
             style={{
               padding: '8px 20px',
               borderRadius: '8px',
@@ -122,8 +132,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
               fontWeight: 700,
               backgroundColor: activeCatalogCategory === 'energy-drinks' ? '#FFFFFF' : 'transparent',
               color: activeCatalogCategory === 'energy-drinks' ? '#4F46E5' : '#64748B',
-              boxShadow: activeCatalogCategory === 'energy-drinks' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-              transition: 'all 0.15s ease'
+              boxShadow: activeCatalogCategory === 'energy-drinks' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
             }}
           >
             ⚡ Energy Drinks ({products.length})
@@ -137,8 +146,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
               fontWeight: 700,
               backgroundColor: activeCatalogCategory === 'coffee' ? '#FFFFFF' : 'transparent',
               color: activeCatalogCategory === 'coffee' ? '#4F46E5' : '#64748B',
-              boxShadow: activeCatalogCategory === 'coffee' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-              transition: 'all 0.15s ease'
+              boxShadow: activeCatalogCategory === 'coffee' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
             }}
           >
             ☕ Coffee (Reserved for Future)
@@ -147,11 +155,14 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
 
         {activeCatalogCategory === 'energy-drinks' && (
           <button
-            onClick={() => setIsAddModalOpen(true)}
+            onClick={() => {
+              setNewProduct(prev => ({ ...prev, brand: selectedBrand?.name || brands[0]?.name || 'Red Bull' }));
+              setIsAddModalOpen(true);
+            }}
             className="btn-primary"
           >
             <Plus size={18} />
-            <span>Add New Product</span>
+            <span>Add New Drink</span>
           </button>
         )}
       </div>
@@ -161,55 +172,142 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
           <div style={{ fontSize: '3rem', marginBottom: '16px' }}>☕</div>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0F172A' }}>Coffee Database Reserved</h2>
           <p style={{ color: '#64748B', marginTop: '8px', lineHeight: 1.6 }}>
-            As defined in the Version 1 Specification, the initial release focuses exclusively on functional energy drinks. 
-            Coffee beans, cold brews, and espresso categories will be introduced in future expansions!
+            As defined in the specification, Version 1 focuses exclusively on functional energy drinks. Coffee will be introduced in future expansions!
           </p>
-          <button 
-            onClick={() => setActiveCatalogCategory('energy-drinks')}
-            className="btn-primary" 
-            style={{ marginTop: '20px' }}
-          >
+          <button onClick={() => setActiveCatalogCategory('energy-drinks')} className="btn-primary" style={{ marginTop: '20px' }}>
             Return to Energy Drinks
           </button>
         </div>
+      ) : !selectedBrand ? (
+        /* =========================================================
+           BRAND SELECTION VIEW: Buttons to see each Energy Drink Brand
+           ========================================================= */
+        <div>
+          <div style={{ marginBottom: '20px' }}>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0F172A' }}>
+              Select an Energy Drink Brand
+            </h2>
+            <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '4px' }}>
+              Click any brand button below to view its specific drinks, flavours, and variants.
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+            gap: '16px'
+          }}>
+            {brands.map((b) => {
+              const count = brandProductCounts[b.name] || 0;
+              return (
+                <button
+                  key={b.id}
+                  onClick={() => {
+                    setSelectedBrand(b);
+                    setSearchQuery('');
+                  }}
+                  className="rankit-card"
+                  style={{
+                    padding: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    textAlign: 'left',
+                    gap: '10px',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                    border: '1px solid #E2E8F0',
+                    backgroundColor: '#FFFFFF'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#4F46E5';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 6px 12px -2px rgba(79, 70, 229, 0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = '#E2E8F0';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.05)';
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+                    <span style={{ fontSize: '1.75rem' }}>{b.logo || '⚡'}</span>
+                    <span style={{
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      padding: '3px 8px',
+                      borderRadius: '9999px',
+                      backgroundColor: count > 0 ? '#EEF2FF' : '#F1F5F9',
+                      color: count > 0 ? '#4F46E5' : '#94A3B8'
+                    }}>
+                      {count} {count === 1 ? 'drink' : 'drinks'}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', lineHeight: 1.2 }}>
+                      {b.name}
+                    </h3>
+                    <p style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '3px' }}>
+                      {b.origin || 'Active Brand'}
+                    </p>
+                  </div>
+
+                  <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', fontWeight: 700, color: '#4F46E5' }}>
+                    <span>Explore Drinks</span>
+                    <ChevronRight size={15} />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       ) : (
-        <>
-          {/* Controls Bar: Search, Brand Filter, Status Filter, Sorting, View Mode */}
-          <div className="rankit-card" style={{ padding: '16px 20px', marginBottom: '24px', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
+        /* =========================================================
+           BRAND SPECIFIC DRINKS VIEW
+           ========================================================= */
+        <div>
+          {/* Back button and brand header banner */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px' }}>
+            <button
+              onClick={() => {
+                setSelectedBrand(null);
+                setSearchQuery('');
+              }}
+              className="btn-secondary"
+              style={{ padding: '8px 14px', fontSize: '0.85rem' }}
+            >
+              <ArrowLeft size={16} />
+              <span>All Brands</span>
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '2rem' }}>{selectedBrand.logo || '⚡'}</span>
+              <div>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A', lineHeight: 1.1 }}>
+                  {selectedBrand.name} Drinks
+                </h2>
+                <p style={{ fontSize: '0.8rem', color: '#64748B', marginTop: '2px' }}>
+                  {selectedBrand.tagline ? `"${selectedBrand.tagline}"` : selectedBrand.origin} • {displayProducts.length} available
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Controls: Search in this brand, Discontinued filter, Sort order, View mode */}
+          <div className="rankit-card" style={{ padding: '14px 18px', marginBottom: '20px', display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', justifyContent: 'space-between' }}>
             <SearchBar 
               value={searchQuery}
               onChange={setSearchQuery}
-              placeholder="Search flavours, brands, caffeine..."
+              placeholder={`Search ${selectedBrand.name} drinks & flavours...`}
             />
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-              {/* Brand Filter */}
-              <select
-                value={selectedBrandFilter}
-                onChange={(e) => setSelectedBrandFilter(e.target.value)}
-                style={{
-                  padding: '9px 14px',
-                  borderRadius: '8px',
-                  border: '1px solid #CBD5E1',
-                  backgroundColor: '#FFFFFF',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  color: '#0F172A',
-                  cursor: 'pointer'
-                }}
-              >
-                <option value="all">All Brands ({brands.length})</option>
-                {brands.map((b) => (
-                  <option key={b.id} value={b.name}>{b.name}</option>
-                ))}
-              </select>
-
-              {/* Active / Discontinued Filter */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 style={{
-                  padding: '9px 14px',
+                  padding: '8px 12px',
                   borderRadius: '8px',
                   border: '1px solid #CBD5E1',
                   backgroundColor: '#FFFFFF',
@@ -220,16 +318,15 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                 }}
               >
                 <option value="all">All Editions</option>
-                <option value="active">Active Available Only</option>
-                <option value="discontinued">Discontinued Archives</option>
+                <option value="active">Active Only</option>
+                <option value="discontinued">Discontinued Only</option>
               </select>
 
-              {/* Sorting */}
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
                 style={{
-                  padding: '9px 14px',
+                  padding: '8px 12px',
                   borderRadius: '8px',
                   border: '1px solid #CBD5E1',
                   backgroundColor: '#FFFFFF',
@@ -239,53 +336,47 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                   cursor: 'pointer'
                 }}
               >
-                <option value="az">Name: A to Z</option>
-                <option value="za">Name: Z to A</option>
+                <option value="az">A to Z</option>
+                <option value="za">Z to A</option>
                 <option value="caffeine-desc">Caffeine: High to Low</option>
                 <option value="caffeine-asc">Caffeine: Low to High</option>
               </select>
 
-              {/* Grid / List switch */}
               <div style={{ display: 'flex', border: '1px solid #CBD5E1', borderRadius: '8px', overflow: 'hidden' }}>
                 <button
                   onClick={() => setViewMode('grid')}
                   style={{
-                    padding: '8px 10px',
+                    padding: '7px 9px',
                     backgroundColor: viewMode === 'grid' ? '#EEF2FF' : '#FFFFFF',
                     color: viewMode === 'grid' ? '#4F46E5' : '#64748B'
                   }}
                   title="Grid View"
                 >
-                  <Grid size={18} />
+                  <Grid size={17} />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
                   style={{
-                    padding: '8px 10px',
+                    padding: '7px 9px',
                     backgroundColor: viewMode === 'list' ? '#EEF2FF' : '#FFFFFF',
                     color: viewMode === 'list' ? '#4F46E5' : '#64748B'
                   }}
                   title="List View"
                 >
-                  <List size={18} />
+                  <List size={17} />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Catalog Results Summary */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: 600 }}>
-              Showing {filteredProducts.length} of {products.length} products
-            </span>
-          </div>
-
-          {/* Product Layout (Grid vs List) */}
-          {filteredProducts.length === 0 ? (
+          {/* Product cards or table */}
+          {displayProducts.length === 0 ? (
             <div className="rankit-card" style={{ padding: '40px', textAlign: 'center', color: '#64748B' }}>
               <AlertCircle size={32} color="#94A3B8" style={{ margin: '0 auto 12px auto' }} />
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>No matching drinks found</h3>
-              <p style={{ marginTop: '4px' }}>Try broadening your search term or clearing active filters.</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>No drinks found for {selectedBrand.name}</h3>
+              <p style={{ marginTop: '4px', fontSize: '0.85rem' }}>
+                Click "+ Add New Drink" above to add the first flavour to this brand!
+              </p>
             </div>
           ) : viewMode === 'grid' ? (
             <div style={{
@@ -293,7 +384,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
               gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
               gap: '20px'
             }}>
-              {filteredProducts.map((prod) => (
+              {displayProducts.map((prod) => (
                 <ProductCard 
                   key={prod.id} 
                   product={prod} 
@@ -302,13 +393,11 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
               ))}
             </div>
           ) : (
-            /* List View */
             <div className="rankit-card" style={{ overflow: 'hidden' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
                 <thead>
                   <tr style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid #E2E8F0', color: '#64748B', fontWeight: 700 }}>
                     <th style={{ padding: '14px 20px' }}>Product</th>
-                    <th style={{ padding: '14px 20px' }}>Brand</th>
                     <th style={{ padding: '14px 20px' }}>Flavour / Note</th>
                     <th style={{ padding: '14px 20px' }}>Caffeine</th>
                     <th style={{ padding: '14px 20px' }}>Serving Size</th>
@@ -316,7 +405,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredProducts.map((p) => (
+                  {displayProducts.map((p) => (
                     <tr 
                       key={p.id}
                       onClick={() => setSelectedProductDetail(p)}
@@ -326,9 +415,6 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                     >
                       <td style={{ padding: '14px 20px', fontWeight: 700, color: '#0F172A' }}>
                         {p.name}
-                      </td>
-                      <td style={{ padding: '14px 20px', color: '#4F46E5', fontWeight: 600 }}>
-                        {p.brand}
                       </td>
                       <td style={{ padding: '14px 20px', color: '#64748B' }}>
                         {p.flavor || '—'}
@@ -352,10 +438,10 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
               </table>
             </div>
           )}
-        </>
+        </div>
       )}
 
-      {/* Product Detail Modal / Panel */}
+      {/* Product Detail Modal */}
       {selectedProductDetail && (
         <div style={{
           position: 'fixed',
@@ -371,13 +457,13 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
           zIndex: 50,
           padding: '20px'
         }}>
-          <div className="rankit-card" style={{ width: '100%', maxWidth: '560px', maxHeight: '90vh', overflowY: 'auto', padding: '28px' }}>
+          <div className="rankit-card" style={{ width: '100%', maxWidth: '520px', maxHeight: '90vh', overflowY: 'auto', padding: '24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <div>
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#4F46E5', textTransform: 'uppercase' }}>
                   {selectedProductDetail.brand}
                 </span>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0F172A', marginTop: '2px' }}>
+                <h2 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0F172A', marginTop: '2px' }}>
                   {selectedProductDetail.name}
                 </h2>
               </div>
@@ -391,11 +477,11 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
 
             <div style={{
               width: '100%',
-              height: '240px',
+              height: '220px',
               backgroundColor: '#F1F5F9',
-              borderRadius: '12px',
+              borderRadius: '10px',
               overflow: 'hidden',
-              marginBottom: '20px',
+              marginBottom: '16px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -408,41 +494,41 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ padding: '12px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600 }}>Caffeine Content</span>
-                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#F59E0B', marginTop: '2px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginBottom: '16px' }}>
+              <div style={{ padding: '10px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                <span style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: 600 }}>Caffeine</span>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#F59E0B' }}>
                   {selectedProductDetail.caffeine} mg
                 </div>
               </div>
-              <div style={{ padding: '12px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600 }}>Standard Can Volume</span>
-                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#3B82F6', marginTop: '2px' }}>
+              <div style={{ padding: '10px', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                <span style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: 600 }}>Standard Can Size</span>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#3B82F6' }}>
                   {selectedProductDetail.servingSize} ml
                 </div>
               </div>
             </div>
 
             <div style={{ marginBottom: '20px' }}>
-              <h4 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0F172A', marginBottom: '6px' }}>Flavour Profile & Description</h4>
-              <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6 }}>
+              <h4 style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0F172A', marginBottom: '4px' }}>Description</h4>
+              <p style={{ fontSize: '0.85rem', color: '#475569', lineHeight: 1.5 }}>
                 {selectedProductDetail.description || 'No description provided.'}
               </p>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <button 
                 onClick={() => setSelectedProductDetail(null)}
                 className="btn-primary"
               >
-                Close View
+                Close
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* 4.5 Add Product Manually Modal */}
+      {/* Add Drink Modal */}
       {isAddModalOpen && (
         <div style={{
           position: 'fixed',
@@ -458,17 +544,17 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
           zIndex: 50,
           padding: '20px'
         }}>
-          <form onSubmit={handleCreateProductSubmit} className="rankit-card" style={{ width: '100%', maxWidth: '520px', padding: '28px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0F172A' }}>Add Drink to Catalog</h2>
+          <form onSubmit={handleCreateProductSubmit} className="rankit-card" style={{ width: '100%', maxWidth: '500px', padding: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0F172A' }}>Add Drink to Catalog</h2>
               <button type="button" onClick={() => setIsAddModalOpen(false)} style={{ color: '#64748B' }}>
                 <X size={20} />
               </button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
-                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '4px' }}>
                   Product Name *
                 </label>
                 <input
@@ -477,19 +563,19 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                   placeholder="e.g. Monster Ultra Gold"
                   value={newProduct.name}
                   onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
+                  style={{ width: '100%', padding: '9px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                 <div>
-                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '4px' }}>
                     Brand *
                   </label>
                   <select
                     value={newProduct.brand}
                     onChange={(e) => setNewProduct({ ...newProduct, brand: e.target.value })}
-                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem', backgroundColor: '#FFFFFF' }}
+                    style={{ width: '100%', padding: '9px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem', backgroundColor: '#FFFFFF' }}
                   >
                     {brands.map((b) => (
                       <option key={b.id} value={b.name}>{b.name}</option>
@@ -498,7 +584,7 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '4px' }}>
                     Flavour Note
                   </label>
                   <input
@@ -506,14 +592,14 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                     placeholder="e.g. Golden Pineapple"
                     value={newProduct.flavor}
                     onChange={(e) => setNewProduct({ ...newProduct, flavor: e.target.value })}
-                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
+                    style={{ width: '100%', padding: '9px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
                   />
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                 <div>
-                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '4px' }}>
                     Caffeine (mg) *
                   </label>
                   <input
@@ -522,12 +608,12 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                     max="600"
                     value={newProduct.caffeine}
                     onChange={(e) => setNewProduct({ ...newProduct, caffeine: e.target.value })}
-                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
+                    style={{ width: '100%', padding: '9px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '4px' }}>
                     Serving Size (ml) *
                   </label>
                   <input
@@ -536,50 +622,37 @@ export default function Catalog({ products, brands, onAddProduct, onSelectProduc
                     max="1000"
                     value={newProduct.servingSize}
                     onChange={(e) => setNewProduct({ ...newProduct, servingSize: e.target.value })}
-                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
+                    style={{ width: '100%', padding: '9px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
                   />
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '20px' }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+              <div style={{ display: 'flex', gap: '16px' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', cursor: 'pointer', fontWeight: 600 }}>
                   <input
                     type="checkbox"
                     checked={newProduct.sugarFree}
                     onChange={(e) => setNewProduct({ ...newProduct, sugarFree: e.target.checked })}
                   />
-                  <span>Sugar Free / Zero Sugar</span>
+                  <span>Sugar Free</span>
                 </label>
 
-                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', cursor: 'pointer', fontWeight: 600 }}>
                   <input
                     type="checkbox"
                     checked={newProduct.isDiscontinued}
                     onChange={(e) => setNewProduct({ ...newProduct, isDiscontinued: e.target.checked })}
                   />
-                  <span>Discontinued Formulation</span>
+                  <span>Discontinued</span>
                 </label>
               </div>
 
-              <div>
-                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', display: 'block', marginBottom: '6px' }}>
-                  Description / Tasting Notes
-                </label>
-                <textarea
-                  rows="3"
-                  placeholder="Personal tasting observations, ingredients..."
-                  value={newProduct.description}
-                  onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                  style={{ width: '100%', padding: '10px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem' }}
-                />
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '6px' }}>
                 <button type="button" onClick={() => setIsAddModalOpen(false)} className="btn-secondary">
                   Cancel
                 </button>
                 <button type="submit" className="btn-primary">
-                  Save Product to Catalog
+                  Save to Catalog
                 </button>
               </div>
             </div>
