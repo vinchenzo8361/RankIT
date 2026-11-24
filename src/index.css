@@ -1,31 +1,24 @@
-/* RankIt Design System — High contrast neutral base (#F8FAFC) + Indigo Accent (#4F46E5) */
+/* RankIt Design System — Modern, Minimalist, High-Contrast Crisp Aesthetic */
 :root {
-  --bg-primary: #F8FAFC;
+  --bg-primary: #FAFAFA;       /* Softer, cleaner minimalist background */
   --bg-card: #FFFFFF;
-  --bg-hover: #F1F5F9;
-  --brand-accent: #4F46E5;
-  --brand-accent-hover: #4338CA;
-  --brand-accent-light: #EEF2FF;
-  --text-primary: #0F172A;
-  --text-secondary: #64748B;
-  --border-subtle: #E2E8F0;
-  --border-strong: #CBD5E1;
+  --bg-hover: #F4F4F5;          /* Subtler zinc neutral hover */
+  --brand-accent: #3B82F6;      /* Modern refined blue/indigo */
+  --brand-accent-hover: #2563EB;
+  --brand-accent-light: #EFF6FF;
+  --text-primary: #18181B;      /* Deep neutral charcoal */
+  --text-secondary: #71717A;    /* Balanced secondary grey */
+  --border-subtle: #E4E4E7;     /* Clean minimalist borders */
+  --border-strong: #D4D4D8;
 
   /* Tier colors */
   --tier-s: #F59E0B;
-  --tier-a: #16A34A;
+  --tier-a: #10B981;
   --tier-b: #3B82F6;
   --tier-c: #EAB308;
   --tier-d: #F97316;
   --tier-f: #EF4444;
-  --tier-idk: #94A3B8;
-
-  /* Badges */
-  --badge-gold: #F59E0B;
-  --badge-silver: #94A3B8;
-  --badge-bronze: #B45309;
-  --rank-up: #10B981;
-  --rank-down: #EF4444;
+  --tier-idk: #A1A1AA;
 
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--text-primary);
@@ -60,18 +53,18 @@ input, select, textarea {
 
 /* Scrollbar customization */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #E4E4E7;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #A1A1AA;
 }
 
 /* Utilities */
@@ -88,32 +81,32 @@ input, select, textarea {
   overflow-y: auto;
 }
 
-/* Glass & Card styles */
+/* Minimalist Card styles */
 .rankit-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.15s ease;
 }
 
 .rankit-card:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 0.72rem;
   font-weight: 600;
 }
 
 .badge-brand {
-  background: var(--brand-accent-light);
-  color: var(--brand-accent);
+  background: #F4F4F5;
+  color: #18181B;
 }
 
 .badge-discontinued {
@@ -122,52 +115,51 @@ input, select, textarea {
 }
 
 .badge-active {
-  background: #DCFCE7;
-  color: #16A34A;
+  background: #ECFDF5;
+  color: #059669;
 }
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: var(--brand-accent);
+  gap: 7px;
+  padding: 8px 14px;
+  background: #18181B;
   color: #FFFFFF;
   font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: 8px;
-  transition: background 0.15s ease, transform 0.1s ease;
+  font-size: 0.85rem;
+  border-radius: 7px;
+  transition: background 0.15s ease;
 }
 
 .btn-primary:hover {
-  background: var(--brand-accent-hover);
+  background: #27272A;
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
+  gap: 7px;
+  padding: 8px 14px;
   background: #FFFFFF;
-  color: var(--text-primary);
+  color: #18181B;
   border: 1px solid var(--border-subtle);
   font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: 8px;
+  font-size: 0.85rem;
+  border-radius: 7px;
   transition: all 0.15s ease;
 }
 
 .btn-secondary:hover {
-  background: var(--bg-hover);
+  background: #F4F4F5;
   border-color: var(--border-strong);
 }
 
-/* Print specific stylesheet for clean rankings output */
+/* Print specific stylesheet */
 @media print {
   .no-print,
   .sidebar-container,
   .top-header,
-  .tabs-navigation,
   .action-buttons,
   .btn-primary,
   .btn-secondary {
@@ -178,15 +170,5 @@ input, select, textarea {
     background: #FFFFFF !important;
     padding: 0 !important;
     margin: 0 !important;
-  }
-  
-  .print-only {
-    display: block !important;
-  }
-  
-  .rankit-card {
-    box-shadow: none !important;
-    border: 1px solid #CBD5E1 !important;
-    break-inside: avoid;
   }
 }

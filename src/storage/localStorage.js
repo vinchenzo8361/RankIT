@@ -3,7 +3,7 @@ import { initialBrands } from '../data/brands';
 import { initialProducts } from '../data/products';
 
 const STORAGE_KEYS = {
-  BRANDS: 'rankit_brands_v2', // bumped key to ensure users get the full 331+ brands update
+  BRANDS: 'rankit_brands_v3', // bumped key for Top 25 update
   PRODUCTS: 'rankit_products_v2',
   PROJECTS: 'rankit_projects_v1',
   STANDALONE_TIER: 'rankit_standalone_tier_v1',
@@ -80,7 +80,7 @@ export const saveStoredProjects = (projects) => {
   }
 };
 
-// Global Standalone Tier List State - Clean initial state: empty tiers
+// Global Standalone Tier List State
 export const getStoredStandaloneTier = (category = 'drinks') => {
   try {
     const raw = localStorage.getItem(`${STORAGE_KEYS.STANDALONE_TIER}_${category}`);
@@ -102,7 +102,7 @@ export const saveStoredStandaloneTier = (category, data) => {
   }
 };
 
-// Standalone Ratings out of 10 State - Start clean
+// Standalone Ratings out of 10 State
 export const getStoredRatings = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.RATINGS);
@@ -124,7 +124,7 @@ export const saveStoredRatings = (ratings) => {
   }
 };
 
-// Drink Tracker Logs - Start clean
+// Drink Tracker Logs
 export const getStoredDrinkLogs = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.DRINK_LOGS);

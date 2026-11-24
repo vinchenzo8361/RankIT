@@ -52,129 +52,57 @@ Z
 ZOA Energy, Zen, Zest Energy, ZONe Energy.
 Numbers
 3D Energy, 5-hour Energy, 9mm Energy, 28 BLACK.
-Oronamin C, Taisho, XXL, Hot6, Uptime, Wired, Bomba, Rodeo, HELL, XL Energy`;
+Oronamin C, Taisho, XXL, Hot6, Uptime, Wired, Bomba, Rodeo, HELL, XL Energy, Full Throttle`;
 
 // Discontinued brand list
 const discontinuedList = new Set([
   'Adrenaline Shoc', 'Cocaine Energy', 'Crunk', 'Vault', 'Redline', 'VPX Redline', 'Jolt', 
   'Lost and Found', 'Khaos', 'Muscle Monster', 'Starbucks BAYA Energy', 'Street King',
-  'Quake Energy', 'Rowdy Energy', 'HiBall', 'Bang Energy', 'Motor Oil', 'Missile', 
+  'Quake Energy', 'Rowdy Energy', 'HiBall', 'Motor Oil', 'Missile', 
   'Cloud 9', 'Dark Dog', 'Dragon Fire', 'E6', 'Fucked Up', 'I Am Fucked Up', 'Squid Game Energy',
   'Playboy Energy', 'Raptor', 'Shock', 'Speed', 'Stacker 2', 'Tornado', 'Taft', 'Tzinga',
   'Vuka', 'Wolverine', 'War Horse', 'XOT'
 ]);
 
-// Map markets
-const marketMap = {
-  'Red Bull': 'Austria / Global',
-  'Monster Energy': 'USA / Global',
-  'Rockstar': 'USA / Global',
-  'Rockstar Energy': 'USA / Global',
-  'Celsius': 'USA / Global',
-  'Bang Energy': 'USA',
-  'NOS Energy': 'USA',
-  'Reign': 'USA',
-  'Reign Storm': 'USA',
-  'Alani Nu': 'USA',
-  'C4 Energy': 'USA',
-  'Ghost Energy': 'USA / Global',
-  '5-hour Energy': 'USA',
-  'Prime Energy': 'USA / Global',
-  'V Energy': 'Australia / New Zealand',
-  'Lucozade Energy': 'UK',
-  'Lucozade': 'UK',
-  'Burn': 'Global',
-  'HELL Energy': 'Hungary / Global',
-  'HELL': 'Hungary',
-  'Carabao': 'Thailand / Global',
-  'M-150': 'Thailand',
-  'Sting': 'Vietnam / India / Global',
-  'Eastroc Super Drink': 'China',
-  'Shark': 'Thailand / Global',
-  'Shark Energy': 'Thailand / Global',
-  'Mother': 'Australia',
-  'Venom': 'USA',
-  'Venom Energy': 'USA',
-  'Amp Energy': 'USA',
-  'MTN Dew Amp': 'USA',
-  'Full Throttle': 'USA',
-  'Fast Twitch': 'USA',
-  'Gatorade Fast Twitch': 'USA',
-  'Rip It': 'USA',
-  'Adrenaline Rush': 'International',
-  'Battery': 'Finland',
-  'Relentless': 'UK',
-  'Cult': 'Denmark',
-  'Emerge': 'UK',
-  'Power Horse': 'Austria / International',
-  'Tiger': 'Poland / Southeast Asia',
-  'XL Energy': 'Poland / Europe',
-  'XL': 'Poland / Europe',
-  '28 BLACK': 'Germany',
-  'Nalu': 'Belgium',
-  'Guru': 'Canada',
-  'GURU Organic Energy': 'Canada',
-  'Aspire': 'USA',
-  'ZOA Energy': 'USA',
-  'Bucked Up': 'USA',
-  'Ryse Fuel': 'USA',
-  'G Fuel': 'USA',
-  'XYIENCE': 'USA',
-  'XYIENCE Energy': 'USA',
-  'Redline': 'USA',
-  'Big Shock!': 'Czech Republic',
-  'Semtex': 'Czech Republic',
-  'Non Stop': 'Eastern Europe / Poland',
-  'Flying Horse': 'Brazil',
-  'Toro Loco': 'Spain',
-  'Mad Croc': 'Europe',
-  'Powerking': 'Europe',
-  'XXL': 'Europe',
-  'XLNT Sports': 'Europe',
-  'Oshee': 'Poland',
-  'Tenzing': 'UK',
-  'PerfectTed': 'UK',
-  'NOCCO': 'Sweden',
-  'Vitamin Well': 'Sweden',
-  'Sneak': 'UK',
-  'Gorilla Mind': 'USA',
-  'Jocko Fuel': 'USA',
-  'Uptime': 'USA',
-  'Uptime Energy': 'USA',
-  'Wired': 'USA',
-  'Wired Energy': 'USA',
-  'Bomba': 'Europe',
-  'Rodeo': 'Europe',
-  'Pampa+': 'South America',
-  'Volt': 'Latin America',
-  'Volt AJE': 'Latin America',
-  'Volt Energy': 'Latin America',
-  'Vive 100': 'Colombia',
-  'Kabisa': 'Africa',
-  'Supa Komando': 'Africa',
-  'Hi-Tiger': 'China',
-  'Hot6': 'South Korea',
-  'Hot6ix': 'South Korea',
-  'Lipovitan': 'Japan',
-  'ZONe Energy': 'Japan',
-  'Real Gold': 'Japan',
-  'Oronamin C': 'Japan',
-  'Taisho': 'Japan',
-  'TEHO': 'Finland',
-  'Black Bruin': 'Turkey',
-  'Baly': 'Turkey',
-  'Gorilla': 'Europe',
-  'Crazy Tiger': 'Europe',
-  'EnerYeti': 'Spain',
-  'Irn-Bru Energy': 'Scotland / UK',
-  'Club Mate': 'Germany',
-  'Effect': 'Germany',
-  'Kombat': 'International',
-  'Kong Strong': 'Germany / Europe'
-};
+// Top 25 Brands exactly as ordered (with Red Bull Editions removed, shifted up, and Full Throttle at 25)
+const top25Roster = [
+  { rank: 1, name: 'Red Bull', origin: 'Austria' },
+  { rank: 2, name: 'Monster Energy', origin: 'USA' },
+  { rank: 3, name: 'Rockstar Energy', origin: 'USA' },
+  { rank: 4, name: 'Celsius', origin: 'USA' },
+  { rank: 5, name: 'Eastroc Super Drink', origin: 'China' },
+  { rank: 6, name: 'Bang Energy', origin: 'USA' },
+  { rank: 7, name: 'Alani Nu', origin: 'USA' },
+  { rank: 8, name: 'GHOST Energy', origin: 'USA' },
+  { rank: 9, name: 'C4 Energy', origin: 'USA' },
+  { rank: 10, name: 'NOS Energy', origin: 'USA' },
+  { rank: 11, name: 'Reign', origin: 'USA' },
+  { rank: 12, name: 'M-150', origin: 'Thailand' },
+  { rank: 13, name: 'Carabao', origin: 'Thailand' },
+  { rank: 14, name: 'Sting', origin: 'International / Asia' },
+  { rank: 15, name: 'V Energy', origin: 'New Zealand' },
+  { rank: 16, name: 'Lucozade Energy', origin: 'UK' },
+  { rank: 17, name: 'Burn', origin: 'Global' },
+  { rank: 18, name: 'Prime Energy', origin: 'USA' },
+  { rank: 19, name: '5-hour Energy', origin: 'USA' },
+  { rank: 20, name: 'Shark Energy', origin: 'Thailand' },
+  { rank: 21, name: 'Mother', origin: 'Australia' },
+  { rank: 22, name: 'HELL Energy', origin: 'Hungary' },
+  { rank: 23, name: 'Power Horse', origin: 'Austria' },
+  { rank: 24, name: 'GURU Organic Energy', origin: 'Canada' },
+  { rank: 25, name: 'Full Throttle', origin: 'USA' }
+];
+
+const top25Map = {};
+top25Roster.forEach(item => {
+  top25Map[item.name.toLowerCase()] = item.rank;
+});
 
 const lines = rawText.split('\n');
 const extractedNames = new Set();
+
+// Add top 25 first
+top25Roster.forEach(item => extractedNames.add(item.name));
 
 for (const line of lines) {
   const trimmed = line.trim();
@@ -192,34 +120,34 @@ for (const line of lines) {
 const brandList = Array.from(extractedNames).map((name) => {
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const isDisc = discontinuedList.has(name) || name.toLowerCase().includes('discontinued');
-  const market = marketMap[name] || 'International';
+  const topRank = top25Map[name.toLowerCase()] || null;
 
   return {
     id: slug,
     name: name,
-    category: isDisc ? 'Discontinued' : 'Active', // 'Active' or 'Discontinued'
+    category: isDisc ? 'Discontinued' : 'Active',
+    isTop25: topRank !== null,
+    top25Rank: topRank,
     status: isDisc ? 'Discontinued' : 'Active',
-    origin: market,
-    description: `${name} energy drink brand (${market}).`,
+    origin: topRank ? top25Roster.find(r => r.rank === topRank)?.origin || 'International' : 'International',
     logo: '⚡',
-    color: isDisc ? '#475569' : '#4F46E5'
+    color: isDisc ? '#64748B' : '#4F46E5'
   };
 });
 
-// Sort by category (Active first, then Discontinued), then alphabetically
+// Sort
 brandList.sort((a, b) => {
-  if (a.category !== b.category) {
-    return a.category === 'Active' ? -1 : 1;
-  }
+  if (a.top25Rank && b.top25Rank) return a.top25Rank - b.top25Rank;
+  if (a.category !== b.category) return a.category === 'Active' ? -1 : 1;
   return a.name.localeCompare(b.name);
 });
 
 console.log(`Total brands extracted: ${brandList.length}`);
-const activeCount = brandList.filter(b => b.category === 'Active').length;
-const discCount = brandList.filter(b => b.category === 'Discontinued').length;
-console.log(`Active: ${activeCount}, Discontinued: ${discCount}`);
+console.log(`Top 25 count: ${brandList.filter(b => b.isTop25).length}`);
 
-const code = `// Complete Brand Database Classified into Active Brands and Discontinued Brands
+const code = `// Complete Brand Database with Active, Discontinued, and Top 25 classifications
+export const top25BrandsRoster = ${JSON.stringify(top25Roster, null, 2)};
+
 export const initialBrands = ${JSON.stringify(brandList, null, 2)};
 `;
 
