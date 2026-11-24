@@ -3,8 +3,8 @@ import { initialBrands } from '../data/brands';
 import { initialProducts } from '../data/products';
 
 const STORAGE_KEYS = {
-  BRANDS: 'rankit_brands_v1',
-  PRODUCTS: 'rankit_products_v1',
+  BRANDS: 'rankit_brands_v2', // bumped key to ensure users get the full 331+ brands update
+  PRODUCTS: 'rankit_products_v2',
   PROJECTS: 'rankit_projects_v1',
   STANDALONE_TIER: 'rankit_standalone_tier_v1',
   RATINGS: 'rankit_ratings_v1',
@@ -62,7 +62,6 @@ export const getStoredProjects = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.PROJECTS);
     if (!raw) {
-      // Clean initial state: empty projects list
       localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify([]));
       return [];
     }

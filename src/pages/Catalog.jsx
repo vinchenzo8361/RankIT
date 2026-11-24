@@ -11,7 +11,9 @@ import {
   Sparkles,
   Zap,
   Droplets,
-  Search
+  Search,
+  CheckCircle2,
+  Archive
 } from 'lucide-react';
 import SearchBar from '../components/SearchBar';
 import ProductCard from '../components/ProductCard';
@@ -19,9 +21,13 @@ import ProductCard from '../components/ProductCard';
 export default function Catalog({ products, brands, onAddProduct }) {
   const [activeCatalogCategory, setActiveCatalogCategory] = useState('energy-drinks'); // 'energy-drinks' | 'coffee'
   
+  // Brand category tab: 'active' (Active Brands) vs 'discontinued' (Discontinued Brands)
+  const [brandCategoryTab, setBrandCategoryTab] = useState('active');
+
   // Selected Brand View: null = show all Brand Buttons; brand object = drill down into specific brand
   const [selectedBrand, setSelectedBrand] = useState(null);
 
+  const [brandSearchQuery, setBrandSearchQuery] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'active' | 'discontinued'
   const [sortOrder, setSortOrder] = useState('az'); // 'az' | 'za' | 'caffeine-desc' | 'caffeine-asc'
@@ -48,6 +54,17 @@ export default function Catalog({ products, brands, onAddProduct }) {
   products.forEach((p) => {
     const bName = p.brand;
     brandProductCounts[bName] = (brandProductCounts[bName] || 0) + 1;
+  });
+
+  // Separate active vs discontinued brands
+  const activeBrands = brands.filter((b) => b.category === 'Active');
+  const discontinuedBrands = brands.filter((b) => b.category === 'Discontinued');
+
+  const displayedBrandsPool = brandCategoryTab === 'active' ? activeBrands : discontinuedBrands;
+
+  const filteredBrands = displayedBrandsPool.filter((b) => {
+    return b.name.toLowerCase().includes(brandSearchQuery.toLowerCase()) ||
+           (b.origin && b.origin.toLowerCase().includes(brandSearchQuery.toLowerCase()));
   });
 
   // Products belonging to the selected brand (or all if filtered)
@@ -135,7 +152,7 @@ export default function Catalog({ products, brands, onAddProduct }) {
               boxShadow: activeCatalogCategory === 'energy-drinks' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
             }}
           >
-            ⚡ Energy Drinks ({products.length})
+            ⚡ Energy Drinks Catalog ({brands.length} Brands)
           </button>
           <button
             onClick={() => setActiveCatalogCategory('coffee')}
@@ -180,25 +197,87 @@ export default function Catalog({ products, brands, onAddProduct }) {
         </div>
       ) : !selectedBrand ? (
         /* =========================================================
-           BRAND SELECTION VIEW: Buttons to see each Energy Drink Brand
+           BRAND SELECTION VIEW:
+           Two Categories: 1. Active Brands vs 2. Discontinued Brands
            ========================================================= */
         <div>
-          <div style={{ marginBottom: '20px' }}>
-            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0F172A' }}>
-              Select an Energy Drink Brand
-            </h2>
-            <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '4px' }}>
-              Click any brand button below to view its specific drinks, flavours, and variants.
-            </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '20px' }}>
+            <div>
+              <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0F172A' }}>
+                Energy Drink Brands ({brands.length} Total)
+              </h2>
+              <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '4px' }}>
+                Browse by brand category. Click any brand button to see all its individual drinks and variants.
+              </p>
+            </div>
+
+            {/* TWO CATEGORIES TABS: Active Brands vs Discontinued Brands */}
+            <div style={{ display: 'flex', gap: '6px', backgroundColor: '#F1F5F9', padding: '4px', borderRadius: '10px', border: '1px solid #CBD5E1' }}>
+              <button
+                onClick={() => {
+                  setBrandCategoryTab('active');
+                  setBrandSearchQuery('');
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 18px',
+                  borderRadius: '8px',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  backgroundColor: brandCategoryTab === 'active' ? '#16A34A' : 'transparent',
+                  color: brandCategoryTab === 'active' ? '#FFFFFF' : '#475569',
+                  boxShadow: brandCategoryTab === 'active' ? '0 1px 3px rgba(22, 163, 74, 0.3)' : 'none'
+                }}
+              >
+                <CheckCircle2 size={15} />
+                <span>Active Brands ({activeBrands.length})</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setBrandCategoryTab('discontinued');
+                  setBrandSearchQuery('');
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 18px',
+                  borderRadius: '8px',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  backgroundColor: brandCategoryTab === 'discontinued' ? '#EF4444' : 'transparent',
+                  color: brandCategoryTab === 'discontinued' ? '#FFFFFF' : '#475569',
+                  boxShadow: brandCategoryTab === 'discontinued' ? '0 1px 3px rgba(239, 68, 68, 0.3)' : 'none'
+                }}
+              >
+                <Archive size={15} />
+                <span>Discontinued Brands ({discontinuedBrands.length})</span>
+              </button>
+            </div>
           </div>
 
+          {/* Brand Search Bar */}
+          <div style={{ marginBottom: '20px', maxWidth: '440px' }}>
+            <SearchBar
+              value={brandSearchQuery}
+              onChange={setBrandSearchQuery}
+              placeholder={`Search in ${brandCategoryTab === 'active' ? 'Active' : 'Discontinued'} Brands...`}
+            />
+          </div>
+
+          {/* Brand Buttons Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-            gap: '16px'
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: '14px'
           }}>
-            {brands.map((b) => {
+            {filteredBrands.map((b) => {
               const count = brandProductCounts[b.name] || 0;
+              const isDisc = b.category === 'Discontinued';
+
               return (
                 <button
                   key={b.id}
@@ -208,21 +287,21 @@ export default function Catalog({ products, brands, onAddProduct }) {
                   }}
                   className="rankit-card"
                   style={{
-                    padding: '20px',
+                    padding: '16px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     textAlign: 'left',
-                    gap: '10px',
+                    gap: '8px',
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
                     border: '1px solid #E2E8F0',
                     backgroundColor: '#FFFFFF'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#4F46E5';
+                    e.currentTarget.style.borderColor = isDisc ? '#EF4444' : '#4F46E5';
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 12px -2px rgba(79, 70, 229, 0.15)';
+                    e.currentTarget.style.boxShadow = '0 6px 12px -2px rgba(0, 0, 0, 0.08)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = '#E2E8F0';
@@ -231,31 +310,31 @@ export default function Catalog({ products, brands, onAddProduct }) {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-                    <span style={{ fontSize: '1.75rem' }}>{b.logo || '⚡'}</span>
+                    <span style={{ fontSize: '1.5rem' }}>{b.logo || '⚡'}</span>
                     <span style={{
-                      fontSize: '0.75rem',
+                      fontSize: '0.7rem',
                       fontWeight: 700,
-                      padding: '3px 8px',
+                      padding: '2px 7px',
                       borderRadius: '9999px',
-                      backgroundColor: count > 0 ? '#EEF2FF' : '#F1F5F9',
-                      color: count > 0 ? '#4F46E5' : '#94A3B8'
+                      backgroundColor: isDisc ? '#FEE2E2' : count > 0 ? '#EEF2FF' : '#F1F5F9',
+                      color: isDisc ? '#DC2626' : count > 0 ? '#4F46E5' : '#94A3B8'
                     }}>
-                      {count} {count === 1 ? 'drink' : 'drinks'}
+                      {isDisc ? 'Discontinued' : `${count} ${count === 1 ? 'drink' : 'drinks'}`}
                     </span>
                   </div>
 
                   <div>
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', lineHeight: 1.2 }}>
+                    <h3 style={{ fontSize: '1.02rem', fontWeight: 800, color: '#0F172A', lineHeight: 1.2 }}>
                       {b.name}
                     </h3>
-                    <p style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '3px' }}>
-                      {b.origin || 'Active Brand'}
+                    <p style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '2px' }}>
+                      {b.origin || 'International'}
                     </p>
                   </div>
 
-                  <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', fontWeight: 700, color: '#4F46E5' }}>
-                    <span>Explore Drinks</span>
-                    <ChevronRight size={15} />
+                  <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', fontWeight: 700, color: isDisc ? '#EF4444' : '#4F46E5' }}>
+                    <span>View Drinks</span>
+                    <ChevronRight size={14} />
                   </div>
                 </button>
               );
@@ -284,11 +363,16 @@ export default function Catalog({ products, brands, onAddProduct }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span style={{ fontSize: '2rem' }}>{selectedBrand.logo || '⚡'}</span>
               <div>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A', lineHeight: 1.1 }}>
-                  {selectedBrand.name} Drinks
-                </h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A', lineHeight: 1.1 }}>
+                    {selectedBrand.name} Drinks
+                  </h2>
+                  <span className={selectedBrand.category === 'Discontinued' ? 'badge badge-discontinued' : 'badge badge-active'}>
+                    {selectedBrand.category === 'Discontinued' ? 'Discontinued Brand' : 'Active Brand'}
+                  </span>
+                </div>
                 <p style={{ fontSize: '0.8rem', color: '#64748B', marginTop: '2px' }}>
-                  {selectedBrand.tagline ? `"${selectedBrand.tagline}"` : selectedBrand.origin} • {displayProducts.length} available
+                  Market: {selectedBrand.origin} • {displayProducts.length} drink(s) in catalog
                 </p>
               </div>
             </div>
@@ -373,7 +457,7 @@ export default function Catalog({ products, brands, onAddProduct }) {
           {displayProducts.length === 0 ? (
             <div className="rankit-card" style={{ padding: '40px', textAlign: 'center', color: '#64748B' }}>
               <AlertCircle size={32} color="#94A3B8" style={{ margin: '0 auto 12px auto' }} />
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>No drinks found for {selectedBrand.name}</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A' }}>No drinks listed yet for {selectedBrand.name}</h3>
               <p style={{ marginTop: '4px', fontSize: '0.85rem' }}>
                 Click "+ Add New Drink" above to add the first flavour to this brand!
               </p>
@@ -578,7 +662,7 @@ export default function Catalog({ products, brands, onAddProduct }) {
                     style={{ width: '100%', padding: '9px 12px', border: '1px solid #CBD5E1', borderRadius: '8px', fontSize: '0.875rem', backgroundColor: '#FFFFFF' }}
                   >
                     {brands.map((b) => (
-                      <option key={b.id} value={b.name}>{b.name}</option>
+                      <option key={b.id} value={b.name}>{b.name} ({b.category})</option>
                     ))}
                   </select>
                 </div>
@@ -643,7 +727,7 @@ export default function Catalog({ products, brands, onAddProduct }) {
                     checked={newProduct.isDiscontinued}
                     onChange={(e) => setNewProduct({ ...newProduct, isDiscontinued: e.target.checked })}
                   />
-                  <span>Discontinued</span>
+                  <span>Discontinued Formulation</span>
                 </label>
               </div>
 
