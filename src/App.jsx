@@ -19,11 +19,13 @@ import {
   getStoredRatings,
   saveStoredRatings,
   getStoredDrinkLogs,
-  saveStoredDrinkLogs
+  saveStoredDrinkLogs,
+  getStoredFavorites,
+  saveStoredFavorites
 } from './storage/localStorage';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('home'); // 'home' | 'rankings' | 'catalog' | 'tracker' | 'library'
+  const [activeTab, setActiveTab] = useState('home');
 
   // Central Application Data State
   const [brands, setBrands] = useState([]);
@@ -32,6 +34,7 @@ export default function App() {
   const [standaloneTiers, setStandaloneTiers] = useState({ brands: null, drinks: null });
   const [ratings, setRatings] = useState({});
   const [drinkLogs, setDrinkLogs] = useState({});
+  const [favorites, setFavorites] = useState([]);
 
   // Reload data from LocalStorage
   const loadAllData = () => {
@@ -44,6 +47,7 @@ export default function App() {
     });
     setRatings(getStoredRatings());
     setDrinkLogs(getStoredDrinkLogs());
+    setFavorites(getStoredFavorites());
   };
 
   useEffect(() => {
@@ -80,16 +84,25 @@ export default function App() {
     saveStoredDrinkLogs(newLogs);
   };
 
+  const handleToggleFavorite = (productId) => {
+    let updated;
+    if (favorites.includes(productId)) {
+      updated = favorites.filter((id) => id !== productId);
+    } else {
+      updated = [productId, ...favorites];
+    }
+    setFavorites(updated);
+    saveStoredFavorites(updated);
+  };
+
   const handleNavigateToCatalogProduct = (searchOrId) => {
     setActiveTab('catalog');
   };
 
   return (
     <div className="app-container">
-      {/* Fixed Left Navigation Sidebar */}
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {/* Main View Area */}
       <div className="main-content">
         <Header 
           activeTab={activeTab} 
@@ -126,15 +139,17 @@ export default function App() {
               products={products}
               brands={brands}
               onAddProduct={handleAddProduct}
-              onSelectProductForDetail={(p) => {}}
             />
           )}
 
           {activeTab === 'tracker' && (
             <DrinkTracker
               products={products}
+              brands={brands}
               drinkLogs={drinkLogs}
               onSaveLogs={handleSaveDrinkLogs}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
             />
           )}
 

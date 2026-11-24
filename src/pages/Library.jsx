@@ -6,18 +6,28 @@ import {
   Archive, 
   FlaskConical, 
   ExternalLink,
-  Search,
   Building,
-  Award
+  Coffee,
+  Flame,
+  CupSoda,
+  CheckCircle2,
+  Clock,
+  Layers
 } from 'lucide-react';
 import { libraryData } from '../data/libraryData';
+import { coffeeLibraryData } from '../data/coffeeLibraryData';
 
 export default function Library({ onNavigateToCatalogProduct }) {
   const [activeCategory, setActiveCategory] = useState('energy-drinks'); // 'energy-drinks' | 'coffee'
+  
+  // Energy drinks subsections
   const [activeSubTab, setActiveSubTab] = useState('brands'); // 'brands' | 'products' | 'industry' | 'ingredients' | 'archive'
-  const [searchQuery, setSearchQuery] = useState('');
+
+  // Coffee subsections
+  const [activeCoffeeTab, setActiveCoffeeTab] = useState('drinks'); // 'drinks' | 'roasts' | 'brewing' | 'beans'
 
   const { brandHistories, productHistories, industryHistory, ingredients, discontinuedArchive } = libraryData;
+  const { drinkTypes, roastLevels, homeBrewingGuide, beanSpecies } = coffeeLibraryData;
 
   return (
     <div style={{ padding: '28px', maxWidth: '1300px', margin: '0 auto', width: '100%' }}>
@@ -28,19 +38,19 @@ export default function Library({ onNavigateToCatalogProduct }) {
         justifyContent: 'space-between',
         flexWrap: 'wrap',
         gap: '16px',
-        marginBottom: '24px'
+        marginBottom: '22px'
       }}>
-        <div style={{ display: 'flex', gap: '8px', backgroundColor: '#E2E8F0', padding: '4px', borderRadius: '10px' }}>
+        <div style={{ display: 'flex', gap: '6px', backgroundColor: '#F4F4F5', padding: '3px', borderRadius: '8px' }}>
           <button
             onClick={() => setActiveCategory('energy-drinks')}
             style={{
-              padding: '8px 18px',
-              borderRadius: '8px',
-              fontSize: '0.875rem',
+              padding: '7px 16px',
+              borderRadius: '6px',
+              fontSize: '0.85rem',
               fontWeight: 700,
               backgroundColor: activeCategory === 'energy-drinks' ? '#FFFFFF' : 'transparent',
-              color: activeCategory === 'energy-drinks' ? '#4F46E5' : '#64748B',
-              boxShadow: activeCategory === 'energy-drinks' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
+              color: activeCategory === 'energy-drinks' ? '#18181B' : '#71717A',
+              boxShadow: activeCategory === 'energy-drinks' ? '0 1px 2px rgba(0,0,0,0.05)' : 'none'
             }}
           >
             ⚡ Energy Drinks Encyclopedia
@@ -48,41 +58,240 @@ export default function Library({ onNavigateToCatalogProduct }) {
           <button
             onClick={() => setActiveCategory('coffee')}
             style={{
-              padding: '8px 18px',
-              borderRadius: '8px',
-              fontSize: '0.875rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '7px 16px',
+              borderRadius: '6px',
+              fontSize: '0.85rem',
               fontWeight: 700,
               backgroundColor: activeCategory === 'coffee' ? '#FFFFFF' : 'transparent',
-              color: activeCategory === 'coffee' ? '#4F46E5' : '#64748B',
-              boxShadow: activeCategory === 'coffee' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
+              color: activeCategory === 'coffee' ? '#18181B' : '#71717A',
+              boxShadow: activeCategory === 'coffee' ? '0 1px 2px rgba(0,0,0,0.05)' : 'none'
             }}
           >
-            ☕ Coffee (Reserved for Future)
+            <Coffee size={15} color="#B45309" />
+            <span>☕ Coffee Library & Brewing</span>
           </button>
         </div>
       </div>
 
+      {/* =========================================================
+          COFFEE ENCYCLOPEDIA & HOME BREWING MASTER SECTION
+         ========================================================= */}
       {activeCategory === 'coffee' ? (
-        <div className="rankit-card" style={{ padding: '48px', textAlign: 'center', margin: '40px auto', maxWidth: '600px' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '16px' }}>☕</div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0F172A' }}>Coffee Encyclopedia Reserved</h2>
-          <p style={{ color: '#64748B', marginTop: '8px', lineHeight: 1.6 }}>
-            The coffee history, origins, roast profiles, and extraction encyclopedia will be introduced in future expansions alongside the Coffee Catalog!
-          </p>
-          <button onClick={() => setActiveCategory('energy-drinks')} className="btn-primary" style={{ marginTop: '20px' }}>
-            Return to Energy Drinks Library
-          </button>
+        <div>
+          {/* Header intro */}
+          <div style={{ marginBottom: '20px' }}>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#18181B' }}>
+              Coffee Encyclopedia & Brewing Guide
+            </h2>
+            <p style={{ fontSize: '0.82rem', color: '#71717A', marginTop: '2px' }}>
+              Learn drink anatomy (Latte, Cappuccino, Americano), roast intensities, bean biology, and step-by-step home brewing recipes.
+            </p>
+          </div>
+
+          {/* Coffee Subsections Tabs */}
+          <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '22px' }}>
+            {[
+              { id: 'drinks', label: 'Coffee Drink Types (Latte, Cappuccino...)', icon: CupSoda },
+              { id: 'roasts', label: 'Roast Levels & Intensities', icon: Flame },
+              { id: 'brewing', label: 'How to Make Coffee at Home', icon: Clock },
+              { id: 'beans', label: 'Arabica vs Robusta Beans', icon: Layers }
+            ].map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeCoffeeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveCoffeeTab(tab.id)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '8px 14px',
+                    borderRadius: '6px',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    whiteSpace: 'nowrap',
+                    backgroundColor: isActive ? '#18181B' : '#FFFFFF',
+                    color: isActive ? '#FFFFFF' : '#71717A',
+                    border: '1px solid #E4E4E7',
+                    boxShadow: isActive ? '0 1px 2px rgba(0,0,0,0.08)' : 'none'
+                  }}
+                >
+                  <Icon size={14} />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* 1. DRINK TYPES (Latte, Cappuccino, Americano, Flat White, etc.) */}
+          {activeCoffeeTab === 'drinks' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
+              {drinkTypes.map((item) => (
+                <div key={item.id} className="rankit-card" style={{ padding: '18px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#B45309', textTransform: 'uppercase' }}>
+                        {item.italianMeaning || item.origin || 'Classic Drink'}
+                      </span>
+                      <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#F59E0B' }}>
+                        {item.caffeine}
+                      </span>
+                    </div>
+
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#18181B', marginTop: '4px' }}>
+                      {item.name}
+                    </h3>
+
+                    <div style={{
+                      padding: '5px 8px',
+                      backgroundColor: '#FAFAFA',
+                      borderRadius: '5px',
+                      border: '1px solid #E4E4E7',
+                      fontSize: '0.75rem',
+                      fontWeight: 600,
+                      color: '#18181B',
+                      marginTop: '8px',
+                      marginBottom: '10px'
+                    }}>
+                      Ratio: {item.ratio}
+                    </div>
+
+                    <p style={{ fontSize: '0.82rem', color: '#52525B', lineHeight: 1.5 }}>
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div style={{ marginTop: '14px', paddingTop: '10px', borderTop: '1px solid #F4F4F5', fontSize: '0.74rem', color: '#71717A' }}>
+                    <strong>Ingredients:</strong> {item.ingredients}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* 2. ROAST LEVELS & INTENSITIES */}
+          {activeCoffeeTab === 'roasts' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {roastLevels.map((roast, idx) => (
+                <div key={idx} className="rankit-card" style={{ padding: '20px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px', marginBottom: '10px' }}>
+                    <div>
+                      <span className="badge" style={{ backgroundColor: '#FEF3C7', color: '#92400E' }}>
+                        {roast.intensity}
+                      </span>
+                      <h3 style={{ fontSize: '1.18rem', fontWeight: 800, color: '#18181B', marginTop: '4px' }}>
+                        {roast.level}
+                      </h3>
+                      <span style={{ fontSize: '0.76rem', color: '#71717A' }}>
+                        Roasting Temperature: {roast.temp} • {roast.internalTemp}
+                      </span>
+                    </div>
+
+                    <div style={{ padding: '6px 10px', backgroundColor: '#F4F4F5', borderRadius: '5px', fontSize: '0.74rem', fontWeight: 600, color: '#18181B' }}>
+                      {roast.caffeineLevel}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px', marginTop: '12px', fontSize: '0.82rem' }}>
+                    <div style={{ padding: '10px', backgroundColor: '#FAFAFA', borderRadius: '6px', border: '1px solid #E4E4E7' }}>
+                      <strong style={{ display: 'block', color: '#18181B', marginBottom: '3px' }}>Flavor Profile & Aromatics:</strong>
+                      <span style={{ color: '#52525B', lineHeight: 1.5 }}>{roast.flavorProfile}</span>
+                    </div>
+
+                    <div style={{ padding: '10px', backgroundColor: '#FAFAFA', borderRadius: '6px', border: '1px solid #E4E4E7' }}>
+                      <strong style={{ display: 'block', color: '#18181B', marginBottom: '3px' }}>Best Brewing Equipment:</strong>
+                      <span style={{ color: '#52525B', lineHeight: 1.5 }}>{roast.bestFor}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* 3. HOME BREWING GUIDE (French Press, V60, Aeropress, Moka Pot) */}
+          {activeCoffeeTab === 'brewing' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {homeBrewingGuide.map((brew, idx) => (
+                <div key={idx} className="rankit-card" style={{ padding: '22px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px', marginBottom: '14px' }}>
+                    <div>
+                      <span className="badge badge-brand">Difficulty: {brew.difficulty}</span>
+                      <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#18181B', marginTop: '4px' }}>
+                        {brew.method}
+                      </h3>
+                      <span style={{ fontSize: '0.78rem', color: '#71717A' }}>
+                        Equipment: {brew.gearNeeded}
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                      <span style={{ padding: '4px 8px', borderRadius: '4px', backgroundColor: '#F4F4F5', fontSize: '0.74rem', fontWeight: 600 }}>
+                        Ratio: {brew.coffeeToWater}
+                      </span>
+                      <span style={{ padding: '4px 8px', borderRadius: '4px', backgroundColor: '#F4F4F5', fontSize: '0.74rem', fontWeight: 600 }}>
+                        Water: {brew.waterTemp}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Step by Step instructions */}
+                  <div style={{ marginBottom: '14px' }}>
+                    <h4 style={{ fontSize: '0.82rem', fontWeight: 800, color: '#18181B', textTransform: 'uppercase', marginBottom: '8px' }}>
+                      Step-by-Step Brewing Recipe
+                    </h4>
+                    <ol style={{ paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.82rem', color: '#52525B', lineHeight: 1.5 }}>
+                      {brew.steps.map((st, sIdx) => (
+                        <li key={sIdx}>{st}</li>
+                      ))}
+                    </ol>
+                  </div>
+
+                  <div style={{ padding: '10px 12px', backgroundColor: '#FAFAFA', borderRadius: '6px', border: '1px solid #E4E4E7', fontSize: '0.78rem', color: '#71717A' }}>
+                    <strong>Expected Tasting Result:</strong> {brew.tastingNotes}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* 4. BEAN SPECIES (Arabica vs Robusta) */}
+          {activeCoffeeTab === 'beans' && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+              {beanSpecies.map((b, idx) => (
+                <div key={idx} className="rankit-card" style={{ padding: '20px' }}>
+                  <span className="badge" style={{ backgroundColor: '#FEF3C7', color: '#B45309' }}>
+                    {b.share}
+                  </span>
+                  <h3 style={{ fontSize: '1.18rem', fontWeight: 800, color: '#18181B', marginTop: '6px' }}>
+                    {b.species}
+                  </h3>
+                  <div style={{ fontSize: '0.76rem', color: '#71717A', marginTop: '2px', marginBottom: '12px' }}>
+                    Elevation: {b.altitudes} • Natural Caffeine: {b.caffeine}
+                  </div>
+                  <p style={{ fontSize: '0.82rem', color: '#52525B', lineHeight: 1.6 }}>
+                    {b.characteristics}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       ) : (
+        /* =========================================================
+           ENERGY DRINKS ENCYCLOPEDIA (Existing)
+           ========================================================= */
         <>
-          {/* Subsections: Brand Histories, Product Histories, Industry History, Ingredients, Discontinued Archive */}
-          <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '12px', marginBottom: '28px' }}>
+          <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '22px' }}>
             {[
               { id: 'brands', label: 'Brand Histories', icon: Building },
               { id: 'products', label: 'Product Histories', icon: Sparkles },
               { id: 'industry', label: 'Industry Development', icon: History },
               { id: 'ingredients', label: 'Ingredients & Science', icon: FlaskConical },
-              { id: 'archive', label: 'Discontinued Product Archive', icon: Archive }
+              { id: 'archive', label: 'Discontinued Archive', icon: Archive }
             ].map((tab) => {
               const Icon = tab.icon;
               const isActive = activeSubTab === tab.id;
@@ -93,121 +302,98 @@ export default function Library({ onNavigateToCatalogProduct }) {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px',
-                    padding: '9px 16px',
-                    borderRadius: '8px',
-                    fontSize: '0.85rem',
+                    gap: '6px',
+                    padding: '8px 14px',
+                    borderRadius: '6px',
+                    fontSize: '0.82rem',
                     fontWeight: 700,
                     whiteSpace: 'nowrap',
-                    backgroundColor: isActive ? '#4F46E5' : '#FFFFFF',
-                    color: isActive ? '#FFFFFF' : '#475569',
-                    border: isActive ? '1px solid #4F46E5' : '1px solid #E2E8F0',
-                    boxShadow: isActive ? '0 2px 4px rgba(79, 70, 229, 0.2)' : 'none'
+                    backgroundColor: isActive ? '#18181B' : '#FFFFFF',
+                    color: isActive ? '#FFFFFF' : '#71717A',
+                    border: '1px solid #E4E4E7',
+                    boxShadow: isActive ? '0 1px 2px rgba(0,0,0,0.08)' : 'none'
                   }}
                 >
-                  <Icon size={16} />
+                  <Icon size={14} />
                   <span>{tab.label}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* =========================================================
-              SUBSECTION 1: BRAND HISTORIES
-             ========================================================= */}
           {activeSubTab === 'brands' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {brandHistories.map((brand) => (
-                <div key={brand.id} className="rankit-card" style={{ padding: '28px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px', marginBottom: '16px' }}>
-                    <div>
-                      <span className="badge badge-brand">{brand.country} • Founded {brand.founded}</span>
-                      <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0F172A', marginTop: '6px' }}>
-                        {brand.title}
-                      </h2>
-                      <div style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '4px' }}>
-                        Founders: <strong>{brand.founders}</strong> | Parent Company: <strong>{brand.ownership}</strong>
-                      </div>
+                <div key={brand.id} className="rankit-card" style={{ padding: '24px' }}>
+                  <div style={{ marginBottom: '14px' }}>
+                    <span className="badge badge-brand">{brand.country} • Founded {brand.founded}</span>
+                    <h2 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#18181B', marginTop: '4px' }}>
+                      {brand.title}
+                    </h2>
+                    <div style={{ fontSize: '0.8rem', color: '#71717A', marginTop: '2px' }}>
+                      Founders: <strong>{brand.founders}</strong> | Ownership: <strong>{brand.ownership}</strong>
                     </div>
                   </div>
 
-                  <p style={{ fontSize: '0.95rem', color: '#334155', fontStyle: 'italic', marginBottom: '20px', borderLeft: '4px solid #4F46E5', paddingLeft: '14px' }}>
+                  <p style={{ fontSize: '0.88rem', color: '#3F3F46', fontStyle: 'italic', marginBottom: '16px', borderLeft: '3px solid #18181B', paddingLeft: '12px' }}>
                     "{brand.summary}"
                   </p>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '18px' }}>
                     {brand.content.map((sec, i) => (
                       <div key={i}>
-                        <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#0F172A', marginBottom: '4px' }}>
+                        <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#18181B', marginBottom: '2px' }}>
                           {sec.heading}
                         </h4>
-                        <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6 }}>
+                        <p style={{ fontSize: '0.82rem', color: '#52525B', lineHeight: 1.5 }}>
                           {sec.body}
                         </p>
                       </div>
                     ))}
                   </div>
 
-                  {/* Milestones list */}
-                  <div style={{ backgroundColor: '#F8FAFC', padding: '16px', borderRadius: '10px', marginBottom: '16px', border: '1px solid #E2E8F0' }}>
-                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0F172A', marginBottom: '10px', textTransform: 'uppercase' }}>
+                  <div style={{ backgroundColor: '#FAFAFA', padding: '14px', borderRadius: '8px', border: '1px solid #E4E4E7' }}>
+                    <h4 style={{ fontSize: '0.78rem', fontWeight: 800, color: '#18181B', textTransform: 'uppercase', marginBottom: '8px' }}>
                       Historical Milestones
                     </h4>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '10px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '8px' }}>
                       {brand.milestones.map((m, idx) => (
-                        <div key={idx} style={{ display: 'flex', gap: '8px', fontSize: '0.82rem' }}>
-                          <span style={{ fontWeight: 800, color: '#4F46E5' }}>{m.year}:</span>
-                          <span style={{ color: '#334155' }}>{m.event}</span>
+                        <div key={idx} style={{ display: 'flex', gap: '6px', fontSize: '0.78rem' }}>
+                          <span style={{ fontWeight: 800, color: '#18181B' }}>{m.year}:</span>
+                          <span style={{ color: '#52525B' }}>{m.event}</span>
                         </div>
                       ))}
                     </div>
-                  </div>
-
-                  {/* Fun Facts */}
-                  <div>
-                    <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
-                      Did You Know?
-                    </h4>
-                    <ul style={{ paddingLeft: '20px', fontSize: '0.85rem', color: '#475569', lineHeight: 1.6 }}>
-                      {brand.funFacts.map((fact, idx) => (
-                        <li key={idx}>{fact}</li>
-                      ))}
-                    </ul>
                   </div>
                 </div>
               ))}
             </div>
           )}
 
-          {/* =========================================================
-              SUBSECTION 2: PRODUCT HISTORIES (With 6.3 Catalog Link)
-             ========================================================= */}
           {activeSubTab === 'products' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
               {productHistories.map((prod) => (
-                <div key={prod.id} className="rankit-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div key={prod.id} className="rankit-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <span className="badge badge-brand">{prod.brand} • Introduced {prod.year}</span>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', marginTop: '8px' }}>
+                    <span className="badge badge-brand">{prod.brand} • {prod.year}</span>
+                    <h3 style={{ fontSize: '1.08rem', fontWeight: 800, color: '#18181B', marginTop: '6px' }}>
                       {prod.name}
                     </h3>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#F59E0B', marginTop: '4px', marginBottom: '12px' }}>
+                    <div style={{ fontSize: '0.76rem', fontWeight: 700, color: '#F59E0B', marginTop: '2px', marginBottom: '8px' }}>
                       {prod.significance}
                     </div>
-                    <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6 }}>
+                    <p style={{ fontSize: '0.82rem', color: '#52525B', lineHeight: 1.5 }}>
                       {prod.content}
                     </p>
                   </div>
-
-                  {/* 6.3 Link to Catalog */}
-                  <div style={{ marginTop: '20px', paddingTop: '14px', borderTop: '1px solid #F1F5F9' }}>
+                  <div style={{ marginTop: '16px', paddingTop: '10px', borderTop: '1px solid #F4F4F5' }}>
                     <button
                       onClick={() => onNavigateToCatalogProduct(prod.productId)}
                       className="btn-secondary"
-                      style={{ width: '100%', justifyContent: 'center', fontSize: '0.8rem' }}
+                      style={{ width: '100%', justifyContent: 'center', fontSize: '0.76rem' }}
                     >
-                      <span>View in Catalog Database</span>
-                      <ExternalLink size={14} />
+                      <span>View in Catalog</span>
+                      <ExternalLink size={13} />
                     </button>
                   </div>
                 </div>
@@ -215,21 +401,18 @@ export default function Library({ onNavigateToCatalogProduct }) {
             </div>
           )}
 
-          {/* =========================================================
-              SUBSECTION 3: INDUSTRY DEVELOPMENT
-             ========================================================= */}
           {activeSubTab === 'industry' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {industryHistory.map((era, idx) => (
-                <div key={idx} className="rankit-card" style={{ padding: '24px', display: 'flex', gap: '20px' }}>
-                  <div style={{ minWidth: '140px', fontWeight: 800, color: '#4F46E5', fontSize: '0.95rem' }}>
+                <div key={idx} className="rankit-card" style={{ padding: '18px', display: 'flex', gap: '16px' }}>
+                  <div style={{ minWidth: '130px', fontWeight: 800, color: '#18181B', fontSize: '0.88rem' }}>
                     {era.era}
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#18181B', marginBottom: '4px' }}>
                       {era.title}
                     </h3>
-                    <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6 }}>
+                    <p style={{ fontSize: '0.82rem', color: '#52525B', lineHeight: 1.5 }}>
                       {era.content}
                     </p>
                   </div>
@@ -238,21 +421,18 @@ export default function Library({ onNavigateToCatalogProduct }) {
             </div>
           )}
 
-          {/* =========================================================
-              SUBSECTION 4: INGREDIENTS & SCIENCE
-             ========================================================= */}
           {activeSubTab === 'ingredients' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '14px' }}>
               {ingredients.map((ing, idx) => (
-                <div key={idx} className="rankit-card" style={{ padding: '20px' }}>
+                <div key={idx} className="rankit-card" style={{ padding: '18px' }}>
                   <span className="badge badge-brand">{ing.type}</span>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', marginTop: '8px' }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#18181B', marginTop: '6px' }}>
                     {ing.name}
                   </h3>
-                  <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: '2px', marginBottom: '12px' }}>
-                    Role: <strong>{ing.role}</strong> | Typical: <strong>{ing.typicalDose}</strong>
+                  <div style={{ fontSize: '0.76rem', color: '#71717A', marginTop: '2px', marginBottom: '8px' }}>
+                    Role: <strong>{ing.role}</strong> | Dose: <strong>{ing.typicalDose}</strong>
                   </div>
-                  <p style={{ fontSize: '0.85rem', color: '#475569', lineHeight: 1.6 }}>
+                  <p style={{ fontSize: '0.8rem', color: '#52525B', lineHeight: 1.5 }}>
                     {ing.description}
                   </p>
                 </div>
@@ -260,35 +440,31 @@ export default function Library({ onNavigateToCatalogProduct }) {
             </div>
           )}
 
-          {/* =========================================================
-              SUBSECTION 5: DISCONTINUED PRODUCT ARCHIVE (6.2)
-             ========================================================= */}
           {activeSubTab === 'archive' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {discontinuedArchive.map((item) => (
-                <div key={item.id} className="rankit-card" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-                  <div style={{ maxWidth: '680px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                      <span className="badge badge-discontinued">Discontinued Archive</span>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#64748B' }}>{item.yearsActive}</span>
+                <div key={item.id} className="rankit-card" style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                  <div style={{ maxWidth: '640px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '3px' }}>
+                      <span className="badge badge-discontinued">Discontinued</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#71717A' }}>{item.yearsActive}</span>
                     </div>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A' }}>
-                      {item.name} — <span style={{ color: '#4F46E5' }}>{item.brand}</span>
+                    <h3 style={{ fontSize: '1.08rem', fontWeight: 800, color: '#18181B' }}>
+                      {item.name} — <span style={{ color: '#71717A' }}>{item.brand}</span>
                     </h3>
-                    <p style={{ fontSize: '0.82rem', color: '#475569', marginTop: '6px' }}>
-                      Status: <strong>{item.status}</strong> | Form: <strong>{item.caffeine}</strong>
+                    <p style={{ fontSize: '0.78rem', color: '#52525B', marginTop: '4px' }}>
+                      Status: {item.status} | Formulation: {item.caffeine}
                     </p>
-                    <p style={{ fontSize: '0.85rem', color: '#64748B', marginTop: '6px', fontStyle: 'italic' }}>
+                    <p style={{ fontSize: '0.78rem', color: '#71717A', marginTop: '2px', fontStyle: 'italic' }}>
                       {item.notes}
                     </p>
                   </div>
-
                   <button
                     onClick={() => onNavigateToCatalogProduct(item.name)}
                     className="btn-secondary"
-                    style={{ fontSize: '0.8rem' }}
+                    style={{ fontSize: '0.76rem' }}
                   >
-                    Find in Catalog
+                    Catalog Entry
                   </button>
                 </div>
               ))}

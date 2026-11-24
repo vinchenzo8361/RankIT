@@ -3,12 +3,13 @@ import { initialBrands } from '../data/brands';
 import { initialProducts } from '../data/products';
 
 const STORAGE_KEYS = {
-  BRANDS: 'rankit_brands_v3', // bumped key for Top 25 update
+  BRANDS: 'rankit_brands_v4', // updated for popularity ranks
   PRODUCTS: 'rankit_products_v2',
   PROJECTS: 'rankit_projects_v1',
   STANDALONE_TIER: 'rankit_standalone_tier_v1',
   RATINGS: 'rankit_ratings_v1',
   DRINK_LOGS: 'rankit_drink_logs_v1',
+  FAVORITES: 'rankit_favorites_v1', // dedicated drink favorites store
   SETTINGS: 'rankit_settings_v1',
 };
 
@@ -57,7 +58,31 @@ export const saveStoredProducts = (products) => {
   }
 };
 
-// Ranking Projects - Start clean/empty so users create their own!
+// User Favorites (Array of drink product IDs)
+export const getStoredFavorites = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.FAVORITES);
+    if (!raw) {
+      // Default to initial popular favourites so users see it immediately
+      const defaultFavs = ['rb-original', 'mnst-ultra-white', 'ghost-blue-raspberry'];
+      localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(defaultFavs));
+      return defaultFavs;
+    }
+    return JSON.parse(raw);
+  } catch (e) {
+    return [];
+  }
+};
+
+export const saveStoredFavorites = (favs) => {
+  try {
+    localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(favs));
+  } catch (e) {
+    console.error('Failed saving favorites', e);
+  }
+};
+
+// Ranking Projects
 export const getStoredProjects = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.PROJECTS);
@@ -67,7 +92,6 @@ export const getStoredProjects = () => {
     }
     return JSON.parse(raw);
   } catch (e) {
-    console.error('Failed reading projects', e);
     return [];
   }
 };
@@ -85,8 +109,7 @@ export const getStoredStandaloneTier = (category = 'drinks') => {
   try {
     const raw = localStorage.getItem(`${STORAGE_KEYS.STANDALONE_TIER}_${category}`);
     if (!raw) {
-      const emptyTiers = { S: [], A: [], B: [], C: [], D: [], F: [], IDK: [] };
-      return emptyTiers;
+      return { S: [], A: [], B: [], C: [], D: [], F: [], IDK: [] };
     }
     return JSON.parse(raw);
   } catch (e) {
@@ -155,6 +178,7 @@ export const exportFullBackup = () => {
     products: getStoredProducts(),
     projects: getStoredProjects(),
     ratings: getStoredRatings(),
+    favorites: getStoredFavorites(),
     standaloneTiers: {
       brands: getStoredStandaloneTier('brands'),
       drinks: getStoredStandaloneTier('drinks')
@@ -172,6 +196,7 @@ export const importFullBackup = (jsonData) => {
   if (jsonData.products) saveStoredProducts(jsonData.products);
   if (jsonData.projects) saveStoredProjects(jsonData.projects);
   if (jsonData.ratings) saveStoredRatings(jsonData.ratings);
+  if (jsonData.favorites) saveStoredFavorites(jsonData.favorites);
   if (jsonData.standaloneTiers?.brands) saveStoredStandaloneTier('brands', jsonData.standaloneTiers.brands);
   if (jsonData.standaloneTiers?.drinks) saveStoredStandaloneTier('drinks', jsonData.standaloneTiers.drinks);
   if (jsonData.drinkLogs) saveStoredDrinkLogs(jsonData.drinkLogs);
