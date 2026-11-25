@@ -15,10 +15,15 @@ import {
   ArrowLeft,
   ChevronRight,
   Compass,
-  Lock
+  Lock,
+  Check,
+  CheckSquare,
+  Square,
+  AlertTriangle
 } from 'lucide-react';
 import { libraryData } from '../data/libraryData';
 import { coffeeLibraryData } from '../data/coffeeLibraryData';
+import { getBrewingInstructions } from '../utils/coffeePermutations';
 
 export default function Library({ onNavigateToCatalogProduct }) {
   // activeSection: null = Main Library Portal View; 'energy-drinks' | 'coffee'
@@ -27,20 +32,49 @@ export default function Library({ onNavigateToCatalogProduct }) {
   // Subtabs within Energy Drinks
   const [activeEnergyTab, setActiveEnergyTab] = useState('history'); // 'history' | 'products' | 'brands' | 'ingredients' | 'archive'
 
-  // Subtabs within Coffee
-  const [activeCoffeeTab, setActiveCoffeeTab] = useState('drinks'); // 'drinks' | 'roasts' | 'brewing' | 'beans'
+  // Subtabs within Coffee: 'history' | 'drinks' | 'roasts' | 'brewing' | 'beans'
+  const [activeCoffeeTab, setActiveCoffeeTab] = useState('history');
+
+  // Brewing interactive method state:
+  const [activeBrewMethodId, setActiveBrewMethodId] = useState('pour-over');
+  // Equipment checklist state mapping: { [itemId]: boolean }
+  const [equipmentState, setEquipmentState] = useState({
+    dripper: true,
+    filter: true,
+    scale: true,
+    gooseneck: true,
+    press: true,
+    coarse_grind: true,
+    timer: true,
+    moka: true,
+    fine_grind: true,
+    preboiled: true,
+    stovetop: true,
+    chamber: true,
+    paddle: true
+  });
 
   const { energyDrinkHistory, productHistories, brandHistories, ingredients, discontinuedArchive } = libraryData;
-  const { drinkTypes, roastLevels, homeBrewingGuide, beanSpecies } = coffeeLibraryData;
+  const { coffeeHistory, drinkTypes, roastLevels, homeBrewingMethods, beanSpecies } = coffeeLibraryData;
 
-  // Available library modules/components
+  const currentMethod = homeBrewingMethods.find((m) => m.id === activeBrewMethodId) || homeBrewingMethods[0];
+  const dynamicSteps = getBrewingInstructions(activeBrewMethodId, equipmentState);
+
+  const toggleEquipmentItem = (itemId) => {
+    setEquipmentState((prev) => ({
+      ...prev,
+      [itemId]: !prev[itemId]
+    }));
+  };
+
+  // Modules available on portal screen
   const libraryModules = [
     {
       id: 'energy-drinks',
       title: 'Energy Drinks Encyclopedia',
       badge: 'Active & Historical',
       badgeColor: '#38BDF8',
-      description: 'The definitive encyclopedia: 60-year history from Asian tonics, extreme sports culture, product deep-dives (origin, invention, fame, impact), and active ingredient science.',
+      description: 'The definitive encyclopedia: 60-year history from Asian tonics, extreme sports culture, product deep-dives (both Original Green Monster and Ultra White, Red Bull, Ghost), and active ingredients.',
       icon: '⚡',
       accentColor: '#38BDF8',
       sectionsCount: '5 Sections'
@@ -49,11 +83,11 @@ export default function Library({ onNavigateToCatalogProduct }) {
       id: 'coffee',
       title: 'Coffee Library & Brewing',
       badge: 'Master Guide',
-      badgeColor: '#B45309',
-      description: 'Drink anatomy (Latte, Cappuccino, Americano, Cortado), roast levels and intensities (1–12), Arabica vs Robusta biology, and step-by-step home brewing recipes.',
+      badgeColor: '#F59E0B',
+      description: 'From 850 CE Ethiopian goat herders to Third Wave: drink anatomy (Latte, Cappuccino, Americano, Cortado), roast intensities, and interactive equipment checklists with adaptive home recipes.',
       icon: '☕',
-      accentColor: '#B45309',
-      sectionsCount: '4 Sections'
+      accentColor: '#F59E0B',
+      sectionsCount: '5 Sections'
     },
     {
       id: 'tea-nootropics',
@@ -71,9 +105,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
   return (
     <div style={{ padding: '28px', maxWidth: '1300px', margin: '0 auto', width: '100%' }}>
       {/* =========================================================
-          VIEW 1: PORTAL / COMPONENT SELECTION VIEW
-          When user enters Library, they see the module cards in the center screen.
-          No top category clutter.
+          VIEW 1: PORTAL SELECTION VIEW (Only shown when not drilled down)
          ========================================================= */}
       {!activeSection ? (
         <div>
@@ -86,7 +118,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
               Product Library & Encyclopedia
             </h2>
             <p style={{ fontSize: '0.88rem', color: '#94A3B8', marginTop: '6px', lineHeight: 1.5 }}>
-              Select a category module below to explore deep historical timelines, product inventions, cultural impact, and brewing guides.
+              Select a category below to explore comprehensive historical timelines, individual drink deep-dives, and adaptive home brewing methods.
             </p>
           </div>
 
@@ -159,11 +191,10 @@ export default function Library({ onNavigateToCatalogProduct }) {
         </div>
       ) : (
         /* =========================================================
-           VIEW 2: DRILL-DOWN INTO SPECIFIC MODULE
-           Shows top module navigation tabs, breadcrumb back button
+           VIEW 2: DRILL-DOWN INTO COMPONENT
          ========================================================= */
         <div>
-          {/* Top header navigation with Back button & Module switcher */}
+          {/* Header navigation bar */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px', marginBottom: '22px' }}>
             <button
               onClick={() => setActiveSection(null)}
@@ -174,7 +205,6 @@ export default function Library({ onNavigateToCatalogProduct }) {
               <span>Back to Library Categories</span>
             </button>
 
-            {/* Sub-module switcher added only when inside a component */}
             <div style={{ display: 'flex', gap: '4px', backgroundColor: '#14171F', padding: '3px', borderRadius: '8px', border: '1px solid #242B3B' }}>
               <button
                 onClick={() => setActiveSection('energy-drinks')}
@@ -208,11 +238,10 @@ export default function Library({ onNavigateToCatalogProduct }) {
           </div>
 
           {/* =========================================================
-              COMPONENT A: ENERGY DRINKS ENCYCLOPEDIA & HISTORY
+              COMPONENT A: ENERGY DRINKS
              ========================================================= */}
           {activeSection === 'energy-drinks' && (
             <div>
-              {/* Internal subsection pills */}
               <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '22px' }}>
                 {[
                   { id: 'history', label: 'History of Energy Drinks', icon: History },
@@ -248,7 +277,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 })}
               </div>
 
-              {/* 1. DEDICATED HISTORY OF ENERGY DRINKS */}
+              {/* 1. Complete History */}
               {activeEnergyTab === 'history' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
                   <div className="rankit-card" style={{ padding: '26px' }}>
@@ -297,7 +326,6 @@ export default function Library({ onNavigateToCatalogProduct }) {
                     </div>
                   </div>
 
-                  {/* Cultural Impact Overview */}
                   <div className="rankit-card" style={{ padding: '24px' }}>
                     <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#F8FAFC', marginBottom: '14px' }}>
                       Cultural Impact in Modern Life
@@ -318,7 +346,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 </div>
               )}
 
-              {/* 2. ITEM DEEP-DIVES (Origins, Invention, Fame, Impact, Fun Facts) */}
+              {/* 2. Item Deep-Dives: BOTH Original Green Monster & Ultra White */}
               {activeEnergyTab === 'products' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   {productHistories.map((prod) => (
@@ -343,7 +371,6 @@ export default function Library({ onNavigateToCatalogProduct }) {
                         </div>
                       </div>
 
-                      {/* How It Was First Made & Today's Impact */}
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '14px', marginBottom: '18px' }}>
                         <div style={{ padding: '14px', backgroundColor: '#14171F', borderRadius: '8px', border: '1px solid #242B3B' }}>
                           <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#F8FAFC', marginBottom: '4px' }}>
@@ -364,7 +391,6 @@ export default function Library({ onNavigateToCatalogProduct }) {
                         </div>
                       </div>
 
-                      {/* Random Fun Facts */}
                       <div style={{ padding: '14px', backgroundColor: 'rgba(56, 189, 248, 0.05)', borderRadius: '8px', border: '1px solid rgba(56, 189, 248, 0.2)', marginBottom: '14px' }}>
                         <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#38BDF8', marginBottom: '8px' }}>
                           Random Fun Facts:
@@ -392,7 +418,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 </div>
               )}
 
-              {/* 3. BRAND CHRONICLES */}
+              {/* 3. Brand Chronicles */}
               {activeEnergyTab === 'brands' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                   {brandHistories.map((brand) => (
@@ -442,7 +468,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 </div>
               )}
 
-              {/* 4. INGREDIENT SCIENCE */}
+              {/* 4. Ingredient Science */}
               {activeEnergyTab === 'ingredients' && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
                   {ingredients.map((ing, idx) => (
@@ -462,7 +488,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 </div>
               )}
 
-              {/* 5. DISCONTINUED ARCHIVE */}
+              {/* 5. Discontinued Archive */}
               {activeEnergyTab === 'archive' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {discontinuedArchive.map((item) => (
@@ -490,16 +516,17 @@ export default function Library({ onNavigateToCatalogProduct }) {
           )}
 
           {/* =========================================================
-              COMPONENT B: COFFEE LIBRARY & BREWING
+              COMPONENT B: COFFEE ENCYCLOPEDIA & ADAPTIVE BREWING
              ========================================================= */}
           {activeSection === 'coffee' && (
             <div>
               <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '8px', marginBottom: '22px' }}>
                 {[
-                  { id: 'drinks', label: 'Coffee Drink Types (Latte, Cappuccino...)', icon: CupSoda },
+                  { id: 'history', label: 'History & Origin of Coffee', icon: History },
+                  { id: 'drinks', label: 'Coffee Drink Anatomy (Latte, Cappuccino...)', icon: CupSoda },
                   { id: 'roasts', label: 'Roast Levels & Intensities', icon: Flame },
-                  { id: 'brewing', label: 'How to Make Coffee at Home', icon: Clock },
-                  { id: 'beans', label: 'Arabica vs Robusta Beans', icon: Layers }
+                  { id: 'brewing', label: 'Interactive Home Brewing & Equipment', icon: Clock },
+                  { id: 'beans', label: 'Arabica vs Robusta Biology', icon: Layers }
                 ].map((tab) => {
                   const Icon = tab.icon;
                   const isActive = activeCoffeeTab === tab.id;
@@ -528,7 +555,58 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 })}
               </div>
 
-              {/* 1. DRINK TYPES */}
+              {/* 1. Complete Coffee History */}
+              {activeCoffeeTab === 'history' && (
+                <div className="rankit-card" style={{ padding: '26px' }}>
+                  <div style={{ marginBottom: '18px' }}>
+                    <span className="badge" style={{ backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B' }}>
+                      Botanical & Cultural History
+                    </span>
+                    <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#F8FAFC', marginTop: '6px' }}>
+                      {coffeeHistory.title}
+                    </h2>
+                    <p style={{ fontSize: '0.85rem', color: '#F59E0B', marginTop: '2px' }}>
+                      {coffeeHistory.subtitle}
+                    </p>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', borderLeft: '2px solid #242B3B', paddingLeft: '18px', marginLeft: '6px' }}>
+                    {coffeeHistory.timeline.map((era, i) => (
+                      <div key={i} style={{ position: 'relative' }}>
+                        <span style={{
+                          position: 'absolute',
+                          left: '-23px',
+                          top: '4px',
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          backgroundColor: '#F59E0B',
+                          boxShadow: '0 0 8px rgba(245, 158, 11, 0.6)'
+                        }}></span>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                          <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#F59E0B', backgroundColor: 'rgba(245, 158, 11, 0.1)', padding: '2px 7px', borderRadius: '4px' }}>
+                            {era.year}
+                          </span>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#94A3B8' }}>
+                            {era.era}
+                          </span>
+                        </div>
+
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#F8FAFC', marginBottom: '6px' }}>
+                          {era.title}
+                        </h3>
+
+                        <p style={{ fontSize: '0.85rem', color: '#94A3B8', lineHeight: 1.6 }}>
+                          {era.content}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 2. Drink Types (Latte, Cappuccino, Americano, Cortado...) */}
               {activeCoffeeTab === 'drinks' && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
                   {drinkTypes.map((item) => (
@@ -574,7 +652,7 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 </div>
               )}
 
-              {/* 2. ROAST LEVELS */}
+              {/* 3. Roast Levels & Intensities */}
               {activeCoffeeTab === 'roasts' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   {roastLevels.map((roast, idx) => (
@@ -613,52 +691,173 @@ export default function Library({ onNavigateToCatalogProduct }) {
                 </div>
               )}
 
-              {/* 3. HOME BREWING RECIPES */}
+              {/* 4. INTERACTIVE HOME BREWING WITH EQUIPMENT TICK-BOXES & PERMUTATIONS */}
               {activeCoffeeTab === 'brewing' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {homeBrewingGuide.map((brew, idx) => (
-                    <div key={idx} className="rankit-card" style={{ padding: '22px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px', marginBottom: '14px' }}>
+                <div>
+                  {/* Select Brewing Method Buttons */}
+                  <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '12px', marginBottom: '20px' }}>
+                    {homeBrewingMethods.map((m) => {
+                      const isSel = m.id === activeBrewMethodId;
+                      return (
+                        <button
+                          key={m.id}
+                          onClick={() => setActiveBrewMethodId(m.id)}
+                          style={{
+                            padding: '10px 16px',
+                            borderRadius: '8px',
+                            textAlign: 'left',
+                            backgroundColor: isSel ? '#1F2433' : '#14171F',
+                            border: isSel ? '1px solid #F59E0B' : '1px solid #242B3B',
+                            color: isSel ? '#F59E0B' : '#94A3B8'
+                          }}
+                        >
+                          <div style={{ fontWeight: 800, fontSize: '0.9rem', color: isSel ? '#F59E0B' : '#F8FAFC' }}>{m.name}</div>
+                          <div style={{ fontSize: '0.72rem', color: '#64748B' }}>{m.tagline}</div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Main Grid: Left = Dynamic Step-by-Step Instructions; Right = Equipment Checklist Box */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(0, 1fr) 320px',
+                    gap: '20px',
+                    alignItems: 'start'
+                  }}>
+                    {/* Left: Dynamic Step-by-Step Instructions that adapt to equipment permutations */}
+                    <div className="rankit-card" style={{ padding: '24px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px solid #1F2433', paddingBottom: '12px' }}>
                         <div>
-                          <span className="badge badge-brand">Difficulty: {brew.difficulty}</span>
-                          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#F8FAFC', marginTop: '4px' }}>
-                            {brew.method}
+                          <span className="badge" style={{ backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B' }}>
+                            Difficulty: {currentMethod.difficulty}
+                          </span>
+                          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', marginTop: '4px' }}>
+                            {currentMethod.name} — Step-by-Step Recipe
                           </h3>
-                          <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>
-                            Equipment: {brew.gearNeeded}
-                          </span>
-                        </div>
-
-                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                          <span style={{ padding: '4px 8px', borderRadius: '4px', backgroundColor: '#1F2433', fontSize: '0.74rem', fontWeight: 600, color: '#F8FAFC' }}>
-                            Ratio: {brew.coffeeToWater}
-                          </span>
-                          <span style={{ padding: '4px 8px', borderRadius: '4px', backgroundColor: '#1F2433', fontSize: '0.74rem', fontWeight: 600, color: '#F8FAFC' }}>
-                            Water: {brew.waterTemp}
-                          </span>
                         </div>
                       </div>
 
-                      <div style={{ marginBottom: '14px' }}>
-                        <h4 style={{ fontSize: '0.82rem', fontWeight: 800, color: '#F59E0B', textTransform: 'uppercase', marginBottom: '8px' }}>
-                          Step-by-Step Brewing Recipe
-                        </h4>
-                        <ol style={{ paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.82rem', color: '#94A3B8', lineHeight: 1.5 }}>
-                          {brew.steps.map((st, sIdx) => (
-                            <li key={sIdx}>{st}</li>
-                          ))}
-                        </ol>
-                      </div>
+                      {/* Display warning if any item is unticked */}
+                      {currentMethod.equipment.some((eq) => !equipmentState[eq.id]) && (
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          padding: '10px 14px',
+                          backgroundColor: 'rgba(245, 158, 11, 0.08)',
+                          border: '1px solid rgba(245, 158, 11, 0.25)',
+                          borderRadius: '6px',
+                          marginBottom: '16px',
+                          fontSize: '0.78rem',
+                          color: '#F59E0B'
+                        }}>
+                          <AlertTriangle size={15} />
+                          <span>
+                            Recipe dynamically adapted! Missing gear substituted with alternative kitchen techniques.
+                          </span>
+                        </div>
+                      )}
 
-                      <div style={{ padding: '10px 12px', backgroundColor: '#14171F', borderRadius: '6px', border: '1px solid #242B3B', fontSize: '0.78rem', color: '#94A3B8' }}>
-                        <strong style={{ color: '#F8FAFC' }}>Expected Tasting Result:</strong> {brew.tastingNotes}
+                      {/* Step list */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                        {dynamicSteps.map((step, idx) => (
+                          <div key={idx} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                            <div style={{
+                              width: '26px',
+                              height: '26px',
+                              borderRadius: '50%',
+                              backgroundColor: '#1F2433',
+                              border: '1px solid #242B3B',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '0.78rem',
+                              fontWeight: 800,
+                              color: '#F59E0B',
+                              flexShrink: 0,
+                              marginTop: '2px'
+                            }}>
+                              {idx + 1}
+                            </div>
+                            <div style={{ flex: 1 }}>
+                              <h4 style={{ fontSize: '0.92rem', fontWeight: 800, color: '#F8FAFC' }}>
+                                {step.title}
+                              </h4>
+                              <p style={{ fontSize: '0.84rem', color: '#94A3B8', lineHeight: 1.5, marginTop: '2px' }}>
+                                {step.desc}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
+
+                    {/* Right: Equipment Checklist Box with Tick-marks */}
+                    <div className="rankit-card" style={{ padding: '20px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+                        <Clock size={16} color="#F59E0B" />
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#F8FAFC' }}>
+                          Equipment Checklist
+                        </h4>
+                      </div>
+                      <p style={{ fontSize: '0.74rem', color: '#94A3B8', marginBottom: '14px', lineHeight: 1.4 }}>
+                        Check off the items you have at home. Unticking an item will dynamically recalculate the recipe permutations!
+                      </p>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        {currentMethod.equipment.map((item) => {
+                          const isChecked = equipmentState[item.id] ?? true;
+                          return (
+                            <div
+                              key={item.id}
+                              onClick={() => toggleEquipmentItem(item.id)}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: '10px',
+                                padding: '10px 12px',
+                                borderRadius: '6px',
+                                backgroundColor: isChecked ? '#14171F' : 'rgba(239, 68, 68, 0.06)',
+                                border: isChecked ? '1px solid #242B3B' : '1px dashed #EF4444',
+                                cursor: 'pointer',
+                                transition: 'all 0.15s ease'
+                              }}
+                            >
+                              <div style={{ marginTop: '2px', color: isChecked ? '#10B981' : '#EF4444' }}>
+                                {isChecked ? <CheckSquare size={16} /> : <Square size={16} />}
+                              </div>
+
+                              <div style={{ flex: 1 }}>
+                                <div style={{
+                                  fontSize: '0.82rem',
+                                  fontWeight: 700,
+                                  color: isChecked ? '#F8FAFC' : '#94A3B8',
+                                  textDecoration: isChecked ? 'none' : 'line-through'
+                                }}>
+                                  {item.name}
+                                </div>
+                                {!isChecked && (
+                                  <div style={{ fontSize: '0.7rem', color: '#F59E0B', marginTop: '2px' }}>
+                                    Substituted with: {item.fallback}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid #1F2433', fontSize: '0.74rem', color: '#64748B', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span>Default Ratio:</span>
+                        <span style={{ fontWeight: 700, color: '#F8FAFC' }}>{currentMethod.defaultRatio}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
-              {/* 4. BEAN SPECIES */}
+              {/* 5. Bean Species */}
               {activeCoffeeTab === 'beans' && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
                   {beanSpecies.map((b, idx) => (

@@ -1,20 +1,52 @@
-// Comprehensive Coffee Encyclopedia, Brewing Science & Home Guides
+// Comprehensive Coffee Encyclopedia, History, Chemistry, and Dynamic Home Brewing Permutations
 export const coffeeLibraryData = {
-  overview: {
-    title: 'The Coffee Encyclopedia & Master Guide',
-    tagline: 'From Bean to Cup: Roast Chemistry, Espresso Anatomy, and Home Brewing',
-    summary: 'Everything you need to know about coffee: roast levels, roast profiles, espresso drinks explained, bean varieties, and step-by-step home brewing methods.'
+  // 1. Complete History & Origins of Coffee
+  coffeeHistory: {
+    title: 'The Origin, Spread & Evolution of Coffee',
+    subtitle: 'From Ancient Ethiopian Goat Herders to the Modern Third-Wave Specialty Boom',
+    timeline: [
+      {
+        era: '850 CE: The Ethiopian Highlands & Kaldi the Goat Herder',
+        year: 'c. 850 CE',
+        title: 'Discovery in Ancient Kaffa, Ethiopia',
+        content: 'Legend records that Kaldi, an Ethiopian goat herder, noticed his flock dancing with unusual hyperactivity after chewing bright red berries from an unfamiliar forest shrub. Curious, Kaldi brought the berries to an Islamic monastery. The abbot condemned them as devils work and threw them into a fire. Soon, an intoxicatingly aromatic roasted fragrance wafted out; the monks raked out the glowing beans, crushed them into hot water, and drank the world’s very first cup of coffee to stay alert during nocturnal prayer vigils.'
+      },
+      {
+        era: '1400s – 1500s: The Arabian Peninsula & Sufi Monasteries',
+        year: '1400s – 1500s',
+        title: 'Yemen, Mocha & The First Coffee Houses',
+        content: 'Coffee cultivation began systematically in Yemen across the Red Sea. Sufi mystics drank "Qahwah" to sustain concentration during overnight spiritual chants. By the 1500s, commercial port cities like Mocha exported beans across Egypt, Syria, and Turkey. The world’s first public coffeehouses ("Kaveh Kanes") opened in Mecca and Istanbul, nicknamed "Schools of the Wise" because scholars, poets, and politicians gathered to converse, play chess, and listen to music.'
+      },
+      {
+        era: '1600s – 1700s: European Arrival & The Smuggling of Fertile Seeds',
+        year: '1600s – 1700s',
+        title: 'From Venetian Traders to the London Stock Exchange',
+        content: 'Ottoman merchants introduced coffee to Venice in 1615. Initially denounced by Catholic clergy as the "bitter invention of Satan," Pope Clement VIII tasted it, was captivated, and playfully declared he would baptize it to fool the Devil. Coffee houses exploded across London, Paris, and Vienna. The London Stock Exchange, Lloyd’s of London insurance, and Sotheby’s auction house were all founded inside 17th-century London coffeehouses. The Dutch successfully smuggled fertile coffee seedlings out of Yemen to plant in Java (Indonesia) and Suriname.'
+      },
+      {
+        era: '1800s – 1900s: Industrial Extraction & Espresso Machinery',
+        year: '1884 – 1948',
+        title: 'Italian Steam Engineering & Achille Gaggia’s Crema',
+        content: 'Angelo Moriondo of Turin patented the first steam-driven coffee machine in 1884. In 1948, Milanese inventor Achille Gaggia revolutionized coffee forever by designing a spring-piston lever machine that forced hot water through tightly packed coffee grounds at 9 atmospheres of high pressure. For the first time, espresso emerged crowned with a golden, velvety aromatic foam layer—which Gaggia marketed as "Caffè Crema".'
+      },
+      {
+        era: 'Late 20th – 21st Century: The Three Waves of Coffee',
+        year: '1970s – Present',
+        title: 'First, Second, and Third Wave Specialty Coffee',
+        content: 'First Wave brought cheap instant cans into every suburban pantry (Folgers, Maxwell House). Second Wave (spearheaded by Peet’s and Starbucks) popularized espresso bars, dark Italian roasts, and flavored lattes. Today’s Third Wave treats coffee as an artisanal agricultural delicacy similar to fine wine—emphasizing single-origin micro-lots, transparent fair-trade farmer co-ops, light-to-medium roast profiles, and precision brewing chemistry.'
+      }
+    ]
   },
 
-  // 1. Types of Coffee Drinks (Latte, Cappuccino, Americano, etc.)
+  // 2. Types of Coffee Drinks (Latte, Cappuccino, Americano, Cortado, etc.)
   drinkTypes: [
     {
       id: 'espresso',
       name: 'Espresso',
-      italianMeaning: 'Pressed-out',
-      ratio: '1:2 (e.g. 18g coffee to 36g liquid espresso)',
+      italianMeaning: 'Pressed-out under pressure',
+      ratio: '1:2 (e.g. 18g ground coffee yields 36g liquid espresso)',
       caffeine: '64 mg (per 30ml single shot)',
-      description: 'The foundation of all modern specialty coffee. Water forced under 9 bars of pressure through finely ground coffee in 25–30 seconds. Composed of a rich syrupy body, deep heart, and a golden aromatic foam layer on top called the crema.',
+      description: 'The foundation of all modern specialty espresso drinks. Water forced at 9 bars of pressure through finely ground coffee in 25–30 seconds. Features a deep body, sweet heart, and a golden aromatic crema foam layer.',
       ingredients: 'Finely ground coffee + high-pressure hot water (93°C / 200°F).'
     },
     {
@@ -23,25 +55,25 @@ export const coffeeLibraryData = {
       italianMeaning: 'Milk Coffee',
       ratio: '1/6 Espresso + 4/6 Steamed Milk + 1/6 Microfoam',
       caffeine: '64–128 mg (1–2 shots)',
-      description: 'The creamiest and mildest espresso drink. Made with one or two shots of espresso topped with a large volume of steamed milk and a thin 5mm layer of silky microfoam on top, perfect for latte art.',
+      description: 'The creamiest and mildest espresso drink. Made with one or two shots of espresso topped with a generous volume of silky steamed milk and a thin 5mm layer of glossy microfoam on top, perfect for latte art.',
       ingredients: '1–2 shots espresso, 240–300ml steamed milk, thin microfoam layer.'
     },
     {
       id: 'cappuccino',
       name: 'Cappuccino',
-      italianMeaning: 'Named after the hoods of Capuchin monks',
-      ratio: '1/3 Espresso + 1/3 Steamed Milk + 1/3 Thick Milk Foam',
+      italianMeaning: 'Named after the brown hoods of Capuchin monks',
+      ratio: '1/3 Espresso + 1/3 Steamed Milk + 1/3 Aerated Foam Dome',
       caffeine: '64–128 mg',
-      description: 'Famous for its velvety, luxurious mouthfeel and distinct contrast. Traditional Italian cappuccino is served in a 150–180ml cup with equal thirds of rich espresso, sweet steamed milk, and a dense, pillow-like dome of froth often dusted with cocoa.',
+      description: 'Famous for its velvety contrast and dense foam dome. Served in a 150–180ml ceramic cup with equal thirds of rich espresso, sweet steamed milk, and a thick airy foam cap often dusted with cocoa.',
       ingredients: 'Espresso shot, steamed milk, dense aerated foam.'
     },
     {
       id: 'americano',
       name: 'Caffè Americano',
-      italianMeaning: 'American-style coffee',
+      italianMeaning: 'American-style diluted coffee',
       ratio: '1/3 Espresso + 2/3 Hot Water',
       caffeine: '64–128 mg',
-      description: 'Invented during World War II when American soldiers stationed in Italy diluted intense Italian espresso with hot water to mimic the drip coffee from back home. Preserves the complex flavor profile of espresso with a lighter, drip-coffee mouthfeel.',
+      description: 'Invented during World War II when American GIs stationed in Italy found Italian espresso too concentrated and added hot water to emulate American drip coffee. Retains espresso aromatics with light drip body.',
       ingredients: '1–2 shots espresso poured into 180–240ml hot water.'
     },
     {
@@ -50,16 +82,16 @@ export const coffeeLibraryData = {
       origin: 'Australia / New Zealand',
       ratio: '1/3 Double Ristretto/Espresso + 2/3 Steamed Whole Milk',
       caffeine: '128 mg (Double shot standard)',
-      description: 'Originating in Melbourne and Wellington in the 1980s. Stronger than a latte with less milk, featuring glossy steamed microfoam completely folded into the coffee rather than sitting on top as a separate fluffy layer.',
+      description: 'Stronger and more coffee-forward than a latte, with glossy steamed microfoam completely blended into the drink rather than sitting on top as a stiff separate foam cap.',
       ingredients: 'Double espresso (often ristretto) + 150ml glossy microfoam.'
     },
     {
       id: 'cortado',
       name: 'Cortado',
       origin: 'Spain / Latin America',
-      ratio: '1:1 Equal parts Espresso and Warm Steamed Milk',
+      ratio: '1:1 Equal parts Espresso and Warm Textured Milk',
       caffeine: '64–128 mg',
-      description: 'From the Spanish verb "cortar" (to cut). The steamed milk gently cuts through the acidity and bitterness of the espresso without overpowering its rich, intense bean aromatics.',
+      description: 'From the Spanish verb "cortar" (to cut). The steamed milk gently cuts through the acidity of the espresso without overpowering its rich, intense bean notes.',
       ingredients: '60ml double espresso + 60ml lightly textured warm milk.'
     },
     {
@@ -68,7 +100,7 @@ export const coffeeLibraryData = {
       italianMeaning: 'Stained or Marked',
       ratio: 'Espresso with a dash/dollop of milk foam',
       caffeine: '64 mg',
-      description: 'A shot of espresso "marked" with a single spoonful of textured milk foam. Not to be confused with commercial dessert caramel drinks—authentic Italian macchiato is intensely strong and concentrated.',
+      description: 'A shot of espresso "marked" with a single spoonful of textured milk foam. Concentrated and punchy.',
       ingredients: 'Single espresso shot + 1 teaspoon foamed milk.'
     },
     {
@@ -76,12 +108,12 @@ export const coffeeLibraryData = {
       name: 'Cold Brew',
       ratio: '1:8 to 1:12 steep ratio',
       caffeine: '150–200 mg per 250ml',
-      description: 'Coarsely ground coffee steeped in cold or ambient filtered water for 12 to 24 hours. Cold extraction pulls out chocolate and caramel notes while bypassing hot water oxidation, resulting in 65% less perceived acidity and a naturally sweet, silky cup.',
+      description: 'Coarsely ground coffee steeped in cold filtered water for 16 to 24 hours. Cold extraction bypasses heat-induced oxidation, yielding 65% less perceived acidity and deep chocolate notes.',
       ingredients: 'Coarse ground coffee + cold filtered water steeped 16–20 hrs.'
     }
   ],
 
-  // 2. Roast Levels, Intensities & Flavor Profiles
+  // 3. Roast Levels, Intensities & Flavor Profiles
   roastLevels: [
     {
       level: 'Light Roast (Cinnamon / New England)',
@@ -125,75 +157,63 @@ export const coffeeLibraryData = {
     }
   ],
 
-  // 3. Step-by-Step Home Brewing Guide
-  homeBrewingGuide: [
+  // 4. Interactive Home Brewing Methods with Equipment Checklist & Dynamic Permutations
+  homeBrewingMethods: [
     {
-      method: 'French Press (Immersion Brewing)',
+      id: 'pour-over',
+      name: 'Pour-Over (Hario V60 / Kalita)',
+      tagline: 'Clean, crisp, aromatic clarity',
+      difficulty: 'Intermediate',
+      defaultRatio: '1:16 (15g coffee : 240g water)',
+      equipment: [
+        { id: 'dripper', name: 'Pour-Over Cone (V60 / Kalita)', essential: true, fallback: 'Standard coffee funnel or clean mug' },
+        { id: 'filter', name: 'Paper / Cloth Filter', essential: true, fallback: 'Clean paper towel, cheesecloth or fine metal sieve' },
+        { id: 'scale', name: 'Digital Kitchen Scale', essential: false, fallback: 'Tablespoon measurement (approx 2 level tbsp = 10g coffee)' },
+        { id: 'gooseneck', name: 'Gooseneck Kettle', essential: false, fallback: 'Standard kettle poured slowly from the spout or measuring cup' }
+      ]
+    },
+    {
+      id: 'french-press',
+      name: 'French Press (Immersion Pot)',
+      tagline: 'Rich, bold, full-bodied extraction',
       difficulty: 'Beginner',
-      gearNeeded: 'French Press, Kettle, Spoon',
-      grindSize: 'Coarse (Sea salt consistency)',
-      coffeeToWater: '1:15 ratio (e.g. 30g coffee to 450g water)',
-      waterTemp: '94°C (200°F) — 45 seconds off the boil',
-      steps: [
-        'Add 30g of coarse freshly ground coffee to the glass carafe.',
-        'Pour 450g hot water vigorously to saturate all grounds evenly.',
-        'Place lid on top with plunger pulled up. Set a timer for 4:00 minutes.',
-        'At 4:00, use a soup spoon to gently crust-break the top floating coffee. The grounds will sink to the bottom.',
-        'Gently press the mesh filter down just below the liquid surface and pour immediately. Never leave brewed coffee sitting in the press.'
-      ],
-      tastingNotes: 'Heavy, rich, bold mouthfeel with natural aromatic coffee oils preserved.'
+      defaultRatio: '1:15 (30g coffee : 450g water)',
+      equipment: [
+        { id: 'press', name: 'French Press Carafe & Mesh Plunger', essential: true, fallback: 'Mason jar steeped + poured through a kitchen mesh strainer' },
+        { id: 'coarse_grind', name: 'Coarse Coffee Grounds', essential: true, fallback: 'Medium ground coffee steeped 3 minutes instead of 4' },
+        { id: 'scale', name: 'Kitchen Scale', essential: false, fallback: 'Tablespoons: 4 heaping tablespoons coffee for 2 large mugs of water' },
+        { id: 'timer', name: 'Timer / Stopwatch', essential: false, fallback: 'Count to 240 seconds mentally or watch the kitchen clock' }
+      ]
     },
     {
-      method: 'Pour-Over (Hario V60 / Kalita Wave)',
+      id: 'moka-pot',
+      name: 'Stovetop Moka Pot (Italian Espresso)',
+      tagline: 'Thick, syrupy, concentrated crema-base',
       difficulty: 'Intermediate',
-      gearNeeded: 'Pour-over cone, paper filter, gooseneck kettle, kitchen scale',
-      grindSize: 'Medium-Fine (Kosher salt consistency)',
-      coffeeToWater: '1:16 ratio (e.g. 15g coffee to 240g water)',
-      waterTemp: '93°C (200°F)',
-      steps: [
-        'Fold and rinse the paper filter with hot water to remove paper taste, then discard rinse water.',
-        'Add 15g of ground coffee, make a small dimple in the center, and tare scale to zero.',
-        'Bloom phase: Pour 45g of water gently in circles. Wait 40 seconds to allow trapped carbon dioxide gas to escape.',
-        'Pour 2: In slow concentric circles from inside out, pour steadily until reaching 150g by 1:15.',
-        'Final Pour: Continue pouring gently up to 240g total water by 1:45. Let draw down completely by 2:45 to 3:00.'
-      ],
-      tastingNotes: 'Pristine clarity, vibrant acidity, highlights floral, berry, and citrus flavor notes.'
+      defaultRatio: 'Fill bottom chamber to valve; fill basket loosely',
+      equipment: [
+        { id: 'moka', name: 'Bialetti / Moka Pot', essential: true, fallback: 'Cannot substitute Moka steam boiler principle' },
+        { id: 'fine_grind', name: 'Fine-Medium Coffee Grounds', essential: true, fallback: 'Store-bought espresso ground coffee' },
+        { id: 'preboiled', name: 'Pre-Boiled Hot Water', essential: false, fallback: 'Cold tap water (takes longer to boil and can impart metallic notes)' },
+        { id: 'stovetop', name: 'Stove / Induction Burner', essential: true, fallback: 'Portable camp burner or hot plate' }
+      ]
     },
     {
-      method: 'AeroPress (Inverted or Classic)',
-      difficulty: 'Beginner to Intermediate',
-      gearNeeded: 'AeroPress chamber, paper/metal filter, paddle',
-      grindSize: 'Medium-Fine',
-      coffeeToWater: '1:14 ratio (e.g. 16g coffee to 220g water)',
-      waterTemp: '85°C – 90°C (185°F – 194°F) — Cooler water reduces bitterness',
-      steps: [
-        'Insert paper filter in cap and wet with warm water.',
-        'Add 16g of medium-fine coffee into chamber over a sturdy mug.',
-        'Pour 220g hot water in 10 seconds. Stir 3 times with paddle.',
-        'Insert plunger 1cm to create a vacuum seal and prevent dripping. Steep for 1:30 minutes.',
-        'Gently press down with steady body weight for 30 seconds until you hear a soft hiss.'
-      ],
-      tastingNotes: 'Smooth, sweet, clean body with almost zero bitterness and low perceived acidity.'
-    },
-    {
-      method: 'Stovetop Moka Pot (Italian Espresso-Style)',
-      difficulty: 'Intermediate',
-      gearNeeded: 'Bialetti / Moka Pot, stove or burner',
-      grindSize: 'Fine (Finer than drip, coarser than commercial espresso)',
-      coffeeToWater: 'Fill boiler to lower pressure valve; fill basket loosely',
-      waterTemp: 'Pre-boiled water in lower chamber (prevents burnt taste)',
-      steps: [
-        'Fill bottom boiler chamber with pre-boiled hot water up to just beneath the safety release valve.',
-        'Fill funnel basket with fine coffee grounds. Level it off smoothly with your finger—NEVER tamp or press down firmly.',
-        'Screw top carafe tightly onto base using a towel to protect your hands from hot bottom chamber.',
-        'Place on medium-low heat with the lid open. Watch for coffee to emerge like warm golden honey.',
-        'As soon as stream turns light pale yellow and starts sputtering (frothing hiss), immediately remove from heat and run bottom base under cold sink water to stop extraction instantly.'
-      ],
-      tastingNotes: 'Intense, thick, espresso-like strength, perfect base for homemade lattes and iced coffees.'
+      id: 'aeropress',
+      name: 'AeroPress Pressure Brewer',
+      tagline: 'Smooth, rapid, zero-bitterness cup',
+      difficulty: 'Beginner',
+      defaultRatio: '1:14 (16g coffee : 220g water)',
+      equipment: [
+        { id: 'chamber', name: 'AeroPress Chamber & Plunger', essential: true, fallback: 'Standard immersion steep in mug' },
+        { id: 'filter', name: 'Micro Paper Filter', essential: true, fallback: 'Cut-to-size standard coffee filter paper circle' },
+        { id: 'paddle', name: 'Stirring Paddle / Spoon', essential: false, fallback: 'Regular kitchen spoon or butter knife' },
+        { id: 'scale', name: 'Scale / Measuring Scoop', essential: false, fallback: 'Use the AeroPress numbered chamber marks and scoop' }
+      ]
     }
   ],
 
-  // 4. Bean Types & Origins
+  // 5. Bean Species
   beanSpecies: [
     {
       species: 'Coffea Arabica (Arabica)',

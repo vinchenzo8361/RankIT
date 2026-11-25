@@ -1,6 +1,5 @@
 // Comprehensive Energy Drink Encyclopedia, Product Deep-Dives, History, and Cultural Impact
 export const libraryData = {
-  // 1. Dedicated Complete History of Energy Drinks
   energyDrinkHistory: {
     title: 'The Complete History & Evolution of Energy Drinks',
     subtitle: 'From Post-War Asian Restorative Tonics to a $90 Billion Global Cultural Phenomenon',
@@ -9,19 +8,19 @@ export const libraryData = {
         era: '1960s: The Japanese Pharmaceutical Roots',
         year: '1962',
         title: 'Lipovitan D & Post-War Economic Miracle',
-        content: 'The true ancestor of the modern energy drink was created by Taisho Pharmaceuticals in Tokyo, Japan, under the name Lipovitan D. Packaged in medicinal brown glass apothecary bottles, it was marketed not as a soft drink, but as an over-the-counter restorative health tonic formulated with taurine, nicotinamide, and B vitamins. It was designed to fuel Japanese salarymen and factory technicians working relentless 80-hour weeks rebuild post-World War II Japan.'
+        content: 'The true ancestor of the modern energy drink was created by Taisho Pharmaceuticals in Tokyo, Japan, under the name Lipovitan D. Packaged in medicinal brown glass apothecary bottles, it was marketed as an over-the-counter restorative health tonic formulated with taurine, nicotinamide, and B vitamins. It was designed to fuel Japanese salarymen and factory technicians working relentless 80-hour weeks rebuild post-World War II Japan.'
       },
       {
         era: '1970s: The Thai Trucker Elixir',
         year: '1976',
         title: 'Chaleo Yoovidhya & Krating Daeng',
-        content: 'Inspired by Japanese tonic imports, Thai entrepreneur Chaleo Yoovidhya founded T.C. Pharmaceutical and formulated Krating Daeng ("Red Gaur / Bull"). Sold in small amber glass bottles, the uncarbonated syrup blended water, cane sugar, taurine, inositol, and caffeine. It became an immediate essential staple across Southeast Asia for long-haul truck drivers, tuk-tuk operators, and rural farmers.'
+        content: 'Inspired by Japanese tonic imports, Thai entrepreneur Chaleo Yoovidhya founded T.C. Pharmaceutical and formulated Krating Daeng ("Red Gaur / Bull"). Sold in amber glass bottles, the uncarbonated syrup blended water, cane sugar, taurine, inositol, and caffeine. It became an essential staple across Southeast Asia for long-haul truck drivers, tuk-tuk operators, and rural farmers.'
       },
       {
         era: '1980s: The Western Transformation',
         year: '1984 – 1987',
         title: 'Dietrich Mateschitz & The Birth of Red Bull',
-        content: 'In 1982, Austrian marketing executive Dietrich Mateschitz visited Thailand on business and found Krating Daeng miraculously cured his chronic jet lag. Teaming up with Yoovidhya, they adapted the formula for Western palates by carbonating it, lowering sweetness, and introducing the now-iconic slim 250ml silver-and-blue can. Launched in Austria on April 1, 1987, Red Bull created the modern functional beverage category out of thin air by pricing itself double conventional soda.'
+        content: 'In 1982, Austrian marketing executive Dietrich Mateschitz visited Thailand on business and found Krating Daeng cured his jet lag. Teaming up with Yoovidhya, they adapted the formula for Western palates by carbonating it, lowering sweetness, and introducing the slim 250ml silver-and-blue can. Launched in Austria on April 1, 1987, Red Bull created the modern functional beverage category out of thin air.'
       },
       {
         era: '2000s: The 16oz Can Wars & Youth Culture',
@@ -58,8 +57,25 @@ export const libraryData = {
     ]
   },
 
-  // 2. Individual Drinks Deep Dive (Origins, Invention, Today's Impact, Fame, Fun Facts)
+  // Item Deep-Dives: Includes BOTH Original Green Monster & Monster Ultra White, Red Bull, Ghost, C4, Celsius
   productHistories: [
+    {
+      id: 'mnst-original',
+      name: 'Monster Energy (Original Green)',
+      brand: 'Monster Energy',
+      origin: 'Corona, California, United States',
+      inventor: 'Hansen Natural Corporation (Rodney Sacks & Hilton Schlosberg)',
+      releaseYear: 2002,
+      howItWasMade: 'In late 2001, Hansen Natural was competing against Red Bull’s high prices. Sacks and Schlosberg formulated a sweet, smooth, carbonated citrus-berry energy punch with Panax Ginseng root extract, L-Carnitine, Taurine, B vitamins, and 160mg caffeine. They packaged it into an audacious 16oz (473ml) matte black can embossed with three radioactive green claw scratches tearing through the metal.',
+      fameScore: '10/10 — The Heavyweight Champion of 16oz Big-Can Energy',
+      todaysImpact: 'Original Green Monster established the "Twice the Size for the Same Price" market precedent that dethroned Red Bull’s volume dominance in the United States. It turned Hansen Natural into Monster Beverage Corporation—one of the best performing public stocks in modern Wall Street history (over 100,000% return from 2000 to 2020).',
+      funFacts: [
+        'The iconic green "M" claw logo was designed to look like a beast tearing through the metal can.',
+        'Monster distributed free cans out of modified black military trucks at motocross races, skate parks, and rock concerts instead of running TV commercials.',
+        'The trademark recipe includes natural guarana seed extract alongside authentic ginseng root.'
+      ],
+      tastingNotes: 'Sweet, full-bodied carbonated apple-citrus punch with a smooth, lingering tart herbal bite.'
+    },
     {
       id: 'mnst-ultra-white',
       name: 'Monster Zero Ultra (Ultra White)',
@@ -144,7 +160,7 @@ export const libraryData = {
     }
   ],
 
-  // 3. Historical Brand Encyclopedia
+  // Brand Chronicles
   brandHistories: [
     {
       id: 'red-bull-brand',
@@ -202,7 +218,7 @@ export const libraryData = {
     }
   ],
 
-  // 4. Ingredient Science
+  // Ingredients Science
   ingredients: [
     {
       name: 'Caffeine (1,3,7-trimethylxanthine)',
@@ -234,7 +250,7 @@ export const libraryData = {
     }
   ],
 
-  // 5. Discontinued Archive
+  // Discontinued Archive
   discontinuedArchive: [
     {
       id: 'disc-redline',
