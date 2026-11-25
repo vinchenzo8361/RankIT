@@ -1,15 +1,17 @@
-/* RankIt Design System — Modern, Minimalist, High-Contrast Crisp Aesthetic */
+/* RankIt Design System — Premium Minimalist Dark/Light Hybrid Aesthetic */
 :root {
-  --bg-primary: #FAFAFA;       /* Softer, cleaner minimalist background */
-  --bg-card: #FFFFFF;
-  --bg-hover: #F4F4F5;          /* Subtler zinc neutral hover */
-  --brand-accent: #3B82F6;      /* Modern refined blue/indigo */
-  --brand-accent-hover: #2563EB;
-  --brand-accent-light: #EFF6FF;
-  --text-primary: #18181B;      /* Deep neutral charcoal */
-  --text-secondary: #71717A;    /* Balanced secondary grey */
-  --border-subtle: #E4E4E7;     /* Clean minimalist borders */
-  --border-strong: #D4D4D8;
+  --bg-primary: #0C0E12;       /* Deep slate-graphite dark background */
+  --bg-card: #14171F;          /* Refined card surface */
+  --bg-card-hover: #1A1F2B;    /* Subtle hover glow */
+  --bg-subtle: #1F2433;
+  --brand-accent: #38BDF8;      /* Vibrant modern cyan/sky accent */
+  --brand-accent-hover: #0EA5E9;
+  --brand-accent-light: rgba(56, 189, 248, 0.12);
+  --text-primary: #F8FAFC;      /* Crisp pure white */
+  --text-secondary: #94A3B8;    /* Elegant slate secondary */
+  --text-muted: #64748B;
+  --border-subtle: #242B3B;     /* Crisp fine border */
+  --border-strong: #334155;
 
   /* Tier colors */
   --tier-s: #F59E0B;
@@ -18,7 +20,7 @@
   --tier-c: #EAB308;
   --tier-d: #F97316;
   --tier-f: #EF4444;
-  --tier-idk: #A1A1AA;
+  --tier-idk: #64748B;
 
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--text-primary);
@@ -37,6 +39,9 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.5;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.04) 0px, transparent 50%);
 }
 
 button {
@@ -44,11 +49,13 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  color: inherit;
 }
 
 input, select, textarea {
   font-family: inherit;
   color: inherit;
+  background-color: transparent;
 }
 
 /* Scrollbar customization */
@@ -60,11 +67,11 @@ input, select, textarea {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E4E4E7;
+  background: #242B3B;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #A1A1AA;
+  background: #38BDF8;
 }
 
 /* Utilities */
@@ -85,90 +92,76 @@ input, select, textarea {
 .rankit-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-  transition: all 0.15s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .rankit-card:hover {
-  border-color: #CBD5E1;
-  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+  border-color: #38BDF8;
+  transform: translateY(-1px);
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 2px 7px;
-  border-radius: 5px;
+  padding: 2px 8px;
+  border-radius: 6px;
   font-size: 0.72rem;
   font-weight: 600;
 }
 
 .badge-brand {
-  background: #F4F4F5;
-  color: #18181B;
+  background: var(--bg-subtle);
+  color: #F8FAFC;
+  border: 1px solid var(--border-subtle);
 }
 
 .badge-discontinued {
-  background: #FEE2E2;
-  color: #DC2626;
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .badge-active {
-  background: #ECFDF5;
-  color: #059669;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 8px 14px;
-  background: #18181B;
-  color: #FFFFFF;
-  font-weight: 600;
+  padding: 8px 16px;
+  background: #38BDF8;
+  color: #0C0E12;
+  font-weight: 700;
   font-size: 0.85rem;
-  border-radius: 7px;
-  transition: background 0.15s ease;
+  border-radius: 8px;
+  transition: all 0.15s ease;
 }
 
 .btn-primary:hover {
-  background: #27272A;
+  background: #7DD3FC;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 8px 14px;
-  background: #FFFFFF;
-  color: #18181B;
+  padding: 8px 16px;
+  background: var(--bg-subtle);
+  color: #F8FAFC;
   border: 1px solid var(--border-subtle);
   font-weight: 600;
   font-size: 0.85rem;
-  border-radius: 7px;
+  border-radius: 8px;
   transition: all 0.15s ease;
 }
 
 .btn-secondary:hover {
-  background: #F4F4F5;
-  border-color: var(--border-strong);
-}
-
-/* Print specific stylesheet */
-@media print {
-  .no-print,
-  .sidebar-container,
-  .top-header,
-  .action-buttons,
-  .btn-primary,
-  .btn-secondary {
-    display: none !important;
-  }
-  
-  body, .main-content, .app-container {
-    background: #FFFFFF !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
+  background: var(--bg-card-hover);
+  border-color: #475569;
 }

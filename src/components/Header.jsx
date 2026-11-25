@@ -1,12 +1,5 @@
 import React, { useRef } from 'react';
-import { 
-  Download, 
-  Upload, 
-  FileSpreadsheet, 
-  Printer, 
-  Sparkles,
-  RefreshCw
-} from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { 
   exportFullBackup, 
   importFullBackup, 
@@ -25,6 +18,7 @@ import {
 export default function Header({ onDataReload, activeTab }) {
   const fileInputRef = useRef(null);
 
+  // Download features are kept safe in the codebase, hidden from public UI per user request
   const handleExportJSON = () => {
     const data = exportFullBackup();
     const dateStr = new Date().toISOString().split('T')[0];
@@ -47,7 +41,7 @@ export default function Header({ onDataReload, activeTab }) {
       }
     };
     reader.readAsText(file);
-    e.target.value = ''; // Reset input
+    e.target.value = '';
   };
 
   const handleExportCSV = () => {
@@ -68,9 +62,10 @@ export default function Header({ onDataReload, activeTab }) {
 
   return (
     <header style={{
-      height: '68px',
-      backgroundColor: '#FFFFFF',
-      borderBottom: '1px solid #E2E8F0',
+      height: '64px',
+      backgroundColor: 'rgba(12, 14, 18, 0.85)',
+      backdropFilter: 'blur(12px)',
+      borderBottom: '1px solid #242B3B',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -79,61 +74,38 @@ export default function Header({ onDataReload, activeTab }) {
       top: 0,
       zIndex: 20
     }} className="top-header no-print">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <h1 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0F172A', textTransform: 'capitalize' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <h1 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#F8FAFC', textTransform: 'capitalize' }}>
           {activeTab === 'home' ? 'Overview' : activeTab.replace('-', ' ')}
         </h1>
       </div>
 
-      {/* Action Buttons: Export JSON, Import JSON, CSV, Print */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }} className="action-buttons">
-        <input 
-          type="file" 
-          ref={fileInputRef} 
-          style={{ display: 'none' }} 
-          accept=".json"
-          onChange={handleImportJSON} 
-        />
+      {/* Hidden file input for restore code integrity */}
+      <input 
+        type="file" 
+        ref={fileInputRef} 
+        style={{ display: 'none' }} 
+        accept=".json"
+        onChange={handleImportJSON} 
+      />
 
-        <button 
-          onClick={handleExportJSON}
-          className="btn-secondary" 
-          title="Backup your entire database (rankings, logs, comments)"
-          style={{ padding: '7px 12px', fontSize: '0.8rem' }}
-        >
-          <Download size={15} color="#4F46E5" />
-          <span>Export JSON</span>
-        </button>
-
-        <button 
-          onClick={() => fileInputRef.current?.click()}
-          className="btn-secondary" 
-          title="Restore your data from a backup JSON file"
-          style={{ padding: '7px 12px', fontSize: '0.8rem' }}
-        >
-          <Upload size={15} color="#16A34A" />
-          <span>Import JSON</span>
-        </button>
-
-        <button 
-          onClick={handleExportCSV}
-          className="btn-secondary" 
-          title="Export ratings and tracker logs to CSV for Excel / Sheets"
-          style={{ padding: '7px 12px', fontSize: '0.8rem' }}
-        >
-          <FileSpreadsheet size={15} color="#0EA5E9" />
-          <span>Export CSV</span>
-        </button>
-
-        <button 
-          onClick={triggerPrint}
-          className="btn-secondary" 
-          title="Print or save PDF of rankings"
-          style={{ padding: '7px 12px', fontSize: '0.8rem' }}
-        >
-          <Printer size={15} color="#64748B" />
-          <span>Print</span>
-        </button>
+      {/* Clean status pill */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <span style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          fontSize: '0.75rem',
+          fontWeight: 600,
+          color: '#94A3B8',
+          backgroundColor: '#1F2433',
+          padding: '4px 10px',
+          borderRadius: '20px',
+          border: '1px solid #242B3B'
+        }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10B981' }}></span>
+          <span>RankIt Studio</span>
+        </span>
       </div>
     </header>
   );

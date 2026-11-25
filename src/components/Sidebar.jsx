@@ -4,7 +4,6 @@ import {
   Layers, 
   Coffee, 
   BookOpen, 
-  Sparkles,
   ChevronRight,
   Database
 } from 'lucide-react';
@@ -12,16 +11,16 @@ import {
 export default function Sidebar({ activeTab, setActiveTab }) {
   const navItems = [
     { id: 'rankings', label: 'Rankings', icon: Trophy, desc: 'Tier lists & ratings' },
-    { id: 'catalog', label: 'Catalog', icon: Layers, desc: 'Energy drink database' },
-    { id: 'tracker', label: 'Drink Tracker', icon: Coffee, desc: 'Caffeine consumption' },
-    { id: 'library', label: 'Library', icon: BookOpen, desc: 'History & encyclopedia' }
+    { id: 'catalog', label: 'Catalog', icon: Layers, desc: '330+ energy drinks' },
+    { id: 'tracker', label: 'Drink Tracker', icon: Coffee, desc: 'Daily caffeine intake' },
+    { id: 'library', label: 'Library', icon: BookOpen, desc: 'Knowledge & brewing' }
   ];
 
   return (
     <aside style={{
-      width: '260px',
-      backgroundColor: '#FFFFFF',
-      borderRight: '1px solid #E2E8F0',
+      width: '250px',
+      backgroundColor: '#10131A',
+      borderRight: '1px solid #242B3B',
       display: 'flex',
       flexDirection: 'column',
       flexShrink: 0
@@ -30,8 +29,8 @@ export default function Sidebar({ activeTab, setActiveTab }) {
       <div 
         onClick={() => setActiveTab('home')}
         style={{
-          padding: '24px 20px',
-          borderBottom: '1px solid #F1F5F9',
+          padding: '22px 20px',
+          borderBottom: '1px solid #1F2433',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
@@ -39,45 +38,45 @@ export default function Sidebar({ activeTab, setActiveTab }) {
         }}
       >
         <div style={{
-          width: '38px',
-          height: '38px',
-          borderRadius: '10px',
-          backgroundColor: '#4F46E5',
+          width: '36px',
+          height: '36px',
+          borderRadius: '9px',
+          background: 'linear-gradient(135deg, #38BDF8 0%, #3B82F6 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#FFFFFF',
+          color: '#0C0E12',
           fontWeight: 800,
-          fontSize: '1.25rem',
-          boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.25)'
+          fontSize: '1.2rem',
+          boxShadow: '0 4px 12px rgba(56, 189, 248, 0.3)'
         }}>
           R
         </div>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontWeight: 800, fontSize: '1.25rem', letterSpacing: '-0.02em', color: '#0F172A' }}>
-              Rank<span style={{ color: '#4F46E5' }}>It</span>
+            <span style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '-0.02em', color: '#F8FAFC' }}>
+              Rank<span style={{ color: '#38BDF8' }}>It</span>
             </span>
             <span style={{ 
-              fontSize: '0.65rem', 
+              fontSize: '0.62rem', 
               fontWeight: 700, 
-              backgroundColor: '#EEF2FF', 
-              color: '#4F46E5', 
-              padding: '2px 6px', 
+              backgroundColor: 'rgba(56, 189, 248, 0.15)', 
+              color: '#38BDF8', 
+              padding: '1px 5px', 
               borderRadius: '4px' 
             }}>
               v1.0
             </span>
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 500 }}>
-            Energy Drink Studio
+          <div style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 500 }}>
+            Energy & Coffee Studio
           </div>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <nav style={{ padding: '16px 12px', flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        <div style={{ padding: '4px 12px', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: '#94A3B8', letterSpacing: '0.05em' }}>
+      <nav style={{ padding: '16px 12px', flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
+        <div style={{ padding: '4px 12px', fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', letterSpacing: '0.05em' }}>
           Navigation
         </div>
 
@@ -92,41 +91,48 @@ export default function Sidebar({ activeTab, setActiveTab }) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                padding: '12px 14px',
-                borderRadius: '10px',
+                padding: '11px 14px',
+                borderRadius: '8px',
                 width: '100%',
                 textAlign: 'left',
-                backgroundColor: isActive ? '#EEF2FF' : 'transparent',
-                color: isActive ? '#4F46E5' : '#0F172A',
+                backgroundColor: isActive ? 'rgba(56, 189, 248, 0.12)' : 'transparent',
+                color: isActive ? '#38BDF8' : '#94A3B8',
                 fontWeight: isActive ? 700 : 500,
+                border: isActive ? '1px solid rgba(56, 189, 248, 0.3)' : '1px solid transparent',
                 transition: 'all 0.15s ease'
               }}
               onMouseEnter={(e) => {
-                if (!isActive) e.currentTarget.style.backgroundColor = '#F8FAFC';
+                if (!isActive) {
+                  e.currentTarget.style.backgroundColor = '#1A1F2B';
+                  e.currentTarget.style.color = '#F8FAFC';
+                }
               }}
               onMouseLeave={(e) => {
-                if (!isActive) e.currentTarget.style.backgroundColor = 'transparent';
+                if (!isActive) {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#94A3B8';
+                }
               }}
             >
-              <Icon size={20} color={isActive ? '#4F46E5' : '#64748B'} strokeWidth={isActive ? 2.5 : 2} />
+              <Icon size={18} color={isActive ? '#38BDF8' : '#64748B'} strokeWidth={isActive ? 2.5 : 2} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '0.9rem', lineHeight: 1.2 }}>{item.label}</div>
-                <div style={{ fontSize: '0.72rem', color: isActive ? '#6366F1' : '#94A3B8' }}>{item.desc}</div>
+                <div style={{ fontSize: '0.86rem', lineHeight: 1.2, color: isActive ? '#38BDF8' : '#F8FAFC' }}>{item.label}</div>
+                <div style={{ fontSize: '0.7rem', color: '#64748B' }}>{item.desc}</div>
               </div>
-              {isActive && <ChevronRight size={16} color="#4F46E5" />}
+              {isActive && <ChevronRight size={15} color="#38BDF8" />}
             </button>
           );
         })}
       </nav>
 
       {/* Local Mode Notice */}
-      <div style={{ padding: '16px', margin: '12px', backgroundColor: '#F8FAFC', borderRadius: '10px', border: '1px solid #E2E8F0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <Database size={15} color="#4F46E5" />
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#0F172A' }}>100% Local & Private</span>
+      <div style={{ padding: '14px', margin: '12px', backgroundColor: '#14171F', borderRadius: '8px', border: '1px solid #242B3B' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+          <Database size={14} color="#38BDF8" />
+          <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#F8FAFC' }}>100% Local Storage</span>
         </div>
-        <p style={{ fontSize: '0.72rem', color: '#64748B', lineHeight: 1.4 }}>
-          No accounts or cloud tracking. Data is preserved directly in your browser.
+        <p style={{ fontSize: '0.7rem', color: '#94A3B8', lineHeight: 1.4 }}>
+          Private and stored in your browser.
         </p>
       </div>
     </aside>
