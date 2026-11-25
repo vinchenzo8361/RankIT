@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Rankings from './pages/Rankings';
@@ -101,14 +100,14 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      {/* Top Left-to-Right Header Navigation */}
+      <Header 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        onDataReload={loadAllData} 
+      />
 
       <div className="main-content">
-        <Header 
-          activeTab={activeTab} 
-          onDataReload={loadAllData} 
-        />
-
         <main style={{ flex: 1, paddingBottom: '40px' }}>
           {activeTab === 'home' && (
             <Home 

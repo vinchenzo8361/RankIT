@@ -3,7 +3,7 @@ import { initialBrands } from '../data/brands';
 import { initialProducts } from '../data/products';
 
 const STORAGE_KEYS = {
-  BRANDS: 'rankit_brands_v4', // updated for popularity ranks
+  BRANDS: 'rankit_brands_v5', // updated for deduplicated brands & audit
   PRODUCTS: 'rankit_products_v2',
   PROJECTS: 'rankit_projects_v1',
   STANDALONE_TIER: 'rankit_standalone_tier_v1',

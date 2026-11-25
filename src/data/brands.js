@@ -237,18 +237,6 @@ export const initialBrands = [
     "popularityRank": 9
   },
   {
-    "id": "ghost-energy",
-    "name": "GHOST Energy",
-    "category": "Active",
-    "isTop25": true,
-    "top25Rank": 8,
-    "status": "Active",
-    "origin": "USA",
-    "logo": "⚡",
-    "color": "#4F46E5",
-    "popularityRank": 10
-  },
-  {
     "id": "c4-energy",
     "name": "C4 Energy",
     "category": "Active",
@@ -258,7 +246,7 @@ export const initialBrands = [
     "origin": "USA",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 11
+    "popularityRank": 10
   },
   {
     "id": "nos-energy",
@@ -270,7 +258,7 @@ export const initialBrands = [
     "origin": "USA",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 12
+    "popularityRank": 11
   },
   {
     "id": "reign",
@@ -282,7 +270,7 @@ export const initialBrands = [
     "origin": "USA",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 13
+    "popularityRank": 12
   },
   {
     "id": "reign-storm",
@@ -294,7 +282,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 14
+    "popularityRank": 13
   },
   {
     "id": "m-150",
@@ -306,7 +294,7 @@ export const initialBrands = [
     "origin": "Thailand",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 15
+    "popularityRank": 14
   },
   {
     "id": "carabao",
@@ -318,7 +306,7 @@ export const initialBrands = [
     "origin": "Thailand",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 16
+    "popularityRank": 15
   },
   {
     "id": "sting",
@@ -330,7 +318,7 @@ export const initialBrands = [
     "origin": "International / Asia",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 17
+    "popularityRank": 16
   },
   {
     "id": "v-energy",
@@ -342,7 +330,7 @@ export const initialBrands = [
     "origin": "New Zealand",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 18
+    "popularityRank": 17
   },
   {
     "id": "lucozade",
@@ -354,7 +342,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 19
+    "popularityRank": 18
   },
   {
     "id": "lucozade-energy",
@@ -366,7 +354,7 @@ export const initialBrands = [
     "origin": "UK",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 20
+    "popularityRank": 19
   },
   {
     "id": "burn",
@@ -378,7 +366,7 @@ export const initialBrands = [
     "origin": "Global",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 21
+    "popularityRank": 20
   },
   {
     "id": "prime-energy",
@@ -390,7 +378,7 @@ export const initialBrands = [
     "origin": "USA",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 22
+    "popularityRank": 21
   },
   {
     "id": "5-hour-energy",
@@ -402,7 +390,7 @@ export const initialBrands = [
     "origin": "USA",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 23
+    "popularityRank": 22
   },
   {
     "id": "shark",
@@ -414,7 +402,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 24
+    "popularityRank": 23
   },
   {
     "id": "shark-energy",
@@ -426,7 +414,7 @@ export const initialBrands = [
     "origin": "Thailand",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 25
+    "popularityRank": 24
   },
   {
     "id": "mother",
@@ -438,7 +426,7 @@ export const initialBrands = [
     "origin": "Australia",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 26
+    "popularityRank": 25
   },
   {
     "id": "hell",
@@ -450,7 +438,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 27
+    "popularityRank": 26
   },
   {
     "id": "hell-energy",
@@ -462,7 +450,7 @@ export const initialBrands = [
     "origin": "Hungary",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 28
+    "popularityRank": 27
   },
   {
     "id": "power-horse",
@@ -474,7 +462,7 @@ export const initialBrands = [
     "origin": "Austria",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 29
+    "popularityRank": 28
   },
   {
     "id": "guru",
@@ -486,7 +474,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 30
+    "popularityRank": 29
   },
   {
     "id": "guru-organic-energy",
@@ -498,7 +486,7 @@ export const initialBrands = [
     "origin": "Canada",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 31
+    "popularityRank": 30
   },
   {
     "id": "full-throttle",
@@ -510,7 +498,7 @@ export const initialBrands = [
     "origin": "USA",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 32
+    "popularityRank": 31
   },
   {
     "id": "amp-energy",
@@ -522,7 +510,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 33
+    "popularityRank": 32
   },
   {
     "id": "mtn-dew-amp",
@@ -534,7 +522,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 34
+    "popularityRank": 33
   },
   {
     "id": "g-fuel",
@@ -546,7 +534,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 35
+    "popularityRank": 34
   },
   {
     "id": "bucked-up",
@@ -558,7 +546,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 36
+    "popularityRank": 35
   },
   {
     "id": "ryse-fuel",
@@ -570,7 +558,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 37
+    "popularityRank": 36
   },
   {
     "id": "relentless",
@@ -582,7 +570,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 38
+    "popularityRank": 37
   },
   {
     "id": "nocco",
@@ -594,7 +582,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 39
+    "popularityRank": 38
   },
   {
     "id": "sneak",
@@ -606,7 +594,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 40
+    "popularityRank": 39
   },
   {
     "id": "gorilla-mind",
@@ -618,7 +606,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 41
+    "popularityRank": 40
   },
   {
     "id": "fast-twitch",
@@ -630,7 +618,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 42
+    "popularityRank": 41
   },
   {
     "id": "rip-it",
@@ -642,7 +630,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 43
+    "popularityRank": 42
   },
   {
     "id": "battery",
@@ -654,7 +642,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 44
+    "popularityRank": 43
   },
   {
     "id": "xyience-energy",
@@ -666,7 +654,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 45
+    "popularityRank": 44
   },
   {
     "id": "3d-energy",
@@ -678,7 +666,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 46
+    "popularityRank": 45
   },
   {
     "id": "zoa-energy",
@@ -690,7 +678,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 47
+    "popularityRank": 46
   },
   {
     "id": "bum-energy",
@@ -702,7 +690,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 48
+    "popularityRank": 47
   },
   {
     "id": "jocko-fuel",
@@ -714,7 +702,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 49
+    "popularityRank": 48
   },
   {
     "id": "redline",
@@ -726,7 +714,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 50
+    "popularityRank": 49
   },
   {
     "id": "vpx-redline",
@@ -738,7 +726,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 51
+    "popularityRank": 50
   },
   {
     "id": "venom",
@@ -750,7 +738,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 52
+    "popularityRank": 51
   },
   {
     "id": "volt",
@@ -762,7 +750,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 53
+    "popularityRank": 52
   },
   {
     "id": "vive-100",
@@ -774,7 +762,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 54
+    "popularityRank": 53
   },
   {
     "id": "big-shock",
@@ -786,7 +774,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 55
+    "popularityRank": 54
   },
   {
     "id": "semtex",
@@ -798,7 +786,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 56
+    "popularityRank": 55
   },
   {
     "id": "non-stop",
@@ -810,7 +798,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 57
+    "popularityRank": 56
   },
   {
     "id": "flying-horse",
@@ -822,7 +810,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 58
+    "popularityRank": 57
   },
   {
     "id": "toro-loco",
@@ -834,7 +822,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 59
+    "popularityRank": 58
   },
   {
     "id": "mad-croc",
@@ -846,7 +834,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 60
+    "popularityRank": 59
   },
   {
     "id": "powerking",
@@ -858,7 +846,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 61
+    "popularityRank": 60
   },
   {
     "id": "oshee",
@@ -870,7 +858,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 62
+    "popularityRank": 61
   },
   {
     "id": "tenzing",
@@ -882,7 +870,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 63
+    "popularityRank": 62
   },
   {
     "id": "perfectted",
@@ -894,7 +882,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 64
+    "popularityRank": 63
   },
   {
     "id": "vitamin-well",
@@ -906,7 +894,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 65
+    "popularityRank": 64
   },
   {
     "id": "uptime",
@@ -918,7 +906,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 66
+    "popularityRank": 65
   },
   {
     "id": "uptime-energy",
@@ -930,7 +918,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 67
+    "popularityRank": 66
   },
   {
     "id": "wired",
@@ -942,7 +930,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 68
+    "popularityRank": 67
   },
   {
     "id": "wired-energy",
@@ -954,7 +942,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 69
+    "popularityRank": 68
   },
   {
     "id": "bomba",
@@ -966,7 +954,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 70
+    "popularityRank": 69
   },
   {
     "id": "28-black",
@@ -978,7 +966,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 71
+    "popularityRank": 70
   },
   {
     "id": "9mm-energy",
@@ -990,7 +978,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 72
+    "popularityRank": 71
   },
   {
     "id": "abe",
@@ -1002,7 +990,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 73
+    "popularityRank": 72
   },
   {
     "id": "accelerator",
@@ -1014,7 +1002,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 74
+    "popularityRank": 73
   },
   {
     "id": "adrenaline-rush",
@@ -1026,7 +1014,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 75
+    "popularityRank": 74
   },
   {
     "id": "adrenaline-shoc",
@@ -1038,7 +1026,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 76
+    "popularityRank": 75
   },
   {
     "id": "aito",
@@ -1050,7 +1038,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 77
+    "popularityRank": 76
   },
   {
     "id": "amini",
@@ -1062,7 +1050,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 78
+    "popularityRank": 77
   },
   {
     "id": "amper",
@@ -1074,7 +1062,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 79
+    "popularityRank": 78
   },
   {
     "id": "apple-energy",
@@ -1086,7 +1074,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 80
+    "popularityRank": 79
   },
   {
     "id": "ar-energy",
@@ -1098,7 +1086,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 81
+    "popularityRank": 80
   },
   {
     "id": "area-51",
@@ -1110,7 +1098,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 82
+    "popularityRank": 81
   },
   {
     "id": "arizona",
@@ -1122,7 +1110,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 83
+    "popularityRank": 82
   },
   {
     "id": "asahi",
@@ -1134,7 +1122,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 84
+    "popularityRank": 83
   },
   {
     "id": "aspire",
@@ -1146,7 +1134,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 85
+    "popularityRank": 84
   },
   {
     "id": "bacchus",
@@ -1158,7 +1146,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 86
+    "popularityRank": 85
   },
   {
     "id": "bad-dog",
@@ -1170,7 +1158,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 87
+    "popularityRank": 86
   },
   {
     "id": "baly",
@@ -1182,7 +1170,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 88
+    "popularityRank": 87
   },
   {
     "id": "barebells",
@@ -1194,7 +1182,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 89
+    "popularityRank": 88
   },
   {
     "id": "be-sharp",
@@ -1206,7 +1194,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 90
+    "popularityRank": 89
   },
   {
     "id": "beaver-buzz",
@@ -1218,7 +1206,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 91
+    "popularityRank": 90
   },
   {
     "id": "beebad",
@@ -1230,7 +1218,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 92
+    "popularityRank": 91
   },
   {
     "id": "benny",
@@ -1242,7 +1230,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 93
+    "popularityRank": 92
   },
   {
     "id": "beyond-raw",
@@ -1254,7 +1242,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 94
+    "popularityRank": 93
   },
   {
     "id": "big-game-energy",
@@ -1266,7 +1254,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 95
+    "popularityRank": 94
   },
   {
     "id": "bizon",
@@ -1278,7 +1266,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 96
+    "popularityRank": 95
   },
   {
     "id": "black-bruin",
@@ -1290,7 +1278,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 97
+    "popularityRank": 96
   },
   {
     "id": "black-cat",
@@ -1302,7 +1290,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 98
+    "popularityRank": 97
   },
   {
     "id": "black-dragon",
@@ -1314,7 +1302,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 99
+    "popularityRank": 98
   },
   {
     "id": "black-energy",
@@ -1326,7 +1314,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 100
+    "popularityRank": 99
   },
   {
     "id": "black-rifle-energy",
@@ -1338,7 +1326,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 101
+    "popularityRank": 100
   },
   {
     "id": "bloom-energy",
@@ -1350,7 +1338,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 102
+    "popularityRank": 101
   },
   {
     "id": "blu",
@@ -1362,7 +1350,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 103
+    "popularityRank": 102
   },
   {
     "id": "blue-chameleon",
@@ -1374,7 +1362,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 104
+    "popularityRank": 103
   },
   {
     "id": "bolero",
@@ -1386,7 +1374,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 105
+    "popularityRank": 104
   },
   {
     "id": "boom",
@@ -1398,7 +1386,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 106
+    "popularityRank": 105
   },
   {
     "id": "boost",
@@ -1410,7 +1398,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 107
+    "popularityRank": 106
   },
   {
     "id": "booster",
@@ -1422,7 +1410,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 108
+    "popularityRank": 107
   },
   {
     "id": "brite",
@@ -1434,7 +1422,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 109
+    "popularityRank": 108
   },
   {
     "id": "bsc",
@@ -1446,7 +1434,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 110
+    "popularityRank": 109
   },
   {
     "id": "buffalo-kick",
@@ -1458,7 +1446,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 111
+    "popularityRank": 110
   },
   {
     "id": "bullit",
@@ -1470,7 +1458,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 112
+    "popularityRank": 111
   },
   {
     "id": "chucky",
@@ -1482,7 +1470,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 113
+    "popularityRank": 112
   },
   {
     "id": "clean",
@@ -1494,7 +1482,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 114
+    "popularityRank": 113
   },
   {
     "id": "cloud-9",
@@ -1506,7 +1494,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 115
+    "popularityRank": 114
   },
   {
     "id": "club-mate",
@@ -1518,7 +1506,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 116
+    "popularityRank": 115
   },
   {
     "id": "cobra",
@@ -1530,7 +1518,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 117
+    "popularityRank": 116
   },
   {
     "id": "cocaine-energy",
@@ -1542,7 +1530,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 118
+    "popularityRank": 117
   },
   {
     "id": "code-red",
@@ -1554,7 +1542,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 119
+    "popularityRank": 118
   },
   {
     "id": "crazy-tiger",
@@ -1566,7 +1554,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 120
+    "popularityRank": 119
   },
   {
     "id": "crunk",
@@ -1578,7 +1566,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 121
+    "popularityRank": 120
   },
   {
     "id": "cult",
@@ -1590,7 +1578,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 122
+    "popularityRank": 121
   },
   {
     "id": "dark-dog",
@@ -1602,7 +1590,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 123
+    "popularityRank": 122
   },
   {
     "id": "day-and-nite",
@@ -1614,7 +1602,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 124
+    "popularityRank": 123
   },
   {
     "id": "dop3",
@@ -1626,7 +1614,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 125
+    "popularityRank": 124
   },
   {
     "id": "dragon-energy",
@@ -1638,7 +1626,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 126
+    "popularityRank": 125
   },
   {
     "id": "dragon-fire",
@@ -1650,7 +1638,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 127
+    "popularityRank": 126
   },
   {
     "id": "drive-me",
@@ -1662,7 +1650,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 128
+    "popularityRank": 127
   },
   {
     "id": "driver-s-energy",
@@ -1674,7 +1662,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 129
+    "popularityRank": 128
   },
   {
     "id": "dynam-t",
@@ -1686,7 +1674,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 130
+    "popularityRank": 129
   },
   {
     "id": "dzik",
@@ -1698,7 +1686,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 131
+    "popularityRank": 130
   },
   {
     "id": "e-on",
@@ -1710,7 +1698,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 132
+    "popularityRank": 131
   },
   {
     "id": "e6",
@@ -1722,7 +1710,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 133
+    "popularityRank": 132
   },
   {
     "id": "echelon",
@@ -1734,7 +1722,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 134
+    "popularityRank": 133
   },
   {
     "id": "ed-energy",
@@ -1746,7 +1734,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 135
+    "popularityRank": 134
   },
   {
     "id": "effect",
@@ -1758,7 +1746,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 136
+    "popularityRank": 135
   },
   {
     "id": "el-jefe",
@@ -1770,7 +1758,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 137
+    "popularityRank": 136
   },
   {
     "id": "emerge",
@@ -1782,7 +1770,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 138
+    "popularityRank": 137
   },
   {
     "id": "enerdrink",
@@ -1794,7 +1782,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 139
+    "popularityRank": 138
   },
   {
     "id": "eneryeti",
@@ -1806,7 +1794,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 140
+    "popularityRank": 139
   },
   {
     "id": "euroshopper",
@@ -1818,7 +1806,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 141
+    "popularityRank": 140
   },
   {
     "id": "explo",
@@ -1830,7 +1818,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 142
+    "popularityRank": 141
   },
   {
     "id": "extase",
@@ -1842,7 +1830,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 143
+    "popularityRank": 142
   },
   {
     "id": "faxe-kondi-booster",
@@ -1854,7 +1842,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 144
+    "popularityRank": 143
   },
   {
     "id": "fearless",
@@ -1866,7 +1854,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 145
+    "popularityRank": 144
   },
   {
     "id": "flash",
@@ -1878,7 +1866,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 146
+    "popularityRank": 145
   },
   {
     "id": "flash-up",
@@ -1890,7 +1878,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 147
+    "popularityRank": 146
   },
   {
     "id": "flrt",
@@ -1902,7 +1890,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 148
+    "popularityRank": 147
   },
   {
     "id": "frank-s",
@@ -1914,7 +1902,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 149
+    "popularityRank": 148
   },
   {
     "id": "freeway",
@@ -1926,7 +1914,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 150
+    "popularityRank": 149
   },
   {
     "id": "froosh",
@@ -1938,7 +1926,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 151
+    "popularityRank": 150
   },
   {
     "id": "fucked-up",
@@ -1950,7 +1938,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 152
+    "popularityRank": 151
   },
   {
     "id": "funky-monkey",
@@ -1962,7 +1950,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 153
+    "popularityRank": 152
   },
   {
     "id": "fusion",
@@ -1974,7 +1962,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 154
+    "popularityRank": 153
   },
   {
     "id": "gaam",
@@ -1986,7 +1974,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 155
+    "popularityRank": 154
   },
   {
     "id": "gainomax",
@@ -1998,7 +1986,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 156
+    "popularityRank": 155
   },
   {
     "id": "gatorade-energy",
@@ -2010,7 +1998,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 157
+    "popularityRank": 156
   },
   {
     "id": "gg-energy",
@@ -2022,7 +2010,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 158
+    "popularityRank": 157
   },
   {
     "id": "gladiator-energy",
@@ -2034,7 +2022,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 159
+    "popularityRank": 158
   },
   {
     "id": "go-and-fun",
@@ -2046,7 +2034,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 160
+    "popularityRank": 159
   },
   {
     "id": "goat-fuel",
@@ -2058,7 +2046,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 161
+    "popularityRank": 160
   },
   {
     "id": "gofast",
@@ -2070,7 +2058,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 162
+    "popularityRank": 161
   },
   {
     "id": "golden-eagle",
@@ -2082,7 +2070,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 163
+    "popularityRank": 162
   },
   {
     "id": "g-nrgy",
@@ -2094,7 +2082,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 164
+    "popularityRank": 163
   },
   {
     "id": "gorgie",
@@ -2106,7 +2094,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 165
+    "popularityRank": 164
   },
   {
     "id": "gorilla",
@@ -2118,7 +2106,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 166
+    "popularityRank": 165
   },
   {
     "id": "gosh",
@@ -2130,7 +2118,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 167
+    "popularityRank": 166
   },
   {
     "id": "green-monster",
@@ -2142,7 +2130,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 168
+    "popularityRank": 167
   },
   {
     "id": "grizzly-bear",
@@ -2154,7 +2142,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 169
+    "popularityRank": 168
   },
   {
     "id": "grizzly-energy",
@@ -2166,7 +2154,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 170
+    "popularityRank": 169
   },
   {
     "id": "ground-zero",
@@ -2178,7 +2166,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 171
+    "popularityRank": 170
   },
   {
     "id": "guarana",
@@ -2190,7 +2178,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 172
+    "popularityRank": 171
   },
   {
     "id": "h2o-power",
@@ -2202,7 +2190,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 173
+    "popularityRank": 172
   },
   {
     "id": "hi-tiger",
@@ -2214,7 +2202,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 174
+    "popularityRank": 173
   },
   {
     "id": "hiball",
@@ -2226,7 +2214,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 175
+    "popularityRank": 174
   },
   {
     "id": "hot6",
@@ -2238,7 +2226,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 176
+    "popularityRank": 175
   },
   {
     "id": "hot6ix",
@@ -2250,7 +2238,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 177
+    "popularityRank": 176
   },
   {
     "id": "huxley",
@@ -2262,7 +2250,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 178
+    "popularityRank": 177
   },
   {
     "id": "hyper",
@@ -2274,7 +2262,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 179
+    "popularityRank": 178
   },
   {
     "id": "hyper-zone",
@@ -2286,7 +2274,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 180
+    "popularityRank": 179
   },
   {
     "id": "hyperion-x1",
@@ -2298,7 +2286,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 181
+    "popularityRank": 180
   },
   {
     "id": "i-am-fucked-up",
@@ -2310,7 +2298,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 182
+    "popularityRank": 181
   },
   {
     "id": "irn-bru-energy",
@@ -2322,7 +2310,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 183
+    "popularityRank": 182
   },
   {
     "id": "isostar-energy",
@@ -2334,7 +2322,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 184
+    "popularityRank": 183
   },
   {
     "id": "jaffa-booster",
@@ -2346,7 +2334,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 185
+    "popularityRank": 184
   },
   {
     "id": "jano",
@@ -2358,7 +2346,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 186
+    "popularityRank": 185
   },
   {
     "id": "java-monster",
@@ -2370,7 +2358,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 187
+    "popularityRank": 186
   },
   {
     "id": "joggy-energy",
@@ -2382,7 +2370,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 188
+    "popularityRank": 187
   },
   {
     "id": "jolt",
@@ -2394,7 +2382,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 189
+    "popularityRank": 188
   },
   {
     "id": "joluca",
@@ -2406,7 +2394,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 190
+    "popularityRank": 189
   },
   {
     "id": "juissi",
@@ -2418,7 +2406,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 191
+    "popularityRank": 190
   },
   {
     "id": "kabisa",
@@ -2430,7 +2418,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 192
+    "popularityRank": 191
   },
   {
     "id": "khaos",
@@ -2442,7 +2430,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 193
+    "popularityRank": 192
   },
   {
     "id": "kickstart",
@@ -2454,7 +2442,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 194
+    "popularityRank": 193
   },
   {
     "id": "kili",
@@ -2466,7 +2454,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 195
+    "popularityRank": 194
   },
   {
     "id": "killa",
@@ -2478,7 +2466,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 196
+    "popularityRank": 195
   },
   {
     "id": "kirkland",
@@ -2490,7 +2478,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 197
+    "popularityRank": 196
   },
   {
     "id": "kong-strong",
@@ -2502,7 +2490,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 198
+    "popularityRank": 197
   },
   {
     "id": "la-jefa",
@@ -2514,7 +2502,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 199
+    "popularityRank": 198
   },
   {
     "id": "latitude-65",
@@ -2526,7 +2514,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 200
+    "popularityRank": 199
   },
   {
     "id": "lemon-soda",
@@ -2538,7 +2526,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 201
+    "popularityRank": 200
   },
   {
     "id": "lemonade-lover",
@@ -2550,7 +2538,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 202
+    "popularityRank": 201
   },
   {
     "id": "linx",
@@ -2562,7 +2550,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 203
+    "popularityRank": 202
   },
   {
     "id": "lipovitan",
@@ -2574,7 +2562,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 204
+    "popularityRank": 203
   },
   {
     "id": "live-plus",
@@ -2586,7 +2574,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 205
+    "popularityRank": 204
   },
   {
     "id": "lohilo",
@@ -2598,7 +2586,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 206
+    "popularityRank": 205
   },
   {
     "id": "lost-and-found",
@@ -2610,7 +2598,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 207
+    "popularityRank": 206
   },
   {
     "id": "lucky-energy",
@@ -2622,7 +2610,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 208
+    "popularityRank": 207
   },
   {
     "id": "lucky-punch",
@@ -2634,7 +2622,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 209
+    "popularityRank": 208
   },
   {
     "id": "lucozade-alert",
@@ -2646,7 +2634,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 210
+    "popularityRank": 209
   },
   {
     "id": "mac-energy",
@@ -2658,7 +2646,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 211
+    "popularityRank": 210
   },
   {
     "id": "matelaituri",
@@ -2670,7 +2658,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 212
+    "popularityRank": 211
   },
   {
     "id": "maxx",
@@ -2682,7 +2670,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 213
+    "popularityRank": 212
   },
   {
     "id": "mega-watt",
@@ -2694,7 +2682,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 214
+    "popularityRank": 213
   },
   {
     "id": "megaforce",
@@ -2706,7 +2694,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 215
+    "popularityRank": 214
   },
   {
     "id": "mio-energy",
@@ -2718,7 +2706,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 216
+    "popularityRank": 215
   },
   {
     "id": "missile",
@@ -2730,7 +2718,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 217
+    "popularityRank": 216
   },
   {
     "id": "mojo-mate",
@@ -2742,7 +2730,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 218
+    "popularityRank": 217
   },
   {
     "id": "moose-juice",
@@ -2754,7 +2742,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 219
+    "popularityRank": 218
   },
   {
     "id": "motor-oil",
@@ -2766,7 +2754,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 220
+    "popularityRank": 219
   },
   {
     "id": "mountain-dew-energy",
@@ -2778,7 +2766,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 221
+    "popularityRank": 220
   },
   {
     "id": "mr-big",
@@ -2790,7 +2778,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 222
+    "popularityRank": 221
   },
   {
     "id": "mtn-dew-energy",
@@ -2802,7 +2790,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 223
+    "popularityRank": 222
   },
   {
     "id": "mtn-dew-game-fuel",
@@ -2814,7 +2802,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 224
+    "popularityRank": 223
   },
   {
     "id": "muscle-monster",
@@ -2826,7 +2814,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 225
+    "popularityRank": 224
   },
   {
     "id": "myrttisen-kurkut",
@@ -2838,7 +2826,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 226
+    "popularityRank": 225
   },
   {
     "id": "nalu",
@@ -2850,7 +2838,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 227
+    "popularityRank": 226
   },
   {
     "id": "nello",
@@ -2862,7 +2850,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 228
+    "popularityRank": 227
   },
   {
     "id": "netflix-energy",
@@ -2874,7 +2862,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 229
+    "popularityRank": 228
   },
   {
     "id": "neuro",
@@ -2886,7 +2874,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 230
+    "popularityRank": 229
   },
   {
     "id": "next-level",
@@ -2898,7 +2886,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 231
+    "popularityRank": 230
   },
   {
     "id": "nine",
@@ -2910,7 +2898,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 232
+    "popularityRank": 231
   },
   {
     "id": "no-brainwaste",
@@ -2922,7 +2910,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 233
+    "popularityRank": 232
   },
   {
     "id": "nordpuls",
@@ -2934,7 +2922,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 234
+    "popularityRank": 233
   },
   {
     "id": "obolon",
@@ -2946,7 +2934,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 235
+    "popularityRank": 234
   },
   {
     "id": "ome",
@@ -2958,7 +2946,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 236
+    "popularityRank": 235
   },
   {
     "id": "optimum-nutrition-energy",
@@ -2970,7 +2958,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 237
+    "popularityRank": 236
   },
   {
     "id": "oronamin-c",
@@ -2982,7 +2970,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 238
+    "popularityRank": 237
   },
   {
     "id": "oxyshred",
@@ -2994,7 +2982,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 239
+    "popularityRank": 238
   },
   {
     "id": "palestine-energy",
@@ -3006,7 +2994,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 240
+    "popularityRank": 239
   },
   {
     "id": "pampa",
@@ -3018,7 +3006,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 241
+    "popularityRank": 240
   },
   {
     "id": "p-ndy",
@@ -3030,7 +3018,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 242
+    "popularityRank": 241
   },
   {
     "id": "phocus",
@@ -3042,7 +3030,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 243
+    "popularityRank": 242
   },
   {
     "id": "phorm-energy",
@@ -3054,7 +3042,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 244
+    "popularityRank": 243
   },
   {
     "id": "pirkka",
@@ -3066,7 +3054,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 245
+    "popularityRank": 244
   },
   {
     "id": "pirkka-bcaa",
@@ -3078,7 +3066,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 246
+    "popularityRank": 245
   },
   {
     "id": "playboy-energy",
@@ -3090,7 +3078,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 247
+    "popularityRank": 246
   },
   {
     "id": "power-malt",
@@ -3102,7 +3090,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 248
+    "popularityRank": 247
   },
   {
     "id": "predator",
@@ -3114,7 +3102,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 249
+    "popularityRank": 248
   },
   {
     "id": "pro-brands",
@@ -3126,7 +3114,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 250
+    "popularityRank": 249
   },
   {
     "id": "psychik",
@@ -3138,7 +3126,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 251
+    "popularityRank": 250
   },
   {
     "id": "puhdistamo",
@@ -3150,7 +3138,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 252
+    "popularityRank": 251
   },
   {
     "id": "puls",
@@ -3162,7 +3150,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 253
+    "popularityRank": 252
   },
   {
     "id": "puls-nutrition",
@@ -3174,7 +3162,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 254
+    "popularityRank": 253
   },
   {
     "id": "pure-energy",
@@ -3186,7 +3174,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 255
+    "popularityRank": 254
   },
   {
     "id": "pwr-bru",
@@ -3198,7 +3186,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 256
+    "popularityRank": 255
   },
   {
     "id": "pxl",
@@ -3210,7 +3198,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 257
+    "popularityRank": 256
   },
   {
     "id": "qhush-energy",
@@ -3222,7 +3210,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 258
+    "popularityRank": 257
   },
   {
     "id": "quake-energy",
@@ -3234,7 +3222,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 259
+    "popularityRank": 258
   },
   {
     "id": "r-go",
@@ -3246,7 +3234,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 260
+    "popularityRank": 259
   },
   {
     "id": "raptor",
@@ -3258,7 +3246,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 261
+    "popularityRank": 260
   },
   {
     "id": "react",
@@ -3270,7 +3258,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 262
+    "popularityRank": 261
   },
   {
     "id": "real-gold",
@@ -3282,7 +3270,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 263
+    "popularityRank": 262
   },
   {
     "id": "reboost-energy",
@@ -3294,7 +3282,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 264
+    "popularityRank": 263
   },
   {
     "id": "red-devil",
@@ -3306,7 +3294,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 265
+    "popularityRank": 264
   },
   {
     "id": "redcon1",
@@ -3318,7 +3306,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 266
+    "popularityRank": 265
   },
   {
     "id": "repp",
@@ -3330,7 +3318,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 267
+    "popularityRank": 266
   },
   {
     "id": "revup",
@@ -3342,7 +3330,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 268
+    "popularityRank": 267
   },
   {
     "id": "riot-energy",
@@ -3354,7 +3342,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 269
+    "popularityRank": 268
   },
   {
     "id": "riot-games-energy",
@@ -3366,7 +3354,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 270
+    "popularityRank": 269
   },
   {
     "id": "rodeo",
@@ -3378,7 +3366,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 271
+    "popularityRank": 270
   },
   {
     "id": "rowdy-energy",
@@ -3390,7 +3378,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 272
+    "popularityRank": 271
   },
   {
     "id": "rubicon-raw",
@@ -3402,7 +3390,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 273
+    "popularityRank": 272
   },
   {
     "id": "russ-energy",
@@ -3414,7 +3402,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 274
+    "popularityRank": 273
   },
   {
     "id": "score",
@@ -3426,7 +3414,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 275
+    "popularityRank": 274
   },
   {
     "id": "shark-god",
@@ -3438,7 +3426,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 276
+    "popularityRank": 275
   },
   {
     "id": "shock",
@@ -3450,7 +3438,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 277
+    "popularityRank": 276
   },
   {
     "id": "snowman",
@@ -3462,7 +3450,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 278
+    "popularityRank": 277
   },
   {
     "id": "spartan",
@@ -3474,7 +3462,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 279
+    "popularityRank": 278
   },
   {
     "id": "speed",
@@ -3486,7 +3474,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 280
+    "popularityRank": 279
   },
   {
     "id": "speed-unlimited",
@@ -3498,7 +3486,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 281
+    "popularityRank": 280
   },
   {
     "id": "sportyfeel",
@@ -3510,7 +3498,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 282
+    "popularityRank": 281
   },
   {
     "id": "squid-game-energy",
@@ -3522,7 +3510,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 283
+    "popularityRank": 282
   },
   {
     "id": "stacker-2",
@@ -3534,7 +3522,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 284
+    "popularityRank": 283
   },
   {
     "id": "starbucks-baya-energy",
@@ -3546,7 +3534,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 285
+    "popularityRank": 284
   },
   {
     "id": "starbucks-iced-energy",
@@ -3558,7 +3546,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 286
+    "popularityRank": 285
   },
   {
     "id": "starter",
@@ -3570,7 +3558,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 287
+    "popularityRank": 286
   },
   {
     "id": "state",
@@ -3582,7 +3570,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 288
+    "popularityRank": 287
   },
   {
     "id": "strafe",
@@ -3594,7 +3582,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 289
+    "popularityRank": 288
   },
   {
     "id": "street-king",
@@ -3606,7 +3594,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 290
+    "popularityRank": 289
   },
   {
     "id": "sunbeam",
@@ -3618,7 +3606,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 291
+    "popularityRank": 290
   },
   {
     "id": "supa-komando",
@@ -3630,7 +3618,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 292
+    "popularityRank": 291
   },
   {
     "id": "super-energy",
@@ -3642,7 +3630,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 293
+    "popularityRank": 292
   },
   {
     "id": "switch",
@@ -3654,7 +3642,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 294
+    "popularityRank": 293
   },
   {
     "id": "taft",
@@ -3666,7 +3654,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 295
+    "popularityRank": 294
   },
   {
     "id": "taisho",
@@ -3678,7 +3666,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 296
+    "popularityRank": 295
   },
   {
     "id": "teho",
@@ -3690,7 +3678,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 297
+    "popularityRank": 296
   },
   {
     "id": "the-energy-drink",
@@ -3702,7 +3690,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 298
+    "popularityRank": 297
   },
   {
     "id": "the-good-guys",
@@ -3714,7 +3702,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 299
+    "popularityRank": 298
   },
   {
     "id": "thunder",
@@ -3726,7 +3714,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 300
+    "popularityRank": 299
   },
   {
     "id": "tiger",
@@ -3738,7 +3726,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 301
+    "popularityRank": 300
   },
   {
     "id": "tnt",
@@ -3750,7 +3738,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 302
+    "popularityRank": 301
   },
   {
     "id": "to-ga-thrust",
@@ -3762,7 +3750,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 303
+    "popularityRank": 302
   },
   {
     "id": "tornado",
@@ -3774,7 +3762,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 304
+    "popularityRank": 303
   },
   {
     "id": "toxic-waste-energy",
@@ -3786,7 +3774,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 305
+    "popularityRank": 304
   },
   {
     "id": "twenty-five",
@@ -3798,7 +3786,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 306
+    "popularityRank": 305
   },
   {
     "id": "tzinga",
@@ -3810,7 +3798,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 307
+    "popularityRank": 306
   },
   {
     "id": "ultra",
@@ -3822,7 +3810,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 308
+    "popularityRank": 307
   },
   {
     "id": "unwell",
@@ -3834,7 +3822,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 309
+    "popularityRank": 308
   },
   {
     "id": "update",
@@ -3846,7 +3834,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 310
+    "popularityRank": 309
   },
   {
     "id": "usn",
@@ -3858,7 +3846,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 311
+    "popularityRank": 310
   },
   {
     "id": "v8-energy",
@@ -3870,7 +3858,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 312
+    "popularityRank": 311
   },
   {
     "id": "vichy-vitamix",
@@ -3882,7 +3870,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 313
+    "popularityRank": 312
   },
   {
     "id": "viking-power",
@@ -3894,7 +3882,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 314
+    "popularityRank": 313
   },
   {
     "id": "vimto-energy",
@@ -3906,7 +3894,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 315
+    "popularityRank": 314
   },
   {
     "id": "vitamizu",
@@ -3918,7 +3906,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 316
+    "popularityRank": 315
   },
   {
     "id": "volt-aje",
@@ -3930,7 +3918,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 317
+    "popularityRank": 316
   },
   {
     "id": "volt-energy",
@@ -3942,7 +3930,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 318
+    "popularityRank": 317
   },
   {
     "id": "volya",
@@ -3954,7 +3942,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 319
+    "popularityRank": 318
   },
   {
     "id": "vuka",
@@ -3966,7 +3954,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 320
+    "popularityRank": 319
   },
   {
     "id": "w-energy",
@@ -3978,7 +3966,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 321
+    "popularityRank": 320
   },
   {
     "id": "war-horse",
@@ -3990,7 +3978,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 322
+    "popularityRank": 321
   },
   {
     "id": "weld",
@@ -4002,7 +3990,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 323
+    "popularityRank": 322
   },
   {
     "id": "wolf",
@@ -4014,7 +4002,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 324
+    "popularityRank": 323
   },
   {
     "id": "wolverine",
@@ -4026,7 +4014,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 325
+    "popularityRank": 324
   },
   {
     "id": "x-energy",
@@ -4038,7 +4026,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 326
+    "popularityRank": 325
   },
   {
     "id": "x-gamer",
@@ -4050,7 +4038,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 327
+    "popularityRank": 326
   },
   {
     "id": "xl",
@@ -4062,7 +4050,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 328
+    "popularityRank": 327
   },
   {
     "id": "xl-energy",
@@ -4074,7 +4062,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 329
+    "popularityRank": 328
   },
   {
     "id": "xlnt-sports",
@@ -4086,7 +4074,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 330
+    "popularityRank": 329
   },
   {
     "id": "xot",
@@ -4098,7 +4086,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#64748B",
-    "popularityRank": 331
+    "popularityRank": 330
   },
   {
     "id": "xxl",
@@ -4110,7 +4098,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 332
+    "popularityRank": 331
   },
   {
     "id": "zen",
@@ -4122,7 +4110,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 333
+    "popularityRank": 332
   },
   {
     "id": "zest-energy",
@@ -4134,7 +4122,7 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 334
+    "popularityRank": 333
   },
   {
     "id": "zone-energy",
@@ -4146,6 +4134,6 @@ export const initialBrands = [
     "origin": "International",
     "logo": "⚡",
     "color": "#4F46E5",
-    "popularityRank": 335
+    "popularityRank": 334
   }
 ];
